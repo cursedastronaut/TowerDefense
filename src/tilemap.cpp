@@ -44,6 +44,7 @@ void Tilemap::Update(ImDrawList& list, Resources& res)
 
 void Tilemap::Draw(ImDrawList& list, Resources& res)
 {
+
     for (uint32_t y = 0; y < GRID_HEIGHT; y++)
     {
         for (uint32_t x = 0; x < GRID_WIDTH; x++)

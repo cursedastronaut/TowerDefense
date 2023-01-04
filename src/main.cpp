@@ -34,6 +34,8 @@ int main(int argc, char* argv[])
     
     glfwMakeContextCurrent(window);
     glfwSwapInterval(1); // Enable vsync
+    glfwSetWindowAttrib(window, GLFW_RESIZABLE, GLFW_FALSE);
+    //glfwSetCursor()
 
     // Setup Dear ImGui context
     IMGUI_CHECKVERSION();
