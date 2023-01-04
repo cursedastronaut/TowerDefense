@@ -44,23 +44,23 @@ void Tilemap::Update(ImDrawList& list, Resources& res)
 
 void Tilemap::Draw(ImDrawList& list, Resources& res)
 {
-    //if (tileType)
-    //printf("%d\n", tileType[2]);
-
     for (uint32_t y = 0; y < GRID_HEIGHT; y++)
     {
         for (uint32_t x = 0; x < GRID_WIDTH; x++)
         {
             switch (m_grid[y * GRID_WIDTH + x])
             {
+            //Grass tile
             case 0:
                 list.AddImage(res.tileset.id, {x * (TILE_SIZE), y * (TILE_SIZE)}, {x * (TILE_SIZE) + (TILE_SIZE), y * (TILE_SIZE) + (TILE_SIZE)}, {0,0}, {TILE_HUV,TILE_VUV});
                 break;
-
+            //Cobblestone tile
             case 1:
                 list.AddImage(res.tileset.id, {x * (TILE_SIZE), y * (TILE_SIZE)}, {x * (TILE_SIZE) + (TILE_SIZE), y * (TILE_SIZE) + (TILE_SIZE)}, {TILE_HUV,0}, {TILE_HUV*2,TILE_VUV});
                 break;
             
+
+            //Autotiles of cobblestones
             case 0xF0:
                 list.AddImage(res.tileset.id, {x * (TILE_SIZE), y * (TILE_SIZE)}, {x * (TILE_SIZE) + (TILE_SIZE), y * (TILE_SIZE) + (TILE_SIZE)}, {192.f/256.f,799.f/928.f}, {(192.f+TILE_SIZE)/256.f, (799.f+TILE_SIZE)/928.f});
                 break;
