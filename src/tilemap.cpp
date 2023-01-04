@@ -53,11 +53,11 @@ void Tilemap::Draw(ImDrawList& list, Resources& res)
         {
             switch (m_grid[y * GRID_WIDTH + x])
             {
-            case 1:
+            case 0:
                 list.AddImage(res.tileset.id, {x * (TILE_SIZE), y * (TILE_SIZE)}, {x * (TILE_SIZE) + (TILE_SIZE), y * (TILE_SIZE) + (TILE_SIZE)}, {0,0}, {TILE_HUV,TILE_VUV});
                 break;
 
-            case 2:
+            case 1:
                 list.AddImage(res.tileset.id, {x * (TILE_SIZE), y * (TILE_SIZE)}, {x * (TILE_SIZE) + (TILE_SIZE), y * (TILE_SIZE) + (TILE_SIZE)}, {TILE_HUV,0}, {TILE_HUV*2,TILE_VUV});
                 break;
             

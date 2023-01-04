@@ -1,5 +1,5 @@
 #define windowWidth     1280
-#define windowHeight    720
+#define windowHeight    736
 
 
 #define TILE_SIZE       32
