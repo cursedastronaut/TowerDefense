@@ -52,61 +52,67 @@ void Tilemap::Draw(ImDrawList& list, Resources& res)
     {
         for (uint32_t x = 0; x < GRID_WIDTH; x++)
         {
+            float2 pos = {0,0};
             switch (m_grid[y * GRID_WIDTH + x])
             {
             //Grass tile
             case 0:
-                list.AddImage(res.tileset.id, {x * (TILE_SIZE), y * (TILE_SIZE)}, {x * (TILE_SIZE) + (TILE_SIZE), y * (TILE_SIZE) + (TILE_SIZE)}, {0,0}, {TILE_HUV,TILE_VUV});
+                pos.x = 0;  pos.y = 0;
                 break;
             //Cobblestone tile
-            case 1:
-                list.AddImage(res.tileset.id, {x * (TILE_SIZE), y * (TILE_SIZE)}, {x * (TILE_SIZE) + (TILE_SIZE), y * (TILE_SIZE) + (TILE_SIZE)}, {TILE_HUV,0}, {TILE_HUV*2,TILE_VUV});
-                break;
-            
+                case 1:
+                    pos.x = 1;  pos.y = 0;  break;
+                
+                case 0xE0:
+                    pos.x = 1;  pos.y = 26; break;
+                case 0xE1:
+                    pos.x = 0;  pos.y = 27; break;
+                case 0xE2:
+                    pos.x = 0;  pos.y = 26; break;
+                case 0xEA:
+                    pos.x = 6;  pos.y = 27; break;
 
-            //Autotiles of cobblestones
-            case 0xF0:
-                list.AddImage(res.tileset.id, {x * (TILE_SIZE), y * (TILE_SIZE)}, {x * (TILE_SIZE) + (TILE_SIZE), y * (TILE_SIZE) + (TILE_SIZE)}, {192.f/256.f,799.f/928.f}, {(192.f+TILE_SIZE)/256.f, (799.f+TILE_SIZE)/928.f});
-                break;
-            case 0xF1:
-                list.AddImage(res.tileset.id, {x * (TILE_SIZE), y * (TILE_SIZE)}, {x * (TILE_SIZE) + (TILE_SIZE), y * (TILE_SIZE) + (TILE_SIZE)}, {224.f/256.f,799.f/928.f}, {(224.f+TILE_SIZE)/256.f, (799.f+TILE_SIZE)/928.f});
-                break;
-            case 0xF3:
-                list.AddImage(res.tileset.id, {x * (TILE_SIZE), y * (TILE_SIZE)}, {x * (TILE_SIZE) + (TILE_SIZE), y * (TILE_SIZE) + (TILE_SIZE)}, {224.f/256.f,831.f/928.f}, {(224.f+TILE_SIZE)/256.f, (831.f+TILE_SIZE)/928.f});
-                break;
-            case 0xF4:
-                list.AddImage(res.tileset.id, {x * (TILE_SIZE), y * (TILE_SIZE)}, {x * (TILE_SIZE) + (TILE_SIZE), y * (TILE_SIZE) + (TILE_SIZE)}, {192.f/256.f,831.f/928.f}, {(192.f+TILE_SIZE)/256.f, (831.f+TILE_SIZE)/928.f});
-                break;
-            case 0xF7:
-                list.AddImage(res.tileset.id, {x * (TILE_SIZE), y * (TILE_SIZE)}, {x * (TILE_SIZE) + (TILE_SIZE), y * (TILE_SIZE) + (TILE_SIZE)}, {160.f/256.f,895.f/928.f}, {(160.f+TILE_SIZE)/256.f, (895.f+TILE_SIZE)/928.f});
-                break;
-            case 0xF8:
-                list.AddImage(res.tileset.id, {x * (TILE_SIZE), y * (TILE_SIZE)}, {x * (TILE_SIZE) + (TILE_SIZE), y * (TILE_SIZE) + (TILE_SIZE)}, {160.f/256.f,831.f/928.f}, {(160.f+TILE_SIZE)/256.f, (831.f+TILE_SIZE)/928.f});
-                break;
-            case 0xF9:
-                list.AddImage(res.tileset.id, {x * (TILE_SIZE), y * (TILE_SIZE)}, {x * (TILE_SIZE) + (TILE_SIZE), y * (TILE_SIZE) + (TILE_SIZE)}, {160.f/256.f,895.f/928.f}, {(160.f+TILE_SIZE)/256.f, (895.f+TILE_SIZE)/928.f});
-                break;
-            case 0xFA:
-                list.AddImage(res.tileset.id, {x * (TILE_SIZE), y * (TILE_SIZE)}, {x * (TILE_SIZE) + (TILE_SIZE), y * (TILE_SIZE) + (TILE_SIZE)}, {160.f/256.f,863.f/928.f}, {(160.f+TILE_SIZE)/256.f, (863.f+TILE_SIZE)/928.f});
-                break; 
-            case 0xFB:
-                list.AddImage(res.tileset.id, {x * (TILE_SIZE), y * (TILE_SIZE)}, {x * (TILE_SIZE) + (TILE_SIZE), y * (TILE_SIZE) + (TILE_SIZE)}, {128.f/256.f,895.f/928.f}, {(128.f+TILE_SIZE)/256.f, (895.f+TILE_SIZE)/928.f});
-                break; 
-            case 0xFC:
-                list.AddImage(res.tileset.id, {x * (TILE_SIZE), y * (TILE_SIZE)}, {x * (TILE_SIZE) + (TILE_SIZE), y * (TILE_SIZE) + (TILE_SIZE)}, {96.f/256.f,895.f/928.f}, {(96.f+TILE_SIZE)/256.f, (895.f+TILE_SIZE)/928.f});
-                break;    
-            case 0xFD:
-                list.AddImage(res.tileset.id, {x * (TILE_SIZE), y * (TILE_SIZE)}, {x * (TILE_SIZE) + (TILE_SIZE), y * (TILE_SIZE) + (TILE_SIZE)}, {96.f/256.f,863.f/928.f}, {(96.f+TILE_SIZE)/256.f, (863.f+TILE_SIZE)/928.f});
-                break;
-            case 0xFE:
-                list.AddImage(res.tileset.id, {x * (TILE_SIZE), y * (TILE_SIZE)}, {x * (TILE_SIZE) + (TILE_SIZE), y * (TILE_SIZE) + (TILE_SIZE)}, {(96.f+32.f)/256.f,831.f/928.f}, {(96.f+32.f+TILE_SIZE)/256.f, (831.f+TILE_SIZE)/928.f});
-                break;
-            case 0xFF:
-                list.AddImage(res.tileset.id, {x * (TILE_SIZE), y * (TILE_SIZE)}, {x * (TILE_SIZE) + (TILE_SIZE), y * (TILE_SIZE) + (TILE_SIZE)}, {96.f/256.f,831.f/928.f}, {(96.f+TILE_SIZE)/256.f, (831.f+TILE_SIZE)/928.f});
-                break;
-            default:
-                break;
+                //Autotiles of cobblestones
+                case 0xF0:
+                    pos.x = 6;  pos.y = 25; break;
+                    break;
+                case 0xF1:
+                    pos.x = 7;  pos.y = 25; break;
+                    break;
+                case 0xF3:
+                    pos.x = 7;  pos.y = 26; break;
+                case 0xF4:
+                    pos.x = 6;  pos.y = 26; break;
+                case 0xF7:
+                    pos.x = 5;  pos.y = 28; break;
+                case 0xF8:
+                    pos.x = 5;  pos.y = 26; break;
+                case 0xFA:
+                    pos.x = 5;  pos.y = 27; break;
+                case 0xFB:
+                    pos.x = 4;  pos.y = 28; break;
+                case 0xFC:
+                    pos.x = 3;  pos.y = 28; break;
+                case 0xFD:
+                    pos.x = 3;  pos.y = 27; break;
+                case 0xFE:
+                    pos.x = 4;  pos.y = 26; break;
+                case 0xFF:
+                    pos.x = 3;  pos.y = 26; break;
+                default:
+                    break;
             }   
+            list.AddImage(
+                res.tileset.id,                                                                 //Texture
+                {x * (TILE_SIZE), y * (TILE_SIZE)},                                             //Position (upper-left) on Game Screen
+                {x * (TILE_SIZE) + (TILE_SIZE), y * (TILE_SIZE) + (TILE_SIZE)},                 //Position (bottom-right) on Game Screen
+                {(pos.x * TILE_SIZE)/res.tileset.width, (pos.y * TILE_SIZE)/res.tileset.height},//UV (upper-right) position on tileset
+                {(pos.x * TILE_SIZE + TILE_SIZE) / res.tileset.width,                           //UV (bottom-left) position on tileset
+                 (pos.y * TILE_SIZE + TILE_SIZE) / res.tileset.height}     
+            
+            );
+            
+            /*
             switch (c_grid[y * GRID_WIDTH + x])
             {
             case 1:
@@ -114,7 +120,7 @@ void Tilemap::Draw(ImDrawList& list, Resources& res)
                 break;
             default:
                 break;
-            }   
+            }   */
         }
     }
 }

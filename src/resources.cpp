@@ -2,6 +2,6 @@
 
 Resources::Resources()
 {
-   Mario = ImGuiUtils::LoadTexture("assets/mario.png");
-   tileset = ImGuiUtils::LoadTexture("assets/textures/tilesets/wood.png");
+   Mario = ImGuiUtils::LoadTexture("assets/mario.png", true);
+   tileset = ImGuiUtils::LoadTexture("assets/textures/tilesets/wood.png", true);
 }

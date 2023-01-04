@@ -7,7 +7,7 @@
 
 typedef void (*glGenerateMipmapFuncType)(GLenum);
 
-Texture ImGuiUtils::LoadTexture(const char* file)
+Texture ImGuiUtils::LoadTexture(const char* file, bool nearestFilter)
 {
     Texture result = {};
     stbi_uc* pixels = stbi_load(file, &result.width, &result.height, NULL, STBI_rgb_alpha);
@@ -24,13 +24,20 @@ Texture ImGuiUtils::LoadTexture(const char* file)
     glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, result.width, result.height, 0, GL_RGBA, GL_UNSIGNED_BYTE, pixels);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP);
-    
-    // Gen mipmaps
-    glGenerateMipmapFuncType glGenerateMipmapFunc = (glGenerateMipmapFuncType)glfwGetProcAddress("glGenerateMipmap");
-    if (glGenerateMipmapFunc == nullptr)
-        fprintf(stderr, "Cannot load glGenerateMipmap func\n");
+    if (nearestFilter)
+    {
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+    }
     else
-        glGenerateMipmapFunc(GL_TEXTURE_2D);
+    {
+        // Gen mipmaps
+        glGenerateMipmapFuncType glGenerateMipmapFunc = (glGenerateMipmapFuncType)glfwGetProcAddress("glGenerateMipmap");
+        if (glGenerateMipmapFunc == nullptr)
+            fprintf(stderr, "Cannot load glGenerateMipmap func\n");
+        else
+            glGenerateMipmapFunc(GL_TEXTURE_2D);
+    }
 
     // Unbind
     glBindTexture(GL_TEXTURE_2D, 0);
