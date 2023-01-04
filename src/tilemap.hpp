@@ -3,8 +3,8 @@
 #include <cstdio>
 #include <stdint.h>
 
-#define GRID_WIDTH 0x1E
-#define GRID_HEIGHT (0x1FE / GRID_WIDTH)
+#define GRID_WIDTH 40
+#define GRID_HEIGHT 23
 
 class Tilemap
 {
