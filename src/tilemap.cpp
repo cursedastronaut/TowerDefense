@@ -61,6 +61,9 @@ void Tilemap::Draw(ImDrawList& list, Resources& res)
                 list.AddImage(res.tileset.id, {x * (TILE_SIZE), y * (TILE_SIZE)}, {x * (TILE_SIZE) + (TILE_SIZE), y * (TILE_SIZE) + (TILE_SIZE)}, {TILE_HUV,0}, {TILE_HUV*2,TILE_VUV});
                 break;
             
+            case 255:
+                list.AddImage(res.tileset.id, {x * (TILE_SIZE), y * (TILE_SIZE)}, {x * (TILE_SIZE) + (TILE_SIZE), y * (TILE_SIZE) + (TILE_SIZE)}, {96.f/256.f,831.f/928.f}, {(96.f+TILE_SIZE)/256.f, (831.f+TILE_SIZE)/928.f});
+                break;
             default:
                 break;
             }   
