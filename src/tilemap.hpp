@@ -10,6 +10,7 @@ class Tilemap
 {
 private:
     uint8_t m_grid[GRID_WIDTH * GRID_HEIGHT];
+    uint8_t c_grid[GRID_WIDTH * GRID_HEIGHT];
 
 public:
     Tilemap();

@@ -5,10 +5,12 @@
 
 Tilemap::Tilemap()
 {
-    FILE* f;
+    FILE*    f;
+    FILE*    f2;
     uint32_t i;
 
-    f = fopen("map1.bin", "rb");
+    f =     fopen("assets/maps/map1.bin" , "rb");
+    f2 =    fopen("assets/maps/path1.bin", "rb");
     if (!f)
     {
         printf("Can't open file");
@@ -21,6 +23,7 @@ Tilemap::Tilemap()
     while (i < GRID_WIDTH * GRID_HEIGHT)
     {
         m_grid[i++] = 0;
+        c_grid[i]   = 0;
     }
     i = 0;
 
@@ -28,14 +31,14 @@ Tilemap::Tilemap()
     while (i < GRID_WIDTH * GRID_HEIGHT && !feof(f))
     {
         m_grid[i++] = fgetc(f);
+        c_grid[i]   = fgetc(f2);
     }
 
     fclose(f);
+    fclose(f2);
 }
 
-Tilemap::~Tilemap()
-{
-}
+Tilemap::~Tilemap(){};
 
 void Tilemap::Update(ImDrawList& list, Resources& res)
 {
@@ -100,6 +103,14 @@ void Tilemap::Draw(ImDrawList& list, Resources& res)
                 break;
             case 0xFF:
                 list.AddImage(res.tileset.id, {x * (TILE_SIZE), y * (TILE_SIZE)}, {x * (TILE_SIZE) + (TILE_SIZE), y * (TILE_SIZE) + (TILE_SIZE)}, {96.f/256.f,831.f/928.f}, {(96.f+TILE_SIZE)/256.f, (831.f+TILE_SIZE)/928.f});
+                break;
+            default:
+                break;
+            }   
+            switch (c_grid[y * GRID_WIDTH + x])
+            {
+            case 1:
+                list.AddRectFilled({(x-1) * (TILE_SIZE), y * (TILE_SIZE)}, {(x-1) * (TILE_SIZE) + (TILE_SIZE), y * (TILE_SIZE) + (TILE_SIZE)}, IM_COL32(255,0,0,128));
                 break;
             default:
                 break;

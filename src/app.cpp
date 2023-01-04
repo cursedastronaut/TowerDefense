@@ -17,7 +17,5 @@ void App::Update()
 
     tilemap->Update(*imdrawlist, resources);
     ui->Update(*imdrawlist, resources);
-    //imdrawlist->AddImage(resources.tileset.id, {0,0}, {32,32}, {0,0}, {TILE_HUV,TILE_VUV});
-    //idrawlist->AddImage(resources.Mario.id, {16,20}, {100,100}, {0,0}, {1,1});
     
 }
