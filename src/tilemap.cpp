@@ -61,7 +61,43 @@ void Tilemap::Draw(ImDrawList& list, Resources& res)
                 list.AddImage(res.tileset.id, {x * (TILE_SIZE), y * (TILE_SIZE)}, {x * (TILE_SIZE) + (TILE_SIZE), y * (TILE_SIZE) + (TILE_SIZE)}, {TILE_HUV,0}, {TILE_HUV*2,TILE_VUV});
                 break;
             
-            case 255:
+            case 0xF0:
+                list.AddImage(res.tileset.id, {x * (TILE_SIZE), y * (TILE_SIZE)}, {x * (TILE_SIZE) + (TILE_SIZE), y * (TILE_SIZE) + (TILE_SIZE)}, {192.f/256.f,799.f/928.f}, {(192.f+TILE_SIZE)/256.f, (799.f+TILE_SIZE)/928.f});
+                break;
+            case 0xF1:
+                list.AddImage(res.tileset.id, {x * (TILE_SIZE), y * (TILE_SIZE)}, {x * (TILE_SIZE) + (TILE_SIZE), y * (TILE_SIZE) + (TILE_SIZE)}, {224.f/256.f,799.f/928.f}, {(224.f+TILE_SIZE)/256.f, (799.f+TILE_SIZE)/928.f});
+                break;
+            case 0xF3:
+                list.AddImage(res.tileset.id, {x * (TILE_SIZE), y * (TILE_SIZE)}, {x * (TILE_SIZE) + (TILE_SIZE), y * (TILE_SIZE) + (TILE_SIZE)}, {224.f/256.f,831.f/928.f}, {(224.f+TILE_SIZE)/256.f, (831.f+TILE_SIZE)/928.f});
+                break;
+            case 0xF4:
+                list.AddImage(res.tileset.id, {x * (TILE_SIZE), y * (TILE_SIZE)}, {x * (TILE_SIZE) + (TILE_SIZE), y * (TILE_SIZE) + (TILE_SIZE)}, {192.f/256.f,831.f/928.f}, {(192.f+TILE_SIZE)/256.f, (831.f+TILE_SIZE)/928.f});
+                break;
+            case 0xF7:
+                list.AddImage(res.tileset.id, {x * (TILE_SIZE), y * (TILE_SIZE)}, {x * (TILE_SIZE) + (TILE_SIZE), y * (TILE_SIZE) + (TILE_SIZE)}, {160.f/256.f,895.f/928.f}, {(160.f+TILE_SIZE)/256.f, (895.f+TILE_SIZE)/928.f});
+                break;
+            case 0xF8:
+                list.AddImage(res.tileset.id, {x * (TILE_SIZE), y * (TILE_SIZE)}, {x * (TILE_SIZE) + (TILE_SIZE), y * (TILE_SIZE) + (TILE_SIZE)}, {160.f/256.f,831.f/928.f}, {(160.f+TILE_SIZE)/256.f, (831.f+TILE_SIZE)/928.f});
+                break;
+            case 0xF9:
+                list.AddImage(res.tileset.id, {x * (TILE_SIZE), y * (TILE_SIZE)}, {x * (TILE_SIZE) + (TILE_SIZE), y * (TILE_SIZE) + (TILE_SIZE)}, {160.f/256.f,895.f/928.f}, {(160.f+TILE_SIZE)/256.f, (895.f+TILE_SIZE)/928.f});
+                break;
+            case 0xFA:
+                list.AddImage(res.tileset.id, {x * (TILE_SIZE), y * (TILE_SIZE)}, {x * (TILE_SIZE) + (TILE_SIZE), y * (TILE_SIZE) + (TILE_SIZE)}, {160.f/256.f,863.f/928.f}, {(160.f+TILE_SIZE)/256.f, (863.f+TILE_SIZE)/928.f});
+                break; 
+            case 0xFB:
+                list.AddImage(res.tileset.id, {x * (TILE_SIZE), y * (TILE_SIZE)}, {x * (TILE_SIZE) + (TILE_SIZE), y * (TILE_SIZE) + (TILE_SIZE)}, {128.f/256.f,895.f/928.f}, {(128.f+TILE_SIZE)/256.f, (895.f+TILE_SIZE)/928.f});
+                break; 
+            case 0xFC:
+                list.AddImage(res.tileset.id, {x * (TILE_SIZE), y * (TILE_SIZE)}, {x * (TILE_SIZE) + (TILE_SIZE), y * (TILE_SIZE) + (TILE_SIZE)}, {96.f/256.f,895.f/928.f}, {(96.f+TILE_SIZE)/256.f, (895.f+TILE_SIZE)/928.f});
+                break;    
+            case 0xFD:
+                list.AddImage(res.tileset.id, {x * (TILE_SIZE), y * (TILE_SIZE)}, {x * (TILE_SIZE) + (TILE_SIZE), y * (TILE_SIZE) + (TILE_SIZE)}, {96.f/256.f,863.f/928.f}, {(96.f+TILE_SIZE)/256.f, (863.f+TILE_SIZE)/928.f});
+                break;
+            case 0xFE:
+                list.AddImage(res.tileset.id, {x * (TILE_SIZE), y * (TILE_SIZE)}, {x * (TILE_SIZE) + (TILE_SIZE), y * (TILE_SIZE) + (TILE_SIZE)}, {(96.f+32.f)/256.f,831.f/928.f}, {(96.f+32.f+TILE_SIZE)/256.f, (831.f+TILE_SIZE)/928.f});
+                break;
+            case 0xFF:
                 list.AddImage(res.tileset.id, {x * (TILE_SIZE), y * (TILE_SIZE)}, {x * (TILE_SIZE) + (TILE_SIZE), y * (TILE_SIZE) + (TILE_SIZE)}, {96.f/256.f,831.f/928.f}, {(96.f+TILE_SIZE)/256.f, (831.f+TILE_SIZE)/928.f});
                 break;
             default:
