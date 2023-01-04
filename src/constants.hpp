@@ -2,14 +2,17 @@
 #define windowHeight    736
 
 
-#define TILE_SIZE       32
-#define TILE_HUV        0.125f
-#define TILE_VUV        0.03f
+//Tilemap settings
+#define TILE_SIZE       32  //Size of the tile, default: 32x32
 
-
+//UI settings
+#define TOWER_WIN_WIDTH     0.8 //Percentage of screen-width that the Tower Selection UI will take
+#define TOWER_WIN_HEIGHT    128 //Pixels that the Tower Selection UI will take
+#define TOWER_ICON_HEIGHT   96 
+#define TOWER_ICON_WIDTH    64
 //Math things
 
-struct float2
+struct float2 //NEVER TOUCH.
 {
     float x;
     float y;  

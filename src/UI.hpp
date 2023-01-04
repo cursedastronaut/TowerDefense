@@ -11,4 +11,5 @@ public:
     ~UI();
     void Update(ImDrawList& list, Resources& res);
     void Draw(ImDrawList& list, Resources& res);
+    void Button(ImDrawList& list, Resources& res, ImVec2 pos, float width, float height, ImVec4 col);
 };

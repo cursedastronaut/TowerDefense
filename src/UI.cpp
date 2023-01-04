@@ -3,12 +3,36 @@
 
 void UI::Draw(ImDrawList& list, Resources& res)
 {
-    list.AddRectFilled({250, windowHeight - 100}, {windowWidth - 250, windowHeight + 25}, IM_COL32(00, 00, 00, 88), 20.0f);
-    // list.AddRectFilled({windowWidth / 2 - 40, windowHeight - 90}, {windowWidth / 2 + 40, windowHeight - 10}, IM_COL32(00, 00, 255, 88));
-    ImGui::Button("tower", {50, 50});
+    ImVec2 towerSelectionUL = {windowWidth/2 - (TOWER_WIN_WIDTH * windowWidth)/2, windowHeight - TOWER_WIN_HEIGHT};   //Upper-left point of rectangle
+    ImVec2 towerSelectionBR = {windowWidth/2 + (TOWER_WIN_WIDTH * windowWidth)/2, windowHeight + TOWER_WIN_HEIGHT};   //Upper-left point of rectangle
+    //Background of Tower Selection Window
+    list.AddRectFilled(
+        towerSelectionUL,   //Upper-left point of rectangle
+        towerSelectionBR,   //Bottom-right point of rectangle
+        IM_COL32(00, 00, 00, 88),  //Color, black and transparent.
+        20.0f //Rounding.
+    );
+    Button(list, res, {towerSelectionUL.x + 16, towerSelectionUL.y + 16}, TOWER_ICON_WIDTH, TOWER_ICON_HEIGHT, {1,1,1,0.3f});
 }
 
 void UI::Update(ImDrawList& list, Resources& res)
 {
     Draw(list, res);
+}
+
+void UI::Button(ImDrawList& list, Resources& res, ImVec2 pos, float width, float height, ImVec4 col)
+{
+    if (ImGui::IsMouseHoveringRect({ pos.x, pos.y}, { pos.x + width, pos.y + height}, false))
+        col.w = 1.f;
+
+    ImU32 colorU32 = ImColor(col);
+    //Background of Tower Selection Window
+    list.AddRectFilled(
+        { pos.x, pos.y},                    //Upper-left point of rectangle
+        { pos.x + width, pos.y + height},   //Bottom-right point of rectangle
+        colorU32,  //Color, black and transparent.
+        20.0f //Rounding.
+    );
+
+
 }
