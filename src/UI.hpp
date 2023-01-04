@@ -2,6 +2,7 @@
 #include "resources.hpp"
 #include <cstdio>
 #include <stdint.h>
+#include <imgui.h>
 
 class UI
 {
