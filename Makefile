@@ -6,7 +6,7 @@ CPPFLAGS=-Iinclude -Iexternals/include -MMD
 EXTRA_FLAGS=-Wall -Wextra -Wno-unused-function -Wno-unused-parameter -Wno-narrowing
 
 # Specify your compilation objects
-OBJS=src/main.o src/app.o src/imgui_utils.o src/resources.o src/tilemap.o src/entity.o
+OBJS=src/main.o src/app.o src/imgui_utils.o src/resources.o src/tilemap.o src/entity.o src/UI.o
 OBJS+=
 
 # No changes under this line

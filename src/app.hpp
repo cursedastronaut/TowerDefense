@@ -1,6 +1,6 @@
 #pragma once
 #include "tilemap.hpp"
-#include "resources.hpp"
+#include "UI.hpp"
 class App
 {
 public:
@@ -10,7 +10,7 @@ public:
     void Update();
     int money = 0;
     Tilemap* tilemap;
-    Resources resources ;
+    Resources resources;
     ImDrawList* imdrawlist;
-
+    UI* ui;
 };
