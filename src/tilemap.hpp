@@ -3,8 +3,8 @@
 #include <cstdio>
 #include <stdint.h>
 
-#define GRID_WIDTH 40
-#define GRID_HEIGHT 23
+#define GRID_WIDTH 0x1E
+#define GRID_HEIGHT (0x1FE / GRID_WIDTH)
 
 class Tilemap
 {
@@ -14,6 +14,6 @@ private:
 public:
     Tilemap();
     ~Tilemap();
-    void tilemapUpdate(ImDrawList& list, Resources& res);
-    void tilemapDraw(ImDrawList& list, Resources& res);
+    void Update(ImDrawList& list, Resources& res);
+    void Draw(ImDrawList& list, Resources& res);
 };

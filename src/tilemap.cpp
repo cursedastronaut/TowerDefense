@@ -8,7 +8,7 @@ Tilemap::Tilemap()
     FILE* f;
     uint32_t i;
 
-    f = fopen("map1.bin", "r");
+    f = fopen("map1.bin", "rb");
     if (!f)
     {
         printf("Can't open file");
@@ -17,7 +17,7 @@ Tilemap::Tilemap()
 
     i = 0;
 
-    while (!feof(f))
+    while (i < GRID_WIDTH * GRID_HEIGHT && !feof(f))
     {
         m_grid[i++] = fgetc(f);
     }
@@ -29,19 +29,19 @@ Tilemap::~Tilemap()
 {
 }
 
-void Tilemap::tilemapUpdate(ImDrawList& list, Resources& res)
+void Tilemap::Update(ImDrawList& list, Resources& res)
 {
-    tilemapDraw(list, res);
+    Draw(list, res);
 }
 
-void Tilemap::tilemapDraw(ImDrawList& list, Resources& res)
+void Tilemap::Draw(ImDrawList& list, Resources& res)
 {
     //if (tileType)
     //printf("%d\n", tileType[2]);
 
     for (uint32_t y = 0; y < GRID_HEIGHT; y++)
     {
-        for (uint32_t x = 0; x < GRID_HEIGHT; x++)
+        for (uint32_t x = 0; x < GRID_WIDTH; x++)
         {
             switch (m_grid[y * GRID_WIDTH + x])
             {
