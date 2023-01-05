@@ -5,5 +5,8 @@ class Resources
     public:
         Resources();
         Texture Mario;
-        Texture tileset;
+        Texture tilesetWood;
+        Texture tilesetCastle;
+        Texture Fighter4;
+        Texture Void;
 };

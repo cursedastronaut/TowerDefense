@@ -17,4 +17,7 @@ public:
     ~Tilemap();
     void Update(ImDrawList& list, Resources& res);
     void Draw(ImDrawList& list, Resources& res);
+
+    
+    bool drawPath = 0;
 };

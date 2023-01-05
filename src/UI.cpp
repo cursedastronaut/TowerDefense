@@ -12,9 +12,11 @@ void UI::Draw(ImDrawList& list, Resources& res)
         IM_COL32(00, 00, 00, 88),  //Color, black and transparent.
         20.0f //Rounding.
     );
-    if (Button(list, res, {towerSelectionUL.x + 16, towerSelectionUL.y + 16}, TOWER_ICON_WIDTH, TOWER_ICON_HEIGHT, {1,1,1,0.3f}) == true)
+    list.AddText({towerSelectionUL.x + 16, towerSelectionUL.y + 1}, 
+        0xFFFFFFFF, "Choose your tower", NULL);
+    if (Button(list, res.tilesetCastle, {towerSelectionUL.x + 16, towerSelectionUL.y + 16}, TOWER_ICON_WIDTH, TOWER_ICON_HEIGHT, {1,1,1,0.3f}) == true)
     {
-        printf("pressed!");
+        
     }
 }
 
@@ -23,15 +25,19 @@ void UI::Update(ImDrawList& list, Resources& res)
     Draw(list, res);
 }
 
-bool UI::Button(ImDrawList& list, Resources& res, ImVec2 pos, float width, float height, ImVec4 col)
+bool UI::Button(ImDrawList& list, Texture tex, ImVec2 pos, float width, float height, ImVec4 col)
 {
     bool isPressed = false;
     if (ImGui::IsMouseHoveringRect({ pos.x, pos.y}, { pos.x + width, pos.y + height}, false))
-        col.w -= 0.1f; //Change alpha of button
+    {
+        col.w += 0.1f; //Change alpha of button
         if (ImGui::IsMouseDown(ImGuiMouseButton_Left))
         {
             isPressed = true;
+            col.w += 0.1f;
         }
+    }
+        
     ImU32 colorU32 = ImColor(col);
     //Background of Tower Selection Window
     list.AddRectFilled(
@@ -40,6 +46,13 @@ bool UI::Button(ImDrawList& list, Resources& res, ImVec2 pos, float width, float
         colorU32,  //Color, black and transparent.
         20.0f //Rounding.
     );
+    list.AddImage(
+                tex.id,
+                { pos.x, pos.y},
+                { pos.x + width, pos.y + height},
+                {0,0},                           
+                {1,1}     
+            );
     return isPressed;
 
 }

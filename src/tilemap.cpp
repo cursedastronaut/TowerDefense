@@ -43,6 +43,7 @@ Tilemap::~Tilemap(){};
 void Tilemap::Update(ImDrawList& list, Resources& res)
 {
     Draw(list, res);
+    ImGui::Checkbox("Draw Path?", &drawPath);
 }
 
 void Tilemap::Draw(ImDrawList& list, Resources& res)
@@ -53,16 +54,44 @@ void Tilemap::Draw(ImDrawList& list, Resources& res)
         for (uint32_t x = 0; x < GRID_WIDTH; x++)
         {
             float2 pos = {0,0};
+            Texture tileSetToUse = res.tilesetWood;
             switch (m_grid[y * GRID_WIDTH + x])
             {
-            //Grass tile
-            case 0:
-                pos.x = 0;  pos.y = 0;
-                break;
-            //Cobblestone tile
+                //Grass tile
+                case 0:
+                    pos.x = 0;  pos.y = 0;
+                    break;
+
+                //Cobblestone tile
                 case 1:
                     pos.x = 1;  pos.y = 0;  break;
-                
+
+                //Castle tiles
+                case 0xA0:
+                    tileSetToUse = res.tilesetCastle;
+                    pos.x = 0;  pos.y = 22; break;
+                case 0xA1:
+                    tileSetToUse = res.tilesetCastle;
+                    pos.x = 0;  pos.y = 23; break;
+                case 0xA2:
+                    tileSetToUse = res.tilesetCastle;
+                    pos.x = 0;  pos.y = 24; break;
+                case 0xA3:
+                    tileSetToUse = res.tilesetCastle;
+                    pos.x = 7;  pos.y = 22; break;
+                case 0xA4:
+                    tileSetToUse = res.tilesetCastle;
+                    pos.x = 1;  pos.y = 22; break;
+                case 0xA5:
+                    tileSetToUse = res.tilesetCastle;
+                    pos.x = 6;  pos.y = 20; break;
+                case 0xA6:
+                    tileSetToUse = res.tilesetCastle;
+                    pos.x = 0;  pos.y = 15; break;
+                case 0xA7:
+                    tileSetToUse = res.tilesetCastle;
+                    pos.x = 0;  pos.y = 14; break;
+                //                
                 case 0xE0:
                     pos.x = 1;  pos.y = 26; break;
                 case 0xE1:
@@ -103,24 +132,29 @@ void Tilemap::Draw(ImDrawList& list, Resources& res)
                     break;
             }   
             list.AddImage(
-                res.tileset.id,                                                                 //Texture
+                tileSetToUse.id,                                                                //Texture
                 {x * (TILE_SIZE), y * (TILE_SIZE)},                                             //Position (upper-left) on Game Screen
                 {x * (TILE_SIZE) + (TILE_SIZE), y * (TILE_SIZE) + (TILE_SIZE)},                 //Position (bottom-right) on Game Screen
-                {(pos.x * TILE_SIZE)/res.tileset.width, (pos.y * TILE_SIZE)/res.tileset.height},//UV (upper-right) position on tileset
-                {(pos.x * TILE_SIZE + TILE_SIZE) / res.tileset.width,                           //UV (bottom-left) position on tileset
-                 (pos.y * TILE_SIZE + TILE_SIZE) / res.tileset.height}     
-            
+                {(pos.x * TILE_SIZE)/tileSetToUse.width,                                        //UV (upper-right) position on tilesetWood
+                (pos.y * TILE_SIZE)/tileSetToUse.height},                           
+                {(pos.x * TILE_SIZE + TILE_SIZE) / tileSetToUse.width,                          //UV (bottom-left) position on tilesetWood
+                 (pos.y * TILE_SIZE + TILE_SIZE) / tileSetToUse.height}     
             );
             
-            /*
-            switch (c_grid[y * GRID_WIDTH + x])
+            if (drawPath)
             {
-            case 1:
-                list.AddRectFilled({(x-1) * (TILE_SIZE), y * (TILE_SIZE)}, {(x-1) * (TILE_SIZE) + (TILE_SIZE), y * (TILE_SIZE) + (TILE_SIZE)}, IM_COL32(255,0,0,128));
-                break;
-            default:
-                break;
-            }   */
+                switch (c_grid[y * GRID_WIDTH + x])
+                {
+                case 1:
+                    list.AddRectFilled({(x-1) * (TILE_SIZE), y * (TILE_SIZE)}, {(x-1) * (TILE_SIZE) + (TILE_SIZE), y * (TILE_SIZE) + (TILE_SIZE)}, IM_COL32(255,0,0,128));
+                    break;
+                case 0x02:
+                    list.AddRectFilled({(x-1) * (TILE_SIZE), y * (TILE_SIZE)}, {(x-1) * (TILE_SIZE) + (TILE_SIZE), y * (TILE_SIZE) + (TILE_SIZE)}, IM_COL32(0,255,0,128));
+                    break;
+                default:
+                    break;
+                }   
+            }
         }
     }
 }

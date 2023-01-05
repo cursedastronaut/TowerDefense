@@ -10,6 +10,13 @@
 #define TOWER_WIN_HEIGHT    128 //Pixels that the Tower Selection UI will take
 #define TOWER_ICON_HEIGHT   96 
 #define TOWER_ICON_WIDTH    64
+
+//Scenes
+#define SCENE_TITLE         0
+#define SCENE_GAME          1
+
+
+
 //Math things
 
 struct float2 //NEVER TOUCH.

@@ -2,6 +2,9 @@
 
 Resources::Resources()
 {
-   Mario = ImGuiUtils::LoadTexture("assets/mario.png", true);
-   tileset = ImGuiUtils::LoadTexture("assets/textures/tilesets/wood.png", true);
+   //Mario    =  ImGuiUtils::LoadTexture("assets/mario.png", true);
+   tilesetWood    =  ImGuiUtils::LoadTexture("assets/textures/tilesets/wood.png", true);
+   tilesetCastle  =  ImGuiUtils::LoadTexture("assets/textures/tilesets/castle.png", true);
+   Fighter4       =  ImGuiUtils::LoadTexture("assets/textures/characters/fighter04.png", true);
+   Void           =  ImGuiUtils::LoadTexture("assets/textures/void.png", true);
 }
