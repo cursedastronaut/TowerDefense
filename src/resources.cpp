@@ -7,4 +7,5 @@ Resources::Resources()
    tilesetCastle  =  ImGuiUtils::LoadTexture("assets/textures/tilesets/castle.png", true);
    Fighter4       =  ImGuiUtils::LoadTexture("assets/textures/characters/fighter04.png", true);
    Void           =  ImGuiUtils::LoadTexture("assets/textures/void.png", true);
+   title          =  ImGuiUtils::LoadTexture("assets/textures/title.png", true);
 }

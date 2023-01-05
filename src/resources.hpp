@@ -9,4 +9,5 @@ class Resources
         Texture tilesetCastle;
         Texture Fighter4;
         Texture Void;
+        Texture title;
 };
