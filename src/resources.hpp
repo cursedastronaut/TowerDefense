@@ -8,6 +8,7 @@ class Resources
         Texture tilesetWood;
         Texture tilesetCastle;
         Texture Fighter4;
+        Texture Tower;
         Texture Void;
         Texture title;
 };

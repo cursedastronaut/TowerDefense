@@ -7,7 +7,7 @@ EXTRA_FLAGS=-Wall -Wextra -Wno-unused-function -Wno-unused-parameter -Wno-narrow
 
 # Specify your compilation objects
 OBJS=src/main.o src/app.o src/imgui_utils.o src/resources.o src/tilemap.o src/entity.o src/UI.o
-OBJS+=
+OBJS+=src/entities/entity_enemy.o src/entities/entity_tower.o
 
 # No changes under this line
 
