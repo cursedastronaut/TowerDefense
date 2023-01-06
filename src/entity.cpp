@@ -9,8 +9,6 @@ Entity::Entity(Tilemap& tilemap)
     {
         enemyArray[i] = Enemy(tilemap);
     }
-    
-    static int test = 0;
     for (int i = 0; i < GRID_HEIGHT * GRID_WIDTH; i++)
     {
         towerArray[i].type = 0;
