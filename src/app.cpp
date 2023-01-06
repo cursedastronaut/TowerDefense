@@ -16,8 +16,8 @@ App::~App()
 void App::Update()
 {
     imdrawlist = ImGui::GetBackgroundDrawList();
-    
-    ImGui::Text("FPS: %0.f", 1/timePassing);
+    deltaTime = io->DeltaTime;
+    ImGui::Text("FPS: %0.f", 1/deltaTime);
     switch (scene)
     {
     case SCENE_TITLE:

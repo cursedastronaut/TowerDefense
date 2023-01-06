@@ -17,7 +17,7 @@ public:
     UI* ui;
     ImGuiIO* io;
 
-    float timePassing;
+    float deltaTime;
     int scene = 0;
 };
 
