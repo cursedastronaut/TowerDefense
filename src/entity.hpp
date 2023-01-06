@@ -28,6 +28,7 @@ class Entity
             public:
                 int     aimingAt = -1;
                 int     type     = 0;
+                int     level    = 0;
                 float   cooldown = 0;
                 ImVec2  pos      = {0,0};
                 bool    active   = false;
