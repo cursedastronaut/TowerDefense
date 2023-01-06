@@ -3,5 +3,8 @@
         "**/*.d": true,
         "**/*.o": true
     },
-    "C_Cpp.errorSquiggles": "disabled"
+    "C_Cpp.errorSquiggles": "disabled",
+    "files.associations": {
+        "cstdio": "cpp"
+    }
 }

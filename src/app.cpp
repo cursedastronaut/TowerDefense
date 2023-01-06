@@ -5,6 +5,7 @@
 App::App()
 {
     this->tilemap = new Tilemap();
+    this->entity = new Entity(*tilemap);
 }
 
 App::~App()
@@ -33,6 +34,7 @@ void App::Update()
     case SCENE_GAME:
         tilemap->Update(*imdrawlist, resources);
         ui->Update(*imdrawlist, resources);
+        entity->Update(*imdrawlist, resources);
         break;
     
     default:

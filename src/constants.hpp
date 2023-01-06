@@ -15,7 +15,9 @@
 #define SCENE_TITLE         0
 #define SCENE_GAME          1
 
-
+//Entity settings
+/*#define ENTITY_NUMBER       5       //Entity count on level one. Multiplied by LEVEL_ENTITY_MUL every level
+#define LEVEL_ENTITY_MUL    1.2f*/
 
 //Math things
 
