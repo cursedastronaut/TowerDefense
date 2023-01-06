@@ -11,7 +11,7 @@ class Entity
 
         struct enemy {
             float   speed       = 0.1f;
-            int direction       = 0;
+            int direction       = 270;
             int life            = 10;
             int type            = 0;
 
