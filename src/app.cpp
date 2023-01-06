@@ -19,7 +19,7 @@ void App::Update()
     switch (scene)
     {
     case SCENE_TITLE:
-    imdrawlist->AddImage(resources.title.id,
+        imdrawlist->AddImage(resources.title.id,
                 { windowWidth/2 - resources.title.width/2, 64},
                 { windowWidth/2 + resources.title.width/2, 64+resources.title.height},
                 {0,0},                           
