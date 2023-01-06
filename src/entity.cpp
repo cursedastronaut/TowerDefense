@@ -12,9 +12,8 @@ Entity::Entity(Tilemap& tilemap)
                 enemyArray[i].type = 1;
                 if (tilemap.cGrid[y * GRID_WIDTH + x] == 0x06)
                 {
-                    enemyArray[i].hasSpawned = true;
                     enemyArray[i].pos.x = x * TILE_SIZE;
-                    enemyArray[i].pos.y = y * TILE_SIZE;
+                    enemyArray[i].pos.y = (y-1) * TILE_SIZE;
                 }
             }
         }

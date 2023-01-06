@@ -14,7 +14,6 @@ class Entity
             int direction       = 0;
             int life            = 10;
             int type            = 0;
-            bool hasSpawned     = 0;
 
             ImVec2 pos          = {0,0};
         };

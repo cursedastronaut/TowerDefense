@@ -30,10 +30,9 @@ Tilemap::Tilemap()
     //draws the tiles
     while (i < GRID_WIDTH * GRID_HEIGHT && !feof(f))
     {
-        mGrid[i++] = fgetc(f);
         cGrid[i]   = fgetc(f2);
+        mGrid[i++] = fgetc(f);
     }
-
     fclose(f);
     fclose(f2);
 }
