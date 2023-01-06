@@ -33,7 +33,7 @@ int main(int argc, char* argv[])
         return 1;
     
     glfwMakeContextCurrent(window);
-    glfwSwapInterval(1); // Enable vsync
+    glfwSwapInterval(0); // Enable vsync
     glfwSetWindowAttrib(window, GLFW_RESIZABLE, GLFW_FALSE);
     //glfwSetWindowAttrib(window, GLFW_TRANSPARENT_FRAMEBUFFER, GLFW_TRUE);
     glfwWindowHint(GLFW_TRANSPARENT_FRAMEBUFFER, GLFW_TRUE);
