@@ -1,5 +1,6 @@
 #define windowWidth     1280
 #define windowHeight    736
+#define targetFPS       60.f //Max FPS
 
 
 //Tilemap settings

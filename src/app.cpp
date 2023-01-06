@@ -6,6 +6,7 @@ App::App()
 {
     this->tilemap = new Tilemap();
     this->entity = new Entity(*tilemap);
+    this->io = new ImGuiIO();
 }
 
 App::~App()
@@ -15,8 +16,8 @@ App::~App()
 void App::Update()
 {
     imdrawlist = ImGui::GetBackgroundDrawList();
-
     
+    ImGui::Text("FPS: %0.f", 1/timePassing);
     switch (scene)
     {
     case SCENE_TITLE:

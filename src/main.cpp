@@ -56,24 +56,31 @@ int main(int argc, char* argv[])
     while (!glfwWindowShouldClose(window))
     {
         glfwPollEvents();
-
-        // Start the Dear ImGui frame
-        ImGui_ImplOpenGL3_NewFrame();
-        ImGui_ImplGlfw_NewFrame();
-        ImGui::NewFrame();
+        if (app->timePassing >= (1.f/targetFPS))
+        {
+            // Start the Dear ImGui frame
+            ImGui_ImplOpenGL3_NewFrame();
+            ImGui_ImplGlfw_NewFrame();
+            ImGui::NewFrame();
         
-        app->Update();
+        
+            app->Update();
+            // Rendering
+       
+            
+            ImGui::Render();
+            app->timePassing = 0;
+            int display_w, display_h;
+            glfwGetFramebufferSize(window, &display_w, &display_h);
+            glViewport(0, 0, display_w, display_h);
+            glClearColor(0.45f, 0.55f, 0.60f, 0.5f);
+            glClear(GL_COLOR_BUFFER_BIT);
+            ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
 
-        // Rendering
-        ImGui::Render();
-        int display_w, display_h;
-        glfwGetFramebufferSize(window, &display_w, &display_h);
-        glViewport(0, 0, display_w, display_h);
-        glClearColor(0.45f, 0.55f, 0.60f, 0.5f);
-        glClear(GL_COLOR_BUFFER_BIT);
-        ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
-
-        glfwSwapBuffers(window);
+            glfwSwapBuffers(window);
+        }
+        app->timePassing += io.DeltaTime;
+        
     }
 
     delete app;

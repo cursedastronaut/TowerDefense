@@ -15,7 +15,9 @@ public:
     Resources resources;
     ImDrawList* imdrawlist;
     UI* ui;
+    ImGuiIO* io;
 
+    float timePassing;
     int scene = 0;
 };
 
