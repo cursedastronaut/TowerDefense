@@ -40,10 +40,13 @@ class Entity
         void Update(ImDrawList& list, Resources& res, Tilemap& tilemap);
         void Draw(ImDrawList& list, Resources& res);
         void Movement(Tilemap& tilemap);
+
         
         //Enemy functions
         void drawEnemy(ImDrawList& list, Resources& res);
         void moveEnemy(Tilemap& tilemap);
+        void damageEnemy(int dmgAmount, int i);
+        void deathEnemy();
 
         //Tower functions
         void drawTower(ImDrawList& list, Resources& res);

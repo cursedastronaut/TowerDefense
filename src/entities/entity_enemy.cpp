@@ -30,6 +30,11 @@ void Entity::drawEnemy(ImDrawList& list, Resources& res)
 {
     for (int i = 0; i < ENTITY_NUMBER * (LEVEL_ENTITY_MUL /* * level*/); i++)
     {
+        if (!enemyArray[i].canStart || enemyArray[i].life <= 0)
+        {
+            return;
+        }
+
         ImVec2 uvUL = {0,0};
         ImVec2 uvBR = {1,1};
         switch (enemyArray[i].direction)
@@ -73,7 +78,7 @@ void Entity::moveEnemy(Tilemap& tilemap)
         if (ImGui::Button(std::string("Enemy Start").append(std::to_string(i)).c_str())) {
             enemyArray[i].canStart = true;
         }
-        if (!enemyArray[i].canStart)
+        if (!enemyArray[i].canStart || enemyArray[i].life <= 0)
             return;
 
         for (uint32_t y = 0; y < GRID_HEIGHT; y++)
@@ -125,5 +130,21 @@ void Entity::moveEnemy(Tilemap& tilemap)
                 //enemyArray[i].pos += speed * dirs[enemyArray[i].direction] * io.deltaTime;
             } //End of for x
         }    //End of for y
+    }
+}
+void Entity::damageEnemy(int dmgAmount, int i)
+{
+    enemyArray[i].life -= dmgAmount;
+}
+/*
+    for (int i = 0; i < ENTITY_NUMBER * (LEVEL_ENTITY_MUL); i++)
+        if (collision == true)
+            damageEnemy(4, i);
+*/
+void Entity::deathEnemy()
+{
+    for (int i = 0; i < ENTITY_NUMBER * (LEVEL_ENTITY_MUL); i++)
+    {
+        enemyArray[i].life = 0;
     }
 }

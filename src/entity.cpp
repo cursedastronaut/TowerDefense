@@ -19,6 +19,10 @@ void Entity::Update(ImDrawList& list, Resources& res, Tilemap& tilemap)
 {
     Movement(tilemap);
     Draw(list, res);
+    if (ImGui::Button("Execute order 66", {100, 50}) == true)
+    {
+        deathEnemy();
+    }
 }
 
 void Entity::Draw(ImDrawList& list, Resources& res)

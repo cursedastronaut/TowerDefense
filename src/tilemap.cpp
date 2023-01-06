@@ -43,6 +43,7 @@ void Tilemap::Update(ImDrawList& list, Resources& res)
 {
     Draw(list, res);
     ImGui::Checkbox("Draw Path?", &drawPath);
+
 }
 
 void Tilemap::Draw(ImDrawList& list, Resources& res)
