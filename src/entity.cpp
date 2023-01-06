@@ -86,6 +86,8 @@ void Entity::Movement(Tilemap& tilemap)
                 //Handling directions
                 switch (tilemap.cGrid[(int)(enemyArray[i].pos.y+TILE_SIZE) / TILE_SIZE * GRID_WIDTH + (int)enemyArray[i].pos.x / TILE_SIZE])
                 {
+                    case 0x00:
+                        break;
                     case 0x02:
                         enemyArray[i].direction = 0;
                         break;
