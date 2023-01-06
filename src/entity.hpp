@@ -10,17 +10,21 @@ class Entity
     public:
         Entity(Tilemap& tilemap);
 
-        struct enemy {
-            float   speed       = 0.1f;
-            int direction       = 90;
-            int life            = 10;
-            int type            = 0;
-            bool canStart       = false;
+        class Enemy {
+            public:
+                float   speed       = 0.1f;
+                int direction       = 90;
+                int life            = 10;
+                int type            = 0;
+                bool canStart       = false;
 
-            ImVec2 pos          = {0,0};
+                Enemy();
+                Enemy(Tilemap& tilemap);
+
+                ImVec2 pos          = {0,0};
         };
 
-        enemy enemyArray[ENTITY_NUMBER * ((int)LEVEL_ENTITY_MUL /* * level*/)];
+        Enemy enemyArray[ENTITY_NUMBER * ((int)LEVEL_ENTITY_MUL /* * level*/)];
         void Update(ImDrawList& list, Resources& res, Tilemap& tilemap);
         void Draw(ImDrawList& list, Resources& res);
         void Movement(Tilemap& tilemap);

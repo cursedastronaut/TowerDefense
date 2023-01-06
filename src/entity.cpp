@@ -3,22 +3,33 @@
 
 #include <string>
 
+Entity::Enemy::Enemy()
+{
+}
+
+Entity::Enemy::Enemy(Tilemap& tilemap)
+    : direction(90)
+{
+    for (uint32_t y = 0; y < GRID_HEIGHT; y++)
+    {
+        for (uint32_t x = 0; x < GRID_WIDTH; x++)
+        {
+            type = 1;
+            if (tilemap.cGrid[y * GRID_WIDTH + x] == 0x06)
+            {
+                pos.x = x * TILE_SIZE;
+                pos.y = (y-1) * TILE_SIZE;
+                //direction = 90;
+            }
+        }
+    }
+}
+
 Entity::Entity(Tilemap& tilemap)
 {
     for (int i = 0; i < ENTITY_NUMBER * (LEVEL_ENTITY_MUL /* * level*/); i++)
     {
-        for (uint32_t y = 0; y < GRID_HEIGHT; y++)
-        {
-            for (uint32_t x = 0; x < GRID_WIDTH; x++)
-            {
-                enemyArray[i].type = 1;
-                if (tilemap.cGrid[y * GRID_WIDTH + x] == 0x06)
-                {
-                    enemyArray[i].pos.x = x * TILE_SIZE;
-                    enemyArray[i].pos.y = (y-1) * TILE_SIZE;
-                }
-            }
-        }
+        enemyArray[i] = Enemy(tilemap);
     }
 }
 
