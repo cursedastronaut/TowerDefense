@@ -18,6 +18,15 @@ void UI::Draw(ImDrawList& list, Resources& res)
     {
         
     }
+    //draw a transparent white square on the tile the mouse is hovering
+    list.AddRect(
+        {int{ImGui::GetMousePos().x / 32} * 32, int{ImGui::GetMousePos().y / 32} * 32},   //Upper-left point of rectangle
+        {int{ImGui::GetMousePos().x / 32} * 32 + 32, int{ImGui::GetMousePos().y / 32} * 32 + 32},   //Bottom-right point of rectangle
+        IM_COL32_WHITE,  //Color, black and transparent.
+        3.0f, //Rounding.
+        0,
+        3.0f //outline thickness.
+    );
 }
 
 void UI::Update(ImDrawList& list, Resources& res)
