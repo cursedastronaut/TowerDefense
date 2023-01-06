@@ -22,16 +22,16 @@ Tilemap::Tilemap()
     //cleans the memory before drawing the tiles
     while (i < GRID_WIDTH * GRID_HEIGHT)
     {
-        m_grid[i++] = 0;
-        c_grid[i]   = 0;
+        mGrid[i++] = 0;
+        cGrid[i]   = 0;
     }
     i = 0;
 
     //draws the tiles
     while (i < GRID_WIDTH * GRID_HEIGHT && !feof(f))
     {
-        m_grid[i++] = fgetc(f);
-        c_grid[i]   = fgetc(f2);
+        mGrid[i++] = fgetc(f);
+        cGrid[i]   = fgetc(f2);
     }
 
     fclose(f);
@@ -56,7 +56,7 @@ void Tilemap::Draw(ImDrawList& list, Resources& res)
             float2 pos = {0,0};
             Texture tileSetToUse = res.tilesetWood;
             ImU32 col = ImColor(0,0,0,0);
-            switch (m_grid[y * GRID_WIDTH + x])
+            switch (mGrid[y * GRID_WIDTH + x])
             {
                 //Grass tile
                 case 0:
@@ -144,7 +144,7 @@ void Tilemap::Draw(ImDrawList& list, Resources& res)
             
             if (drawPath)
             {
-                switch (c_grid[y * GRID_WIDTH + x])
+                switch (cGrid[y * GRID_WIDTH + x])
                 {
                 case 0x01: //Continue walking
                     col = IM_COL32(255,0,0,128);

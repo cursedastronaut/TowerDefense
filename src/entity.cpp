@@ -10,7 +10,7 @@ Entity::Entity(Tilemap& tilemap)
             for (uint32_t x = 0; x < GRID_WIDTH; x++)
             {
                 enemyArray[i].type = 1;
-                if (tilemap.c_grid[y * GRID_WIDTH + x] == 0x06)
+                if (tilemap.cGrid[y * GRID_WIDTH + x] == 0x06)
                 {
                     enemyArray[i].hasSpawned = true;
                     enemyArray[i].pos.x = x * TILE_SIZE;
