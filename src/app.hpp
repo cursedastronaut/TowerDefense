@@ -9,7 +9,7 @@ public:
     ~App();
 
     void Update();
-    int money = 0;
+    
     Tilemap* tilemap;
     Entity* entity;
     Resources resources;
@@ -19,6 +19,10 @@ public:
 
     float deltaTime;
     int scene = 0;
+    
+    //Game related content - Issue #15
+    int money = 0;
+    int dragDropIndex = 0;
 };
 
 // GUIDE TO UNDERSTAND

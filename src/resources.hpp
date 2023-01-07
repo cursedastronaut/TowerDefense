@@ -10,5 +10,8 @@ class Resources
         Texture Fighter4;
         Texture Tower;
         Texture Void;
+
+
         Texture title;
+        Texture newGame;
 };

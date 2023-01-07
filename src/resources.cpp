@@ -9,4 +9,5 @@ Resources::Resources()
    Fighter4       =  ImGuiUtils::LoadTexture("assets/textures/characters/fighter04.png", true);
    Void           =  ImGuiUtils::LoadTexture("assets/textures/void.png", true);
    title          =  ImGuiUtils::LoadTexture("assets/textures/title.png", true);
+   newGame        =  ImGuiUtils::LoadTexture("assets/textures/new_game.png", true);
 }

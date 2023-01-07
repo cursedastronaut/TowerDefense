@@ -12,4 +12,5 @@ public:
     void Update(ImDrawList& list, Resources& res);
     void Draw(ImDrawList& list, Resources& res);
     bool Button(ImDrawList& list, Texture tex, ImVec2 pos, float width, float height, ImVec4 col);
+    bool dragDropButton(ImDrawList& list, Texture tex, ImVec2 pos, ImVec2 widthHeight, ImVec4 col, int index);
 };
