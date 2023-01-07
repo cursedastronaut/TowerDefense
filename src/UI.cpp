@@ -1,7 +1,7 @@
 #include "UI.hpp"
 #include "constants.hpp"
 
-void UI::Draw(ImDrawList& list, Resources& res)
+void UI::Draw(ImDrawList& list, Resources& res, Game* game)
 {
     //draw a transparent white square on the tile the mouse is hovering
     list.AddRect(
@@ -24,15 +24,15 @@ void UI::Draw(ImDrawList& list, Resources& res)
     );
     list.AddText({towerSelectionUL.x + 16, towerSelectionUL.y + 1}, 
         0xFFFFFFFF, "Choose your tower", NULL);
-    if (dragDropButton(list, res.tilesetCastle, {towerSelectionUL.x + 16, towerSelectionUL.y + 16}, {TOWER_ICON_WIDTH, TOWER_ICON_HEIGHT}, {1,1,1,0.3f}, 1) == true)
+    if (dragDropButton(list, res.tilesetCastle, {towerSelectionUL.x + 16, towerSelectionUL.y + 16}, {TOWER_ICON_WIDTH, TOWER_ICON_HEIGHT}, {1,1,1,0.3f}, game, 1) == true)
     {
         
     }
 }
 
-void UI::Update(ImDrawList& list, Resources& res)
+void UI::Update(ImDrawList& list, Resources& res, Game* game)
 {
-    Draw(list, res);
+    Draw(list, res, game);
 }
 
 bool UI::Button(ImDrawList& list, Texture tex, ImVec2 pos, float width, float height, ImVec4 col)
@@ -67,7 +67,7 @@ bool UI::Button(ImDrawList& list, Texture tex, ImVec2 pos, float width, float he
 
 }
 
-bool UI::dragDropButton(ImDrawList& list, Texture tex, ImVec2 pos, ImVec2 widthHeight, ImVec4 col, /*Game* game,*/int index)
+bool UI::dragDropButton(ImDrawList& list, Texture tex, ImVec2 pos, ImVec2 widthHeight, ImVec4 col, Game* game,int index)
 {
     bool isPressed = false;
     if (ImGui::IsMouseHoveringRect({ pos.x, pos.y}, { pos.x + widthHeight.x, pos.y + widthHeight.y}, false))
@@ -76,7 +76,8 @@ bool UI::dragDropButton(ImDrawList& list, Texture tex, ImVec2 pos, ImVec2 widthH
         if (ImGui::IsMouseDown(ImGuiMouseButton_Left))
         {
             isPressed = true;
-            // = index; //Solve issue #15 first.
+            game->dragDropIndex = index; //Solve issue #15 first.
+            ImGui::Text("dragDropIndex: %d", game->dragDropIndex);
             col.w += 0.1f;
         }
     }

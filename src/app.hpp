@@ -2,6 +2,7 @@
 #include "tilemap.hpp"
 #include "UI.hpp"
 #include "entity.hpp"
+#include "game.hpp"
 class App
 {
 public:
@@ -12,6 +13,7 @@ public:
     
     Tilemap* tilemap;
     Entity* entity;
+    Game* game;
     Resources resources;
     ImDrawList* imdrawlist;
     UI* ui;
@@ -19,10 +21,6 @@ public:
 
     float deltaTime;
     int scene = 0;
-    
-    //Game related content - Issue #15
-    int money = 0;
-    int dragDropIndex = 0;
 };
 
 // GUIDE TO UNDERSTAND
