@@ -78,7 +78,7 @@ bool UI::dragDropButton(ImDrawList& list, Texture tex, ImVec2 pos, ImVec2 widthH
         if (ImGui::IsMouseDown(ImGuiMouseButton_Left))
         {
             isPressed = true;
-            game->dragDropIndex = index; //Solve issue #15 first.
+            game->dragDropIndex = index;
             col.w += 0.1f;
         }
     }
@@ -88,7 +88,8 @@ bool UI::dragDropButton(ImDrawList& list, Texture tex, ImVec2 pos, ImVec2 widthH
     }    
     else
     {
-        game->dragDropIndex = 0;
+        if(game->dragDropIndex == index)
+            game->dragDropIndex = 0;
     }
     ImU32 colorU32 = ImColor(col);
     //Background of Tower Selection Window
