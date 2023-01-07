@@ -24,7 +24,7 @@ void UI::Draw(ImDrawList& list, Resources& res, Game* game)
     );
     list.AddText({towerSelectionUL.x + 16, towerSelectionUL.y + 1}, 
         0xFFFFFFFF, "Choose your tower", NULL);
-    if (dragDropButton(list, res.tilesetCastle, {towerSelectionUL.x + 16, towerSelectionUL.y + 16}, {TOWER_ICON_WIDTH, TOWER_ICON_HEIGHT}, {1,1,1,0.3f}, game, 1) == true)
+    if (dragDropButton(list, res.Tower, {towerSelectionUL.x + 16, towerSelectionUL.y + 16}, {TOWER_ICON_WIDTH, TOWER_ICON_HEIGHT}, {1,1,1,0.3f}, game, 1) == true)
     {
         
     }
@@ -33,6 +33,8 @@ void UI::Draw(ImDrawList& list, Resources& res, Game* game)
 void UI::Update(ImDrawList& list, Resources& res, Game* game)
 {
     Draw(list, res, game);
+    
+            ImGui::Text("dragDropIndex: %d", game->dragDropIndex);
 }
 
 bool UI::Button(ImDrawList& list, Texture tex, ImVec2 pos, float width, float height, ImVec4 col)
@@ -77,11 +79,17 @@ bool UI::dragDropButton(ImDrawList& list, Texture tex, ImVec2 pos, ImVec2 widthH
         {
             isPressed = true;
             game->dragDropIndex = index; //Solve issue #15 first.
-            ImGui::Text("dragDropIndex: %d", game->dragDropIndex);
             col.w += 0.1f;
         }
     }
-        
+    if (ImGui::IsMouseDown(ImGuiMouseButton_Left) && game->dragDropIndex == index)
+    {
+        col.w += 0.1f;
+    }    
+    else
+    {
+        game->dragDropIndex = 0;
+    }
     ImU32 colorU32 = ImColor(col);
     //Background of Tower Selection Window
     list.AddRectFilled(
@@ -95,7 +103,7 @@ bool UI::dragDropButton(ImDrawList& list, Texture tex, ImVec2 pos, ImVec2 widthH
                 { pos.x, pos.y},
                 { pos.x + widthHeight.x, pos.y + widthHeight.y},
                 {0,0},                           
-                {1,1}     
+                {0.25f,0.25f}   //DEBUG TO EDIT TOEDIT  
             );
     return isPressed;
 
