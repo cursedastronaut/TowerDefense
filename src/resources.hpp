@@ -7,6 +7,7 @@ class Resources
         Texture Mario;
         Texture tilesetWood;
         Texture tilesetCastle;
+        Texture tilesetPath;
         Texture Fighter4;
         Texture Turret;
         Texture Void;

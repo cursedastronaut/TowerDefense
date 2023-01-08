@@ -55,7 +55,7 @@ void Tilemap::Draw(ImDrawList& list, Resources& res)
         {
             float2 pos = {0,0};
             Texture tileSetToUse = res.tilesetWood;
-            ImU32 col = ImColor(0,0,0,0);
+            //ImU32 col = ImColor(0,0,0,0);
             switch (mGrid[y * GRID_WIDTH + x])
             {
                 //Grass tile
@@ -142,41 +142,35 @@ void Tilemap::Draw(ImDrawList& list, Resources& res)
                  (pos.y * TILE_SIZE + TILE_SIZE) / tileSetToUse.height}     
             );
             
+            pos = {0,0};
             if (drawPath)
             {
                 switch (cGrid[y * GRID_WIDTH + x])
                 {
                 case 0x01: //Continue walking
-                    col = IM_COL32(255,0,0,128);
-                    //list.AddRectFilled({(x) * (TILE_SIZE), y * (TILE_SIZE)}, {(x) * (TILE_SIZE) + (TILE_SIZE), y * (TILE_SIZE) + (TILE_SIZE)}, IM_COL32(255,0,0,128));
-                    break;
+                    pos = {0,0}; break;
                 case 0x02: //Face north (upscreen)
-                    col = IM_COL32(0,255,0,128);
-                    //list.AddRectFilled({(x) * (TILE_SIZE), y * (TILE_SIZE)}, {(x) * (TILE_SIZE) + (TILE_SIZE), y * (TILE_SIZE) + (TILE_SIZE)}, IM_COL32(0,255,0,128));
-                    break;
+                    pos = {1,0}; break;
                 case 0x03: //Face east (left)
-                    col = IM_COL32(0,0,255,128);
-                    //list.AddRectFilled({(x) * (TILE_SIZE), y * (TILE_SIZE)}, {(x) * (TILE_SIZE) + (TILE_SIZE), y * (TILE_SIZE) + (TILE_SIZE)}, IM_COL32(0,0,255,128));
-                    break;
+                    pos = {2,0}; break;
                 case 0x04: //Face south (down)
-                    col = IM_COL32(255,255,0,128);
-                    //list.AddRectFilled({(x) * (TILE_SIZE), y * (TILE_SIZE)}, {(x) * (TILE_SIZE) + (TILE_SIZE), y * (TILE_SIZE) + (TILE_SIZE)}, IM_COL32(255,255,0,128));
-                    break;
+                    pos = {3,0}; break;
                 case 0x05: //Face west (right)
-                    col = IM_COL32(0,255,255,128);
-                    //list.AddRectFilled({(x) * (TILE_SIZE), y * (TILE_SIZE)}, {(x) * (TILE_SIZE) + (TILE_SIZE), y * (TILE_SIZE) + (TILE_SIZE)}, IM_COL32(0,255,255,128));
-                    break;
+                    pos = {4,0}; break;
                 case 0x06: //Spawnpoint
-                    col = IM_COL32(255,255,255,128);
-                    //list.AddRectFilled({(x-1) * (TILE_SIZE), y * (TILE_SIZE)}, {(x-1) * (TILE_SIZE) + (TILE_SIZE), y * (TILE_SIZE) + (TILE_SIZE)}, IM_COL32(255,255,255,128));
-                    break;
+                    pos = {5,0}; break;
                 default:
+                    pos = {7,0};
                     break;
                 }
-                list.AddRectFilled(
+                list.AddImage(
+                    res.tilesetPath.id,
                     {x * (TILE_SIZE), y * (TILE_SIZE)},                                             //Position (upper-left) on Game Screen
                     {x * (TILE_SIZE) + (TILE_SIZE), y * (TILE_SIZE) + (TILE_SIZE)},                 //Position (bottom-right) on Game Screen
-                    col
+                    {(pos.x * TILE_SIZE)/res.tilesetPath.width,                                        //UV (upper-right) position on tilesetWood
+                     (pos.y * TILE_SIZE)/res.tilesetPath.height},                           
+                    {(pos.x * TILE_SIZE + TILE_SIZE) / res.tilesetPath.width,                          //UV (bottom-left) position on tilesetWood
+                     (pos.y * TILE_SIZE + TILE_SIZE) / res.tilesetPath.height} 
                 );
             }
         }
