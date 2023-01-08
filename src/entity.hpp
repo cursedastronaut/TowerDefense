@@ -1,5 +1,6 @@
 #pragma once
 #include "tilemap.hpp"
+#include "game.hpp"
 #include "imgui_utils.hpp"
 
 #define ENTITY_NUMBER       5           //Entity count on level one. Multiplied by LEVEL_ENTITY_MUL every level
@@ -50,4 +51,5 @@ class Entity
 
         //Tower functions
         void drawTower(ImDrawList& list, Resources& res);
+        void spawnTower(ImVec2 pos, int type);
 };

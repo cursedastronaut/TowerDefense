@@ -1,7 +1,7 @@
 #include "UI.hpp"
 #include "constants.hpp"
 
-void UI::Draw(ImDrawList& list, Resources& res, Game* game)
+void UI::Draw(ImDrawList& list, Resources& res, Game* game, Entity* entity)
 {
     //draw a transparent white square on the tile the mouse is hovering
     list.AddRect(
@@ -26,13 +26,13 @@ void UI::Draw(ImDrawList& list, Resources& res, Game* game)
         0xFFFFFFFF, "Choose your tower", NULL);
     if (dragDropButton(list, res.Tower, {towerSelectionUL.x + 16, towerSelectionUL.y + 16}, {TOWER_ICON_WIDTH, TOWER_ICON_HEIGHT}, {1,1,1,0.3f}, game, 1) == true)
     {
-        
+        entity->spawnTower({ImGui::GetMousePos().x,ImGui::GetMousePos().y}, 0);
     }
 }
 
-void UI::Update(ImDrawList& list, Resources& res, Game* game)
+void UI::Update(ImDrawList& list, Resources& res, Game* game, Entity* entity)
 {
-    Draw(list, res, game);
+    Draw(list, res, game, entity);
     
             ImGui::Text("dragDropIndex: %d", game->dragDropIndex);
 }
@@ -71,13 +71,12 @@ bool UI::Button(ImDrawList& list, Texture tex, ImVec2 pos, float width, float he
 
 bool UI::dragDropButton(ImDrawList& list, Texture tex, ImVec2 pos, ImVec2 widthHeight, ImVec4 col, Game* game,int index)
 {
-    bool isPressed = false;
+    bool isDropped = false;
     if (ImGui::IsMouseHoveringRect({ pos.x, pos.y}, { pos.x + widthHeight.x, pos.y + widthHeight.y}, false))
     {
         col.w += 0.1f; //Change alpha of button
         if (ImGui::IsMouseDown(ImGuiMouseButton_Left))
         {
-            isPressed = true;
             game->dragDropIndex = index;
             col.w += 0.1f;
         }
@@ -96,7 +95,10 @@ bool UI::dragDropButton(ImDrawList& list, Texture tex, ImVec2 pos, ImVec2 widthH
     else
     {
         if(game->dragDropIndex == index)
+        {
             game->dragDropIndex = 0;
+            isDropped = true;  
+        }
     }
     ImU32 colorU32 = ImColor(col);
     //Background of Tower Selection Window
@@ -113,6 +115,6 @@ bool UI::dragDropButton(ImDrawList& list, Texture tex, ImVec2 pos, ImVec2 widthH
                 {0,0},
                 {0.25f,0.25f}   //DEBUG TO EDIT TOEDIT
             );
-    return isPressed;
+    return isDropped;
 
 }

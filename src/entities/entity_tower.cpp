@@ -31,13 +31,33 @@ void Entity::drawTower(ImDrawList& list, Resources& res)
             }
             list.AddImage(
                 res.Tower.id,                                                               
-                {towerArray[i].pos.x, towerArray[i].pos.y},                                            
-                {towerArray[i].pos.x+res.Tower.width/4, towerArray[i].pos.y+res.Tower.height/4},                 
+                {towerArray[i].pos.x, towerArray[i].pos.y-TILE_SIZE},                                            
+                {towerArray[i].pos.x+res.Tower.width/4, towerArray[i].pos.y+res.Tower.height/4-TILE_SIZE},                 
                 uvUL,                           
                 uvBR     
             ); 
+            
         }
-        
     }
     
+    
+}
+
+void Entity::spawnTower(ImVec2 pos, int type)
+{
+    pos.x = (int)(pos.x/TILE_SIZE)*TILE_SIZE;
+    pos.y = (int)(pos.y/TILE_SIZE)*TILE_SIZE;
+    for (int i = 0; i < GRID_HEIGHT * GRID_WIDTH; i++)
+    {
+        if (!towerArray[i].active)
+        {
+            towerArray[i].pos       = pos;
+            towerArray[i].type      = type;
+            towerArray[i].aimingAt  = 0;
+            towerArray[i].cooldown  = 0;
+            towerArray[i].level     = 0;
+            towerArray[i].active    = true;
+            return;
+        }
+    }
 }
