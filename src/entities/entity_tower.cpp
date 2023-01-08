@@ -9,7 +9,7 @@ Entity::Turret::Turret()
 {
 }
 
-void Entity::drawTower(ImDrawList& list, Resources& res)
+void Entity::drawTower(Game* game, Resources& res)
 {
     for (int i = 0; i < GRID_HEIGHT * GRID_WIDTH; i++)
     {
@@ -29,7 +29,7 @@ void Entity::drawTower(ImDrawList& list, Resources& res)
                 default:
                     break;
             }
-            list.AddImage(
+            game->AddToTexlist(2000+i,
                 res.Turret.id,                                                               
                 {turretArray[i].pos.x, turretArray[i].pos.y-TILE_SIZE},                                            
                 {turretArray[i].pos.x+res.Turret.width/4, turretArray[i].pos.y+res.Turret.height/4-TILE_SIZE},                 

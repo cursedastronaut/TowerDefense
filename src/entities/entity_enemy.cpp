@@ -26,7 +26,7 @@ Entity::Enemy::Enemy(Tilemap& tilemap)
     }
 }
 
-void Entity::drawEnemy(ImDrawList& list, Resources& res)
+void Entity::drawEnemy(Game* game, Resources& res)
 {
     for (int i = 0; i < ENTITY_NUMBER * (LEVEL_ENTITY_MUL /* * level*/); i++)
     {
@@ -61,7 +61,7 @@ void Entity::drawEnemy(ImDrawList& list, Resources& res)
         default:
             break;
         }
-        list.AddImage(
+        game->AddToTexlist( 3000+i,
             res.Fighter4.id,                                                               
             {enemyArray[i].pos.x, enemyArray[i].pos.y},                                            
             {enemyArray[i].pos.x+res.Fighter4.width/4, enemyArray[i].pos.y+res.Fighter4.height/4},                 

@@ -15,20 +15,20 @@ Entity::Entity(Tilemap& tilemap)
     }
 }
 
-void Entity::Update(ImDrawList& list, Resources& res, Tilemap& tilemap)
+void Entity::Update(Game* game, Resources& res, Tilemap& tilemap)
 {
     Movement(tilemap);
-    Draw(list, res);
+    Draw(game, res);
     if (ImGui::Button("Execute order 66", {100, 50}) == true)
     {
         deathEnemy();
     }
 }
 
-void Entity::Draw(ImDrawList& list, Resources& res)
+void Entity::Draw(Game* game, Resources& res)
 {
-    drawEnemy(list, res);
-    drawTower(list, res);
+    drawEnemy(game, res);
+    drawTower(game, res);
 }
 
 void Entity::Movement(Tilemap& tilemap)

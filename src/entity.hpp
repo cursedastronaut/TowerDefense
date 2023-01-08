@@ -38,18 +38,18 @@ class Entity
         };
         Enemy enemyArray[ENTITY_NUMBER * ((int)LEVEL_ENTITY_MUL /* * level*/)];
         Turret turretArray[GRID_HEIGHT * GRID_WIDTH];
-        void Update(ImDrawList& list, Resources& res, Tilemap& tilemap);
-        void Draw(ImDrawList& list, Resources& res);
+        void Update(Game* game, Resources& res, Tilemap& tilemap);
+        void Draw(Game* game, Resources& res);
         void Movement(Tilemap& tilemap);
 
         
         //Enemy functions
-        void drawEnemy(ImDrawList& list, Resources& res);
+        void drawEnemy(Game* game, Resources& res);
         void moveEnemy(Tilemap& tilemap);
         void damageEnemy(int dmgAmount, int i);
         void deathEnemy();
 
         //Turret functions
-        void drawTower(ImDrawList& list, Resources& res);
+        void drawTower(Game* game, Resources& res);
         void spawnTower(ImVec2 pos, int type);
 };

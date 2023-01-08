@@ -11,6 +11,8 @@ public:
 
     void Update();
     
+
+    
     Tilemap* tilemap;
     Entity* entity;
     Game* game;
@@ -19,6 +21,7 @@ public:
     UI* ui;
     ImGuiIO* io;
 
+    
     float deltaTime;
     int scene = 0;
 };

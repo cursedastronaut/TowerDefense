@@ -1,5 +1,6 @@
 #pragma once
 #include "resources.hpp"
+#include "game.hpp"
 #include <cstdio>
 #include <stdint.h>
 
@@ -14,8 +15,8 @@ private:
 public:
     Tilemap();
     ~Tilemap();
-    void Update(ImDrawList& list, Resources& res);
-    void Draw(ImDrawList& list, Resources& res);
+    void Update(Game* game, Resources& res);
+    void Draw(Game* game, Resources& res);
 
     
     uint8_t cGrid[GRID_WIDTH * GRID_HEIGHT];

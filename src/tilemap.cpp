@@ -39,14 +39,14 @@ Tilemap::Tilemap()
 
 Tilemap::~Tilemap(){};
 
-void Tilemap::Update(ImDrawList& list, Resources& res)
+void Tilemap::Update(Game* game, Resources& res)
 {
-    Draw(list, res);
+    Draw(game, res);
     ImGui::Checkbox("Draw Path?", &drawPath);
 
 }
 
-void Tilemap::Draw(ImDrawList& list, Resources& res)
+void Tilemap::Draw(Game* game, Resources& res)
 {
 
     for (uint32_t y = 0; y < GRID_HEIGHT; y++)
@@ -132,7 +132,8 @@ void Tilemap::Draw(ImDrawList& list, Resources& res)
                 default:
                     break;
             }   
-            list.AddImage(
+            game->AddToTexlist(
+                y * GRID_WIDTH + x + 100, //Z value
                 tileSetToUse.id,                                                                //Texture
                 {x * (TILE_SIZE), y * (TILE_SIZE)},                                             //Position (upper-left) on Game Screen
                 {x * (TILE_SIZE) + (TILE_SIZE), y * (TILE_SIZE) + (TILE_SIZE)},                 //Position (bottom-right) on Game Screen
@@ -163,7 +164,7 @@ void Tilemap::Draw(ImDrawList& list, Resources& res)
                     pos = {7,0};
                     break;
                 }
-                list.AddImage(
+                game->AddToTexlist( GRID_WIDTH * GRID_HEIGHT + y * GRID_WIDTH + x + 100,
                     res.tilesetPath.id,
                     {x * (TILE_SIZE), y * (TILE_SIZE)},                                             //Position (upper-left) on Game Screen
                     {x * (TILE_SIZE) + (TILE_SIZE), y * (TILE_SIZE) + (TILE_SIZE)},                 //Position (bottom-right) on Game Screen

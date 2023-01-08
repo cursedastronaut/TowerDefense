@@ -1,3 +1,4 @@
+#pragma once
 #define windowWidth     1280
 #define windowHeight    736
 #define targetFPS       60.f //Max FPS
@@ -19,6 +20,11 @@
 //Entity settings
 /*#define ENTITY_NUMBER       5       //Entity count on level one. Multiplied by LEVEL_ENTITY_MUL every level
 #define LEVEL_ENTITY_MUL    1.2f*/
+
+//Graphics settings
+#define MAX_TEXTURES        8192
+#define TILESET_Z           10
+#define TILEPATH_Z          11
 
 //Math things
 
