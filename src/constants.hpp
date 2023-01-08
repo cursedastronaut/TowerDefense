@@ -23,8 +23,8 @@
 
 //Graphics settings
 #define MAX_TEXTURES        8192
-#define TILESET_Z           10
-#define TILEPATH_Z          11
+#define TILESET_Z           100
+#define TILEPATH_Z          
 
 //Math things
 
