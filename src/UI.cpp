@@ -62,7 +62,7 @@ bool UI::Button(ImDrawList& list, Texture tex, ImVec2 pos, float width, float he
                 tex.id,
                 { pos.x, pos.y},
                 { pos.x + width, pos.y + height},
-                {0,0},                           
+                {0,0},
                 {1,1}     
             );
     return isPressed;
@@ -85,6 +85,13 @@ bool UI::dragDropButton(ImDrawList& list, Texture tex, ImVec2 pos, ImVec2 widthH
     if (ImGui::IsMouseDown(ImGuiMouseButton_Left) && game->dragDropIndex == index)
     {
         col.w += 0.1f;
+        list.AddImage(
+                tex.id,
+                { ImGui::GetMousePos().x, ImGui::GetMousePos().y},
+                { ImGui::GetMousePos().x + widthHeight.x, ImGui::GetMousePos().y + widthHeight.y},
+                {0,0},
+                {0.25f,0.25f}   //DEBUG TO EDIT TOEDIT
+            );
     }    
     else
     {
@@ -103,8 +110,8 @@ bool UI::dragDropButton(ImDrawList& list, Texture tex, ImVec2 pos, ImVec2 widthH
                 tex.id,
                 { pos.x, pos.y},
                 { pos.x + widthHeight.x, pos.y + widthHeight.y},
-                {0,0},                           
-                {0.25f,0.25f}   //DEBUG TO EDIT TOEDIT  
+                {0,0},
+                {0.25f,0.25f}   //DEBUG TO EDIT TOEDIT
             );
     return isPressed;
 
