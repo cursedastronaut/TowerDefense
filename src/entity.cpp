@@ -11,7 +11,7 @@ Entity::Entity(Tilemap& tilemap)
     }
     for (int i = 0; i < GRID_HEIGHT * GRID_WIDTH; i++)
     {
-        towerArray[i].type = 0;
+        turretArray[i].type = 0;
     }
 }
 

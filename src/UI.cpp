@@ -15,7 +15,7 @@ void UI::Draw(ImDrawList& list, Resources& res, Game* game, Entity* entity)
 
     ImVec2 towerSelectionUL = {windowWidth/2 - (TOWER_WIN_WIDTH * windowWidth)/2, windowHeight - TOWER_WIN_HEIGHT};   //Upper-left point of rectangle
     ImVec2 towerSelectionBR = {windowWidth/2 + (TOWER_WIN_WIDTH * windowWidth)/2, windowHeight + TOWER_WIN_HEIGHT};   //Upper-left point of rectangle
-    //Background of Tower Selection Window
+    //Background of Turret Selection Window
     list.AddRectFilled(
         towerSelectionUL,   //Upper-left point of rectangle
         towerSelectionBR,   //Bottom-right point of rectangle
@@ -24,7 +24,7 @@ void UI::Draw(ImDrawList& list, Resources& res, Game* game, Entity* entity)
     );
     list.AddText({towerSelectionUL.x + 16, towerSelectionUL.y + 1}, 
         0xFFFFFFFF, "Choose your tower", NULL);
-    if (dragDropButton(list, res.Tower, {towerSelectionUL.x + 16, towerSelectionUL.y + 16}, {TOWER_ICON_WIDTH, TOWER_ICON_HEIGHT}, {1,1,1,0.3f}, game, 1) == true)
+    if (dragDropButton(list, res.Turret, {towerSelectionUL.x + 16, towerSelectionUL.y + 16}, {TOWER_ICON_WIDTH, TOWER_ICON_HEIGHT}, {1,1,1,0.3f}, game, 1) == true)
     {
         entity->spawnTower({ImGui::GetMousePos().x,ImGui::GetMousePos().y}, 0);
     }
@@ -51,7 +51,7 @@ bool UI::Button(ImDrawList& list, Texture tex, ImVec2 pos, float width, float he
     }
         
     ImU32 colorU32 = ImColor(col);
-    //Background of Tower Selection Window
+    //Background of Turret Selection Window
     list.AddRectFilled(
         { pos.x, pos.y},                    //Upper-left point of rectangle
         { pos.x + width, pos.y + height},   //Bottom-right point of rectangle
@@ -101,7 +101,7 @@ bool UI::dragDropButton(ImDrawList& list, Texture tex, ImVec2 pos, ImVec2 widthH
         }
     }
     ImU32 colorU32 = ImColor(col);
-    //Background of Tower Selection Window
+    //Background of Turret Selection Window
     list.AddRectFilled(
         { pos.x, pos.y},                    //Upper-left point of rectangle
         { pos.x + widthHeight.x, pos.y + widthHeight.y},   //Bottom-right point of rectangle

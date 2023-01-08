@@ -25,7 +25,7 @@ class Entity
                 ImVec2 pos          = {0,0};
         };
 
-        class Tower {
+        class Turret {
             public:
                 int     aimingAt = -1;
                 int     type     = 0;
@@ -34,10 +34,10 @@ class Entity
                 ImVec2  pos      = {0,0};
                 bool    active   = false;
 
-                Tower();
+                Turret();
         };
         Enemy enemyArray[ENTITY_NUMBER * ((int)LEVEL_ENTITY_MUL /* * level*/)];
-        Tower towerArray[GRID_HEIGHT * GRID_WIDTH];
+        Turret turretArray[GRID_HEIGHT * GRID_WIDTH];
         void Update(ImDrawList& list, Resources& res, Tilemap& tilemap);
         void Draw(ImDrawList& list, Resources& res);
         void Movement(Tilemap& tilemap);
@@ -49,7 +49,7 @@ class Entity
         void damageEnemy(int dmgAmount, int i);
         void deathEnemy();
 
-        //Tower functions
+        //Turret functions
         void drawTower(ImDrawList& list, Resources& res);
         void spawnTower(ImVec2 pos, int type);
 };
