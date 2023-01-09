@@ -9,9 +9,6 @@
 
 class Tilemap
 {
-private:
-    uint8_t mGrid[GRID_WIDTH * GRID_HEIGHT];
-
 public:
     Tilemap();
     ~Tilemap();
@@ -19,6 +16,7 @@ public:
     void Draw(Game* game, Resources& res);
 
     
+    uint8_t mGrid[GRID_WIDTH * GRID_HEIGHT];
     uint8_t cGrid[GRID_WIDTH * GRID_HEIGHT];
     bool drawPath = 0;
 };

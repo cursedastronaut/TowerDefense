@@ -51,5 +51,5 @@ class Entity
 
         //Turret functions
         void drawTower(Game* game, Resources& res);
-        void spawnTower(ImVec2 pos, int type);
+        void spawnTower(ImVec2 pos, int type, Tilemap& tilemap);
 };

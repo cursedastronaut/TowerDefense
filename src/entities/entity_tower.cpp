@@ -11,10 +11,12 @@ Entity::Turret::Turret()
 
 void Entity::drawTower(Game* game, Resources& res)
 {
+    int debug;
     for (int i = 0; i < GRID_HEIGHT * GRID_WIDTH; i++)
     {
         if (turretArray[i].active)
         {
+            debug++;
            //turretArray[i].Draw();
             //ImGui::Text("%d", turretArray[i].type);
             ImVec2 uvUL = {0,0};
@@ -39,18 +41,26 @@ void Entity::drawTower(Game* game, Resources& res)
             
         }
     }
-    
+    ImGui::Text("towers: %d", debug);
     
 }
 
-void Entity::spawnTower(ImVec2 pos, int type)
+void Entity::spawnTower(ImVec2 pos, int type, Tilemap& tilemap)
 {
     pos.x = (int)(pos.x/TILE_SIZE)*TILE_SIZE;
     pos.y = (int)(pos.y/TILE_SIZE)*TILE_SIZE;
     for (int i = 0; i < GRID_HEIGHT * GRID_WIDTH; i++)
     {
+        if (turretArray[i].pos.x == pos.x && turretArray[i].pos.y == pos.y)
+            return;
+    }
+    for (int i = 0; i < GRID_HEIGHT * GRID_WIDTH; i++)
+    {
         if (!turretArray[i].active)
         {
+            if (tilemap.mGrid[(int)(pos.y/32 * GRID_WIDTH + pos.x/32)])
+                return;
+            
             turretArray[i].pos       = pos;
             turretArray[i].type      = type;
             turretArray[i].aimingAt  = 0;

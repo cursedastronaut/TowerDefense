@@ -39,7 +39,7 @@ void App::Update()
 
     case SCENE_GAME:
         tilemap->Update(game, resources);
-        ui->Update(*imdrawlist, resources, game, entity);
+        ui->Update(*imdrawlist, resources, game, entity, *tilemap);
         entity->Update(game, resources, *tilemap);
         break;
     
