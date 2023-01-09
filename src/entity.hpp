@@ -42,14 +42,18 @@ class Entity
         void Draw(Game* game, Resources& res);
         void Movement(Tilemap& tilemap);
 
-        
-        //Enemy functions
-        void drawEnemy(Game* game, Resources& res);
-        void moveEnemy(Tilemap& tilemap);
-        void damageEnemy(int dmgAmount, int i);
-        void deathEnemy();
+        //TODO: move functions to respective .hpp folder
+            //Enemy functions
+            void drawEnemy(Game* game, Resources& res);
+            void moveEnemy(Tilemap& tilemap);
+            void damageEnemy(int dmgAmount, int i);
+            void deathEnemy();
 
         //Turret functions
         void drawTower(Game* game, Resources& res);
         void spawnTower(ImVec2 pos, int type, Tilemap& tilemap);
+            //Turret functions
+            void drawTower(Game* game, Resources& res, Tilemap& tilemap);
+            void spawnTower(ImVec2 pos, int type);
+            void shootTower();
 };

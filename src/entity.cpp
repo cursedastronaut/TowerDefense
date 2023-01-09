@@ -23,6 +23,7 @@ void Entity::Update(Game* game, Resources& res, Tilemap& tilemap)
     {
         deathEnemy();
     }
+    shootTower();
 }
 
 void Entity::Draw(Game* game, Resources& res)

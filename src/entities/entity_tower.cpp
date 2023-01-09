@@ -1,14 +1,84 @@
 #include "../tilemap.hpp"
 #include "../imgui_utils.hpp"
 #include "../entity.hpp"
+#include "entity_tower.hpp"
 #include "../constants.hpp"
 #include <string>
+#include <math.h>
 
 Entity::Turret::Turret()
     : type(0)
 {
 }
 
+void Entity::
+shootTower()
+{
+    ImGuiIO *io = new ImGuiIO();
+    float deltaTime = io->DeltaTime;
+    //if no target is initialized, set the closest enemy as the new target.
+    for (int i = 0; i < GRID_HEIGHT * GRID_WIDTH; i++)
+    {
+        if (turretArray[i].active)
+        {
+            if (turretArray[i].aimingAt == -1)
+            {
+                float shortestDist = INFINITY;
+                for (int o = 0; o < ENTITY_NUMBER * ((int)LEVEL_ENTITY_MUL); o++)
+                {
+                    if (enemyArray[o].canStart)
+                    {
+                        if (sqrtf(powf(enemyArray[o].pos.x - turretArray[i].pos.x, 2.0f) + powf(enemyArray[o].pos.y - turretArray[i].pos.y, 2.0f)) < shortestDist)
+                        {
+                            turretArray[i].aimingAt = o;
+                            shortestDist = sqrtf(powf(enemyArray[o].pos.x - turretArray[i].pos.x, 2.0f) + powf(enemyArray[o].pos.y - turretArray[i].pos.y, 2.0f));
+                        }
+                    }
+                }
+            }
+            else
+            {
+                if (enemyArray[turretArray[i].aimingAt].life > 0)
+                {
+                    if (turretArray[i].cooldown <= 0)
+                    {
+                        /*if (turretArray[i].aimingAt == -1)
+                        {*/
+                            //deals a certain amount of damage to the target depending on the turret's level.
+                            switch(turretArray[i].type)
+                            {
+                                //tower shooting bullets.
+                                case 0:
+                                enemyArray[turretArray[i].aimingAt].life -= 1 + turretArray[i].level * 2;
+                                turretArray[i].cooldown = 2 - (turretArray[i].level / 2);                    
+                                break;
+
+                                //tower firing missiles.
+                                //TODO: add a function that spawns missiles.
+                                case 1:
+                                //missile function goes here
+                                turretArray[i].cooldown = 5 - turretArray[i].level; 
+                                break;
+                            }
+                        /*}*/
+                    }
+                    else
+                    {
+                        turretArray[i].cooldown -= deltaTime;
+                    }
+                }
+                //once the enemy dies, search for a new target.
+                else
+                {
+                    turretArray[i].aimingAt = -1;
+                }
+                ImGui::Text("Tower aiming at: %d\nTower doing your mom at: longitude 69 latitude 420\nTower cooldown: %f", turretArray[i].aimingAt, turretArray[i].cooldown);
+        }
+        
+        }
+    }
+    
+}
 void Entity::drawTower(Game* game, Resources& res)
 {
     int debug;
