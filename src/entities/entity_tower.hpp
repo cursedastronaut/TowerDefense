@@ -14,7 +14,8 @@ class Turret : public Entity
 
         //Enemy enemyArray[ENTITY_NUMBER * ((int)LEVEL_ENTITY_MUL /* * level*/)];
         //Turret turretArray[GRID_HEIGHT * GRID_WIDTH];
-        void Update(Game* game, Resources& res, Tilemap& tilemap);
-        void Draw(Game* game, Resources& res);
-        void Movement(Tilemap& tilemap);
+        //Turret functions
+        void drawTower(Game* game, Resources& res, Tilemap& tilemap);
+        void spawnTower(ImVec2 pos, int type, Tilemap& tilemap);
+        void shootTower();
 };

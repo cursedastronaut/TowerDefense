@@ -6,14 +6,13 @@
 #include <string>
 #include <math.h>
 
-Entity::Turret::Turret()
+Turret::Turret()
     : type(0)
 {
 }
 
-void Entity::
-shootTower()
-{
+void Turret::shootTower()
+{/*
     ImGuiIO *io = new ImGuiIO();
     float deltaTime = io->DeltaTime;
     //if no target is initialized, set the closest enemy as the new target.
@@ -42,8 +41,6 @@ shootTower()
                 {
                     if (turretArray[i].cooldown <= 0)
                     {
-                        /*if (turretArray[i].aimingAt == -1)
-                        {*/
                             //deals a certain amount of damage to the target depending on the turret's level.
                             switch(turretArray[i].type)
                             {
@@ -60,7 +57,6 @@ shootTower()
                                 turretArray[i].cooldown = 5 - turretArray[i].level; 
                                 break;
                             }
-                        /*}*/
                     }
                     else
                     {
@@ -77,10 +73,10 @@ shootTower()
         
         }
     }
-    
+    */
 }
-void Entity::drawTower(Game* game, Resources& res)
-{
+void Turret::drawTower(Game* game, Resources& res)
+{/*
     int debug;
     for (int i = 0; i < GRID_HEIGHT * GRID_WIDTH; i++)
     {
@@ -112,11 +108,11 @@ void Entity::drawTower(Game* game, Resources& res)
         }
     }
     ImGui::Text("towers: %d", debug);
-    
+    */
 }
 
-void Entity::spawnTower(ImVec2 pos, int type, Tilemap& tilemap)
-{
+void Turret::spawnTower(ImVec2 pos, int type, Tilemap& tilemap)
+{/*
     pos.x = (int)(pos.x/TILE_SIZE)*TILE_SIZE;
     pos.y = (int)(pos.y/TILE_SIZE)*TILE_SIZE;
     for (int i = 0; i < GRID_HEIGHT * GRID_WIDTH; i++)
@@ -139,5 +135,5 @@ void Entity::spawnTower(ImVec2 pos, int type, Tilemap& tilemap)
             turretArray[i].active    = true;
             return;
         }
-    }
+    }*/
 }
