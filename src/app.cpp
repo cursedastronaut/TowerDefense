@@ -27,14 +27,14 @@ void App::Update()
                 { windowWidth/2 + resources.title.width/2, 64+resources.title.height},
                 {0,0},                           
                 {1,1});
-        if (ui->Button(*imdrawlist, resources.Void, {windowWidth/2 - 100, windowHeight/2 - 50}, 200, 100, {1,1,1,0.5}) ||
+        if (ui->Button(*imdrawlist, resources.newGame, {windowWidth/2 - 100, windowHeight/2 - 50}, 200, 100, {1,1,1,0.5}) ||
             ImGui::IsKeyPressed(ImGuiKey_Enter, false))
             scene = SCENE_GAME;
-        game->AddToTexlist( 20, resources.newGame.id,
+        /*game->AddToTexlist( 20, resources.newGame.id,
                 {windowWidth/2 - 100, windowHeight/2 - 50},
                 {windowWidth/2 + 100, windowHeight/2 + 50},
                 {0,0},                           
-                {1,1});
+                {1,1});*/
         break;
 
     case SCENE_GAME:
