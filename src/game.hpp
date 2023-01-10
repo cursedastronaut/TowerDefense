@@ -1,8 +1,8 @@
 #pragma once
 #include "constants.hpp"
-#include "entities/entity_enemy.hpp"
-#include "entities/entity_tower.hpp"
-#include "tilemap.hpp"
+//#include "entities/entity_enemy.hpp"
+//#include "entities/entity_tower.hpp"
+//#include "tilemap.hpp"
 class Game
 {
     public:
@@ -24,8 +24,8 @@ class Game
         };
 
         Texlist arrayTexlist[MAX_TEXTURES];
-        Enemy enemyArray[ENTITY_NUMBER * ((int)LEVEL_ENTITY_MUL)];
-        Turret turretArray[GRID_HEIGHT * GRID_WIDTH];
+        /*Enemy enemyArray[ENTITY_NUMBER * ((int)LEVEL_ENTITY_MUL)];
+        Turret turretArray[GRID_HEIGHT * GRID_WIDTH];*/
 
         void TexlistUpdate(ImDrawList& dl);
         void AddToTexlist(int z, ImTextureID id, ImVec2 posUL, ImVec2 posBR, ImVec2 uvUL, ImVec2 uvBR);

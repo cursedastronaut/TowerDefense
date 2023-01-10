@@ -1,4 +1,4 @@
-#include "../tilemap.hpp"
+/*#include "../tilemap.hpp"
 #include "../imgui_utils.hpp"d
 #include "../constants.hpp"
 #include "entity_enemy.hpp"
@@ -11,7 +11,7 @@ Enemy::Enemy()
 Enemy::Enemy(Tilemap& tilemap)
     : direction(90)
 {
-    /*
+    
     for (uint32_t y = 0; y < GRID_HEIGHT; y++)
     {
         for (uint32_t x = 0; x < GRID_WIDTH; x++)
@@ -24,11 +24,11 @@ Enemy::Enemy(Tilemap& tilemap)
                 //direction = 90;
             }
         }
-    }*/
+    }
 }
 
 void Enemy::drawEnemy(Game* game, Resources& res)
-{/*
+{
     for (int i = 0; i < ENTITY_NUMBER * (LEVEL_ENTITY_MUL); i++)
     {
         if (!enemyArray[i].canStart || enemyArray[i].life <= 0)
@@ -69,11 +69,11 @@ void Enemy::drawEnemy(Game* game, Resources& res)
             uvUL,                           
             uvBR     
         );
-    }*/
+    }
 }
 
 void Enemy::moveEnemy(Tilemap& tilemap)
-{/*
+{
     for (int i = 0; i < ENTITY_NUMBER * (LEVEL_ENTITY_MUL); i++)
     {
         if (ImGui::Button(std::string("Enemy Start").append(std::to_string(i)).c_str())) {
@@ -131,21 +131,21 @@ void Enemy::moveEnemy(Tilemap& tilemap)
                 //enemyArray[i].pos += speed * dirs[enemyArray[i].direction] * io.deltaTime;
             } //End of for x
         }    //End of for y
-    }*/
+    }
 }
 void Enemy::damageEnemy(int dmgAmount, int i)
-{/*
-    enemyArray[i].life -= dmgAmount;*/
+{
+    enemyArray[i].life -= dmgAmount;
 }
-/*
+
     for (int i = 0; i < ENTITY_NUMBER * (LEVEL_ENTITY_MUL); i++)
         if (collision == true)
             damageEnemy(4, i);
-*/
+
 void Enemy::deathEnemy()
-{/*
+{
     for (int i = 0; i < ENTITY_NUMBER * (LEVEL_ENTITY_MUL); i++)
     {
         enemyArray[i].life = 0;
-    }*/
-}
+    }
+}*/

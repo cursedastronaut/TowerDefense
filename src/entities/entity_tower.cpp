@@ -1,4 +1,4 @@
-#include "../tilemap.hpp"
+/*#include "../tilemap.hpp"
 #include "../imgui_utils.hpp"
 #include "../entity.hpp"
 #include "entity_tower.hpp"
@@ -12,7 +12,7 @@ Turret::Turret()
 }
 
 void Turret::shootTower()
-{/*
+{
     ImGuiIO *io = new ImGuiIO();
     float deltaTime = io->DeltaTime;
     //if no target is initialized, set the closest enemy as the new target.
@@ -73,10 +73,10 @@ void Turret::shootTower()
         
         }
     }
-    */
+    
 }
 void Turret::drawTower(Game* game, Resources& res)
-{/*
+{
     int debug;
     for (int i = 0; i < GRID_HEIGHT * GRID_WIDTH; i++)
     {
@@ -108,11 +108,11 @@ void Turret::drawTower(Game* game, Resources& res)
         }
     }
     ImGui::Text("towers: %d", debug);
-    */
+    
 }
 
 void Turret::spawnTower(ImVec2 pos, int type, Tilemap& tilemap)
-{/*
+{
     pos.x = (int)(pos.x/TILE_SIZE)*TILE_SIZE;
     pos.y = (int)(pos.y/TILE_SIZE)*TILE_SIZE;
     for (int i = 0; i < GRID_HEIGHT * GRID_WIDTH; i++)
@@ -135,5 +135,5 @@ void Turret::spawnTower(ImVec2 pos, int type, Tilemap& tilemap)
             turretArray[i].active    = true;
             return;
         }
-    }*/
-}
+    }
+}*/

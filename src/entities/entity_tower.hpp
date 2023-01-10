@@ -1,4 +1,4 @@
-#include "../entity.hpp"
+/*#include "../entity.hpp"
 
 class Turret : public Entity
 {
@@ -12,10 +12,10 @@ class Turret : public Entity
 
         Turret();
 
-        //Enemy enemyArray[ENTITY_NUMBER * ((int)LEVEL_ENTITY_MUL /* * level*/)];
+        //Enemy enemyArray[ENTITY_NUMBER * ((int)LEVEL_ENTITY_MUL)];
         //Turret turretArray[GRID_HEIGHT * GRID_WIDTH];
         //Turret functions
         void drawTower(Game* game, Resources& res, Tilemap& tilemap);
         void spawnTower(ImVec2 pos, int type, Tilemap& tilemap);
         void shootTower();
-};
+};*/

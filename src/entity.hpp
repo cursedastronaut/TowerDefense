@@ -1,5 +1,5 @@
 #pragma once
-#include "tilemap.hpp"
+/*#include "tilemap.hpp"
 #include "game.hpp"
 #include "imgui_utils.hpp"
 
@@ -14,4 +14,4 @@ class Entity : public Game
         void Update(Game* game, Resources& res, Tilemap& tilemap);
         void Draw(Game* game, Resources& res);
         void Movement(Tilemap& tilemap);
-};
+};*/

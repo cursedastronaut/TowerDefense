@@ -1,4 +1,4 @@
-#include "../entity.hpp"
+/*#include "../entity.hpp"
 class Enemy : public Entity {
     public:
         float   speed       = 0.1f;
@@ -16,4 +16,4 @@ class Enemy : public Entity {
         void moveEnemy(Tilemap& tilemap);
         void damageEnemy(int dmgAmount, int i);
         void deathEnemy();
-};
+};*/

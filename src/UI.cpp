@@ -1,7 +1,7 @@
 #include "UI.hpp"
 #include "constants.hpp"
 
-void UI::Draw(ImDrawList& list, Resources& res, Game* game, Entity* entity, Tilemap& tilemap)
+void UI::Draw(ImDrawList& list, Resources& res, Game* game, /*Entity* entity,*/ Tilemap& tilemap)
 {
     //draw a transparent white square on the tile the mouse is hovering
     game->AddRectTexlist( 3497,
@@ -26,13 +26,13 @@ void UI::Draw(ImDrawList& list, Resources& res, Game* game, Entity* entity, Tile
         0xFFFFFFFF, "Choose your tower");
     if (dragDropButton(list, res.Turret, {towerSelectionUL.x + 16, towerSelectionUL.y + 16}, {TOWER_ICON_WIDTH, TOWER_ICON_HEIGHT}, {1,1,1,0.3f}, game, 1) == true)
     {
-        entity->spawnTower({ImGui::GetMousePos().x,ImGui::GetMousePos().y}, 0, tilemap);
+        //entity->spawnTower({ImGui::GetMousePos().x,ImGui::GetMousePos().y}, 0, tilemap);
     }
 }
 
-void UI::Update(ImDrawList& list, Resources& res, Game* game, Entity* entity, Tilemap& tilemap)
+void UI::Update(ImDrawList& list, Resources& res, Game* game, /*Entity* entity,*/ Tilemap& tilemap)
 {
-    Draw(list, res, game, entity, tilemap);
+    Draw(list, res, game, /*entity,*/ tilemap);
     ImGui::Text("dragDropIndex: %d", game->dragDropIndex);
 }
 

@@ -14,7 +14,7 @@ public:
 
     
     Tilemap* tilemap;
-    Entity* entity;
+    //Entity* entity;
     Game* game;
     Resources resources;
     ImDrawList* imdrawlist;
