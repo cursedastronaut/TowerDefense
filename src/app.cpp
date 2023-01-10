@@ -6,7 +6,7 @@ App::App()
 {
     this->tilemap = new Tilemap();
     this->game = new Game();
-    /*this->entity = new Entity(*tilemap);*/
+    this->entity = new Entity(*tilemap);
     this->io = new ImGuiIO();
 }
 

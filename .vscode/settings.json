@@ -9,6 +9,7 @@
         "istream": "cpp",
         "ostream": "cpp",
         "string": "cpp",
-        "xiosbase": "cpp"
+        "xiosbase": "cpp",
+        "*.tcc": "cpp"
     }
 }
