@@ -27,10 +27,10 @@ Enemy::Enemy(Tilemap& tilemap)
 
 void Enemy::Draw(Game* game, Resources& res, int z)
 {
-    /*if (!canStart || life <= 0)
+    if (!canStart || life <= 0)
     {
         return;
-    }*/
+    }
 
     ImVec2 uvUL = {0,0};
     ImVec2 uvBR = {1,1};
@@ -127,17 +127,14 @@ void Enemy::Movement(Tilemap& tilemap)
 }
 void Enemy::Damage(int dmgAmount, int i)
 {
-    // life -= dmgAmount;
-}
+    life -= dmgAmount;
 
-    // for (int i = 0; i < ENTITY_NUMBER * (LEVEL_ENTITY_MUL); i++)
-    //     if (collision == true)
-    //         damageEnemy(4, i);
+    /*for (int i = 0; i < ENTITY_NUMBER * (LEVEL_ENTITY_MUL); i++)
+        if (collision == true)
+            damageEnemy(4, i);*/
+}
 
 void Enemy::Death()
 {
-    // for (int i = 0; i < ENTITY_NUMBER * (LEVEL_ENTITY_MUL); i++)
-    // {
-    //     life = 0;
-    // }
+    
 }
