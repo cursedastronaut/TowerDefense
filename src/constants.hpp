@@ -22,7 +22,7 @@
 #define LEVEL_ENTITY_MUL    1.2f*/
 
 //Graphics settings
-#define MAX_TEXTURES        8192
+#define MAX_TEXTURES        2048
 #define TILESET_Z           100
 #define TILEPATH_Z          
 

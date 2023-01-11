@@ -74,12 +74,10 @@ void Turret::Shoot()
     }
     */
 }
-void Turret::Draw(Game* game, Resources& res) 
+void Turret::Draw(Game* game, Resources& res, int z) 
 {
-    int debug;
     if (active)
     {
-        debug++;
         //Draw();
         //ImGui::Text("%d", type);
         ImVec2 uvUL = {0,0};
@@ -94,7 +92,7 @@ void Turret::Draw(Game* game, Resources& res)
             default:
                 break;
         }
-        game->AddToTexlist(2000,
+        game->AddToTexlist(z, 10,
             res.Turret.id,                                                               
             {pos.x, pos.y-TILE_SIZE},                                            
             {pos.x+res.Turret.width/4, pos.y+res.Turret.height/4-TILE_SIZE},                 
@@ -103,7 +101,6 @@ void Turret::Draw(Game* game, Resources& res)
         ); 
         
     }
-ImGui::Text("towers: %d", debug);
 }
 
 void Turret::Spawn(ImVec2 pos2, int type2, Tilemap& tilemap)

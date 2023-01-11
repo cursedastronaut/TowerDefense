@@ -14,7 +14,7 @@ class Turret : public Entity
         Turret();
         //Turret functions
         void Update(Game* game, Resources& res, Tilemap& tilemap);
-        void Draw(Game* game, Resources& res) override ;
+        void Draw(Game* game, Resources& res, int z) override ;
         void Spawn(ImVec2 pos, int type, Tilemap& tilemap);
         void Shoot();
 };

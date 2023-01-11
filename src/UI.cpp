@@ -5,7 +5,7 @@
 void UI::Draw(ImDrawList& list, Resources& res, Game* game, std::vector<Entity*>& EntityList, Tilemap& tilemap)
 {
     //draw a transparent white square on the tile the mouse is hovering
-    game->AddRectTexlist( 3497,
+    game->AddRectTexlist( 0, 5,
         {int{ImGui::GetMousePos().x / 32} * 32, int{ImGui::GetMousePos().y / 32} * 32},   //Upper-left point of rectangle
         {int{ImGui::GetMousePos().x / 32} * 32 + 32, int{ImGui::GetMousePos().y / 32} * 32 + 32},   //Bottom-right point of rectangle
         IM_COL32_WHITE,  //Color, black and transparent.
@@ -16,13 +16,13 @@ void UI::Draw(ImDrawList& list, Resources& res, Game* game, std::vector<Entity*>
     ImVec2 towerSelectionUL = {windowWidth/2 - (TOWER_WIN_WIDTH * windowWidth)/2, windowHeight - TOWER_WIN_HEIGHT};   //Upper-left point of rectangle
     ImVec2 towerSelectionBR = {windowWidth/2 + (TOWER_WIN_WIDTH * windowWidth)/2, windowHeight + TOWER_WIN_HEIGHT};   //Upper-left point of rectangle
     //Background of Turret Selection Window
-    game->AddRectFilledTexlist( 3498,
+    game->AddRectFilledTexlist( 9, 5,
         towerSelectionUL,   //Upper-left point of rectangle
         towerSelectionBR,   //Bottom-right point of rectangle
         IM_COL32(00, 00, 00, 88),  //Color, black and transparent.
         20.0f //Rounding.
     );
-    game->AddTextTexlist(3499,
+    game->AddTextTexlist(64, 5,
     {towerSelectionUL.x + 16, towerSelectionUL.y + 1}, 
         0xFFFFFFFF, "Choose your tower");
     if (dragDropButton(list, res.Turret, {towerSelectionUL.x + 16, towerSelectionUL.y + 16}, {TOWER_ICON_WIDTH, TOWER_ICON_HEIGHT}, {1,1,1,0.3f}, game, 1) == true)
@@ -88,7 +88,7 @@ bool UI::dragDropButton(ImDrawList& list, Texture tex, ImVec2 pos, ImVec2 widthH
     {
         col.w += 0.1f;
         game->AddToTexlist(
-                3502,
+                32,5,
                 tex.id,
                 { ImGui::GetMousePos().x, ImGui::GetMousePos().y},
                 { ImGui::GetMousePos().x + widthHeight.x, ImGui::GetMousePos().y + widthHeight.y},
@@ -106,13 +106,13 @@ bool UI::dragDropButton(ImDrawList& list, Texture tex, ImVec2 pos, ImVec2 widthH
     }
     ImU32 colorU32 = ImColor(col);
     //Background of Turret Selection Window
-    game->AddRectFilledTexlist(3500, //TOEDIT
+    game->AddRectFilledTexlist(10, 5, //TOEDIT
         { pos.x, pos.y},                    //Upper-left point of rectangle
         { pos.x + widthHeight.x, pos.y + widthHeight.y},   //Bottom-right point of rectangle
         colorU32,  //Color, black and transparent.
         10.0f //Rounding.
     );
-    game->AddToTexlist( 3501 , //TOEDIT
+    game->AddToTexlist( 30 , 5, //TOEDIT
                 tex.id,
                 { pos.x, pos.y},
                 { pos.x + widthHeight.x, pos.y + widthHeight.y},

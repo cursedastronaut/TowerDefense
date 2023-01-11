@@ -12,7 +12,7 @@ class Entity
         Entity();
         
          void Update(Game* game, Resources& res, Tilemap& tilemap);
-        virtual void Draw(Game* game, Resources& res);
+        virtual void Draw(Game* game, Resources& res, int z);
         virtual void Spawn(ImVec2 pos, int type, Tilemap& tilemap);
          void Movement(Tilemap& tilemap);
 };

@@ -133,7 +133,7 @@ void Tilemap::Draw(Game* game, Resources& res)
                     break;
             }   
             game->AddToTexlist(
-                y * GRID_WIDTH + x + TILESET_Z, //Z value
+                y * GRID_WIDTH + x, 1, //Z value
                 tileSetToUse.id,                                                                //Texture
                 {x * (TILE_SIZE), y * (TILE_SIZE)},                                             //Position (upper-left) on Game Screen
                 {x * (TILE_SIZE) + (TILE_SIZE), y * (TILE_SIZE) + (TILE_SIZE)},                 //Position (bottom-right) on Game Screen
@@ -164,7 +164,7 @@ void Tilemap::Draw(Game* game, Resources& res)
                     pos = {7,0};
                     break;
                 }
-                game->AddToTexlist( GRID_WIDTH * GRID_HEIGHT + y * GRID_WIDTH + x + 100,
+                game->AddToTexlist( y * GRID_WIDTH + x, 2,
                     res.tilesetPath.id,
                     {x * (TILE_SIZE), y * (TILE_SIZE)},                                             //Position (upper-left) on Game Screen
                     {x * (TILE_SIZE) + (TILE_SIZE), y * (TILE_SIZE) + (TILE_SIZE)},                 //Position (bottom-right) on Game Screen

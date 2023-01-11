@@ -21,7 +21,7 @@ void App::Update()
     switch (scene)
     {
     case SCENE_TITLE:
-        game->AddToTexlist( 10, resources.title.id,
+        game->AddToTexlist( 10, 0, resources.title.id,
                 { windowWidth/2 - resources.title.width/2, 64},
                 { windowWidth/2 + resources.title.width/2, 64+resources.title.height},
                 {0,0},                           
@@ -43,7 +43,7 @@ void App::Update()
         for(size_t i = 0; i<EntityList.size(); i++)
         {
             EntityList[i]->Update(game, resources, *tilemap);
-            EntityList[i]->Draw(game, resources);
+            EntityList[i]->Draw(game, resources, i);
         }
 
         //entity->Update(game, resources, *tilemap);
@@ -58,92 +58,95 @@ void App::Update()
 
 void Game::TexlistUpdate(ImDrawList& dl)
 {
-    for (int i = 0; i < MAX_TEXTURES; i++)
+    for (int layer = 0; layer < 32; layer++)
     {
-        if (arrayTexlist[i].active)
+        for (int z = 0; z < MAX_TEXTURES; z++)
         {
-            switch (arrayTexlist[i].type)
+            if (arrayTexlist[layer][z].active)
             {
-            case 0:
-                dl.AddImage(
-                    arrayTexlist[i].id,
-                    arrayTexlist[i].posUL,
-                    arrayTexlist[i].posBR,
-                    arrayTexlist[i].uvUL,
-                    arrayTexlist[i].uvBR
-                );
-                break;
-            case 1:
-                dl.AddRectFilled(
-                    arrayTexlist[i].posUL,
-                    arrayTexlist[i].posBR,
-                    arrayTexlist[i].col,
-                    arrayTexlist[i].round
-                );
-                break;
-            case 2:
-                dl.AddRect(
-                    arrayTexlist[i].posUL,
-                    arrayTexlist[i].posBR,
-                    arrayTexlist[i].col,
-                    arrayTexlist[i].round,
-                    0,
-                    arrayTexlist[i].thick
-                );
-                break;
-            case 3:
-                dl.AddText(
-                    arrayTexlist[i].posUL,
-                    arrayTexlist[i].col,
-                    arrayTexlist[i].text,
-                    NULL
-                );
-            default:
-                break;
+                switch (arrayTexlist[layer][z].type)
+                {
+                case 0:
+                    dl.AddImage(
+                        arrayTexlist[layer][z].id,
+                        arrayTexlist[layer][z].posUL,
+                        arrayTexlist[layer][z].posBR,
+                        arrayTexlist[layer][z].uvUL,
+                        arrayTexlist[layer][z].uvBR
+                    );
+                    break;
+                case 1:
+                    dl.AddRectFilled(
+                        arrayTexlist[layer][z].posUL,
+                        arrayTexlist[layer][z].posBR,
+                        arrayTexlist[layer][z].col,
+                        arrayTexlist[layer][z].round
+                    );
+                    break;
+                case 2:
+                    dl.AddRect(
+                        arrayTexlist[layer][z].posUL,
+                        arrayTexlist[layer][z].posBR,
+                        arrayTexlist[layer][z].col,
+                        arrayTexlist[layer][z].round,
+                        0,
+                        arrayTexlist[layer][z].thick
+                    );
+                    break;
+                case 3:
+                    dl.AddText(
+                        arrayTexlist[layer][z].posUL,
+                        arrayTexlist[layer][z].col,
+                        arrayTexlist[layer][z].text,
+                        NULL
+                    );
+                default:
+                    break;
+                }
+                arrayTexlist[layer][z].active = false;
             }
-            arrayTexlist[i].active = false;
         }
     }
 }
 
-void Game::AddToTexlist(int z, ImTextureID id, ImVec2 posUL, ImVec2 posBR, ImVec2 uvUL, ImVec2 uvBR)
+void Game::AddToTexlist(int z, int layer, ImTextureID id, ImVec2 posUL, ImVec2 posBR, ImVec2 uvUL, ImVec2 uvBR)
 {
-    arrayTexlist[z].active  = true;
-    arrayTexlist[z].type    = 0;
-    arrayTexlist[z].id      = id;
-    arrayTexlist[z].posUL   = posUL;
-    arrayTexlist[z].posBR   = posBR;
-    arrayTexlist[z].uvUL    = uvUL;                          
-    arrayTexlist[z].uvBR    = uvBR;
-    arrayTexlist[z].col     = 0;
+    arrayTexlist[layer][z].active  = true;
+    arrayTexlist[layer][z].type    = 0;
+    arrayTexlist[layer][z].id      = id;
+    arrayTexlist[layer][z].posUL   = posUL;
+    arrayTexlist[layer][z].posBR   = posBR;
+    arrayTexlist[layer][z].uvUL    = uvUL;                          
+    arrayTexlist[layer][z].uvBR    = uvBR;
+    arrayTexlist[layer][z].col     = 0;
 }
 
-void Game::AddRectFilledTexlist(int z, ImVec2 posUL, ImVec2 posBR, ImU32 col, float rounding)
+void Game::AddRectFilledTexlist(int z, int layer, ImVec2 posUL, ImVec2 posBR, ImU32 col, float rounding)
 {
-    arrayTexlist[z].active  = true;
-    arrayTexlist[z].posUL   = posUL;
-    arrayTexlist[z].posBR   = posBR;
-    arrayTexlist[z].col     = col;
-    arrayTexlist[z].type    = 1;
-    arrayTexlist[z].round   = rounding;
+    arrayTexlist[layer][z].active  = true;
+    arrayTexlist[layer][z].posUL   = posUL;
+    arrayTexlist[layer][z].posBR   = posBR;
+    arrayTexlist[layer][z].col     = col;
+    arrayTexlist[layer][z].type    = 1;
+    arrayTexlist[layer][z].round   = rounding;
 }
 
-void Game::AddRectTexlist(int z, ImVec2 posUL, ImVec2 posBR, ImU32 col, float rounding, float thickness)
+void Game::AddRectTexlist(int z, int layer, ImVec2 posUL, ImVec2 posBR, ImU32 col, float rounding, float thickness)
 {
-    arrayTexlist[z].active  = true;
-    arrayTexlist[z].posUL   = posUL;
-    arrayTexlist[z].posBR   = posBR;
-    arrayTexlist[z].col     = col;
-    arrayTexlist[z].type    = 2;
-    arrayTexlist[z].round   = rounding;
-    arrayTexlist[z].thick   = thickness;
+    arrayTexlist[layer][z].active  = true;
+    arrayTexlist[layer][z].posUL   = posUL;
+    arrayTexlist[layer][z].posBR   = posBR;
+    arrayTexlist[layer][z].col     = col;
+    arrayTexlist[layer][z].type    = 2;
+    arrayTexlist[layer][z].round   = rounding;
+    arrayTexlist[layer][z].thick   = thickness;
 }
 
-void Game::AddTextTexlist(int z, ImVec2 pos, ImU32 col, const char *text)
+void Game::AddTextTexlist(int z, int layer, ImVec2 pos, ImU32 col, const char *text)
 {
-    arrayTexlist[z].active  = true;
-    arrayTexlist[z].posUL   = pos;
-    arrayTexlist[z].text    = text;
-    arrayTexlist[z].col     = col;
-    arrayTexlist[z].type    = 3;
+    arrayTexlist[layer][z].active  = true;
+    arrayTexlist[layer][z].posUL   = pos;
+    arrayTexlist[layer][z].text    = text;
+    arrayTexlist[layer][z].col     = col;
+    arrayTexlist[layer][z].type    = 3;
 }

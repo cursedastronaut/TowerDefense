@@ -23,7 +23,7 @@ void Entity::Update(Game* game, Resources& res, Tilemap& tilemap)
 {
 }
 
-void Entity::Draw(Game* game, Resources& res)
+void Entity::Draw(Game* game, Resources& res, int z)
 {
 printf("AAAAAAA");
 
