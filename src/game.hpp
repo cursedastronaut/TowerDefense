@@ -24,6 +24,7 @@ class Game
         };
 
         Texlist arrayTexlist[MAX_TEXTURES];
+        //arrayTexlist layerTexlist[32];
         /*Enemy enemyArray[ENTITY_NUMBER * ((int)LEVEL_ENTITY_MUL)];
         Turret turretArray[GRID_HEIGHT * GRID_WIDTH];*/
 

@@ -2,7 +2,9 @@
 #include "tilemap.hpp"
 #include "UI.hpp"
 #include "entity.hpp"
+#include "entities/entity_tower.hpp"
 #include "game.hpp"
+#include <vector>
 class App
 {
 public:
@@ -11,10 +13,11 @@ public:
 
     void Update();
     
-
     
     Tilemap* tilemap;
-    Entity* entity;
+    //Entity* entity;
+    //Tower* tower;
+    std::vector<Entity*> EntityList;
     Game* game;
     Resources resources;
     ImDrawList* imdrawlist;

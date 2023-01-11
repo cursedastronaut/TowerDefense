@@ -6,7 +6,6 @@ App::App()
 {
     this->tilemap = new Tilemap();
     this->game = new Game();
-    this->entity = new Entity(*tilemap);
     this->io = new ImGuiIO();
 }
 
@@ -39,8 +38,16 @@ void App::Update()
 
     case SCENE_GAME:
         tilemap->Update(game, resources);
-        ui->Update(*imdrawlist, resources, game, /*entity,*/ *tilemap);
+        ui->Update(*imdrawlist, resources, game, EntityList /*entity,*/, *tilemap);
+        
+        for(size_t i = 0; i<EntityList.size(); i++)
+        {
+            EntityList[i]->Update(game, resources, *tilemap);
+            EntityList[i]->Draw(game, resources);
+        }
+
         //entity->Update(game, resources, *tilemap);
+
         break;
     
     default:

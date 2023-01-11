@@ -9,9 +9,10 @@
 class Entity
 {
     public:
-        Entity(Tilemap& tilemap);
+        Entity();
         
-        void Update(Game* game, Resources& res, Tilemap& tilemap);
-        void Draw(Game* game, Resources& res);
-        void Movement(Tilemap& tilemap);
+         void Update(Game* game, Resources& res, Tilemap& tilemap);
+        virtual void Draw(Game* game, Resources& res);
+        virtual void Spawn(ImVec2 pos, int type, Tilemap& tilemap);
+         void Movement(Tilemap& tilemap);
 };

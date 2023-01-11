@@ -13,7 +13,7 @@ class Enemy : public Entity {
         ImVec2 pos          = {0,0};
         //Enemy functions
         void drawEnemy(Game* game, Resources& res);
-        void moveEnemy(Tilemap& tilemap);
+        void Move(Tilemap& tilemap);
         void damageEnemy(int dmgAmount, int i);
         void deathEnemy();
 };*/

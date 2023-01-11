@@ -1,3 +1,4 @@
+#pragma once
 #include "../entity.hpp"
 
 class Turret : public Entity
@@ -12,7 +13,8 @@ class Turret : public Entity
 
         Turret();
         //Turret functions
-        void Draw(Game* game, Resources& res, Tilemap& tilemap);
+        void Update(Game* game, Resources& res, Tilemap& tilemap);
+        void Draw(Game* game, Resources& res) override ;
         void Spawn(ImVec2 pos, int type, Tilemap& tilemap);
         void Shoot();
 };

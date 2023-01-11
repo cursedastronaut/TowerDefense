@@ -3,8 +3,12 @@
 
 #include <string>
 
-Entity::Entity(Tilemap& tilemap)
-{/*
+Entity::Entity()
+{
+
+
+
+    /*
     for (int i = 0; i < ENTITY_NUMBER * (LEVEL_ENTITY_MUL); i++)
     {
         enemyArray[i] = Enemy(tilemap);
@@ -17,20 +21,16 @@ Entity::Entity(Tilemap& tilemap)
 
 void Entity::Update(Game* game, Resources& res, Tilemap& tilemap)
 {
-    Movement(tilemap);
-    Draw(game, res);/*
-    if (ImGui::Button("Execute order 66", {100, 50}) == true)
-    {
-        deathEnemy();
-    }
-    shootTower();*/
 }
 
 void Entity::Draw(Game* game, Resources& res)
-{/*
-    drawEnemy(game, res);
-    drawTower(game, res);*/
+{
+printf("AAAAAAA");
+
 }
+
+void Entity::Spawn(ImVec2 pos, int type, Tilemap& tilemap)
+{}
 
 void Entity::Movement(Tilemap& tilemap)
 {
