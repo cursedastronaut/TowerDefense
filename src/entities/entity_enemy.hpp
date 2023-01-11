@@ -1,10 +1,11 @@
-/*#include "../entity.hpp"
+#pragma once
+#include "../entity.hpp"
 class Enemy : public Entity {
     public:
         float   speed       = 0.1f;
         int     direction   = 90;
         int     life        = 10;
-        int     type        = 0;
+        int     type        = 1;
         bool    canStart    = false;
 
         Enemy();
@@ -12,8 +13,8 @@ class Enemy : public Entity {
 
         ImVec2 pos          = {0,0};
         //Enemy functions
-        void drawEnemy(Game* game, Resources& res);
-        void Move(Tilemap& tilemap);
-        void damageEnemy(int dmgAmount, int i);
-        void deathEnemy();
-};*/
+        void Draw(Game* game, Resources& res, int z);
+        void Movement(Tilemap& tilemap);
+        void Damage(int dmgAmount, int i);
+        void Death(); 
+};

@@ -6,7 +6,12 @@ App::App()
 {
     this->tilemap = new Tilemap();
     this->game = new Game();
-    this->io = new ImGuiIO();
+
+    for (int i = 0; i < 5; i++)
+    {
+        Enemy* newEntity = new Enemy(*tilemap);
+        EntityList.push_back(newEntity);
+    }
 }
 
 App::~App()
@@ -16,6 +21,7 @@ App::~App()
 void App::Update()
 {
     imdrawlist = ImGui::GetBackgroundDrawList();
+    io = &ImGui::GetIO();
     deltaTime = io->DeltaTime;
     ImGui::Text("FPS: %0.f", 1/deltaTime);
     switch (scene)
@@ -42,8 +48,9 @@ void App::Update()
         
         for(size_t i = 0; i<EntityList.size(); i++)
         {
-            EntityList[i]->Update(game, resources, *tilemap);
+            EntityList[i]->Update(EntityList);
             EntityList[i]->Draw(game, resources, i);
+            EntityList[i]->Movement(*tilemap);
         }
 
         //entity->Update(game, resources, *tilemap);

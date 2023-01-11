@@ -3,6 +3,7 @@
 #include "UI.hpp"
 #include "entity.hpp"
 #include "entities/entity_tower.hpp"
+#include "entities/entity_enemy.hpp"
 #include "game.hpp"
 #include <vector>
 class App

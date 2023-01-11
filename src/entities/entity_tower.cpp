@@ -10,7 +10,12 @@ Turret::Turret() : Entity()
 {
 }
 
-void Turret::Shoot()
+void Turret::Update(const std::vector<Entity*>& EntityList)
+{
+    Shoot(EntityList);
+}
+
+void Turret::Shoot(const std::vector<Entity*>& EntityList)
 {/*
     ImGuiIO *io = new ImGuiIO();
     float deltaTime = io->DeltaTime;
@@ -71,8 +76,7 @@ void Turret::Shoot()
         }
         
         }
-    }
-    */
+    }*/
 }
 void Turret::Draw(Game* game, Resources& res, int z) 
 {
@@ -110,7 +114,7 @@ void Turret::Spawn(ImVec2 pos2, int type2, Tilemap& tilemap)
 
     if (!active)
     {
-        if (tilemap.mGrid[(int)(pos.y/32 * GRID_WIDTH + pos.x/32)])
+        if (tilemap.mGrid[(int)(pos2.y/32 * GRID_WIDTH + pos2.x/32)])
             return;
         
         pos       = pos2;

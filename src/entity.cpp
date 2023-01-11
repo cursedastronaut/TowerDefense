@@ -19,9 +19,6 @@ Entity::Entity()
     }*/
 }
 
-void Entity::Update(Game* game, Resources& res, Tilemap& tilemap)
-{
-}
 
 void Entity::Draw(Game* game, Resources& res, int z)
 {
@@ -36,3 +33,5 @@ void Entity::Movement(Tilemap& tilemap)
 {
     //moveEnemy(tilemap);
 }
+/*void Damage(int dmgAmount, int i);
+void Death();*/
