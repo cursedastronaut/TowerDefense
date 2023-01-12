@@ -69,6 +69,7 @@ void Enemy::Draw(Game* game, Resources& res, int z)
 
 void Enemy::Movement(Tilemap& tilemap)
 {
+    ImGui::Text("Enemy type: %d Enemy CanStart : %d", type, canStart);
     if (ImGui::Button(std::string("Enemy Start").append(std::to_string(0)).c_str())) {
         canStart = true;
     }

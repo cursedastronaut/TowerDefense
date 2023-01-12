@@ -7,7 +7,7 @@ class Turret : public Entity
         int     aimingAt = -1;
         int     type     = 0;
         int     level    = 0;
-        float   cooldown = 0;
+        float   cooldown = 5.f;
         ImVec2  pos      = {0,0};
         bool    active   = false;
 
@@ -17,4 +17,6 @@ class Turret : public Entity
         void Draw(Game* game, Resources& res, int z) override ;
         void Spawn(ImVec2 pos, int type, Tilemap& tilemap);
         void Shoot(const std::vector<Entity*>& EntityList);
+        int GetType() {return type;};
+        ImVec2 GetPos() {return pos;};
 };

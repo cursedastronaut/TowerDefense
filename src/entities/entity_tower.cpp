@@ -16,67 +16,60 @@ void Turret::Update(const std::vector<Entity*>& EntityList)
 }
 
 void Turret::Shoot(const std::vector<Entity*>& EntityList)
-{/*
+{
     ImGuiIO *io = new ImGuiIO();
     float deltaTime = io->DeltaTime;
     //if no target is initialized, set the closest enemy as the new target.
-    for (int i = 0; i < GRID_HEIGHT * GRID_WIDTH; i++)
+    if (aimingAt == -1)
     {
-        if (active)
+        float shortestDist = INFINITY;
+        for (int o = 0; o < 6; o++)
         {
-            if (aimingAt == -1)
+            if (EntityList[o]->GetType() == 1 && EntityList[o]->GetCanStart())
             {
-                float shortestDist = INFINITY;
-                for (int o = 0; o < ENTITY_NUMBER * ((int)LEVEL_ENTITY_MUL); o++)
+                printf("test");
+                if (sqrtf(powf(EntityList[o]->GetPos().x - pos.x, 2.0f) + powf(EntityList[o]->GetPos().y - pos.y, 2.0f)) < shortestDist)
                 {
-                    if (enemyArray[o].canStart)
-                    {
-                        if (sqrtf(powf(enemyArray[o].pos.x - pos.x, 2.0f) + powf(enemyArray[o].pos.y - pos.y, 2.0f)) < shortestDist)
-                        {
-                            aimingAt = o;
-                            shortestDist = sqrtf(powf(enemyArray[o].pos.x - pos.x, 2.0f) + powf(enemyArray[o].pos.y - pos.y, 2.0f));
-                        }
-                    }
+                    aimingAt = o;
+                    shortestDist = sqrtf(powf(EntityList[o]->GetPos().x - pos.x, 2.0f) + powf(EntityList[o]->GetPos().y - pos.y, 2.0f));
                 }
+            }
+            ImGui::Text("type: %d",EntityList[o]->GetType());
+        }
+    }
+    else
+    {
+        if (EntityList[aimingAt]->GetLife() > 0)
+        {
+            if (cooldown <= 0)
+            {
+                    //deals a certain amount of damage to the target depending on the turret's level.
+                    switch(type)
+                    {
+                        //tower shooting bullets.
+                        case 0:
+                        EntityList[aimingAt]->Damage(1 + level, aimingAt);
+                        cooldown = 2 - (level / 2);                    
+                        break;
+
+                        case 1:
+                        //missile function goes here
+                        cooldown = 5 - level; 
+                        break;
+                    }
             }
             else
             {
-                if (enemyArray[aimingAt].life > 0)
-                {
-                    if (cooldown <= 0)
-                    {
-                            //deals a certain amount of damage to the target depending on the turret's level.
-                            switch(type)
-                            {
-                                //tower shooting bullets.
-                                case 0:
-                                enemyArray[aimingAt].life -= 1 + level * 2;
-                                cooldown = 2 - (level / 2);                    
-                                break;
-
-                                //tower firing missiles.
-                                //TODO: add a function that spawns missiles.
-                                case 1:
-                                //missile function goes here
-                                cooldown = 5 - level; 
-                                break;
-                            }
-                    }
-                    else
-                    {
-                        cooldown -= deltaTime;
-                    }
-                }
-                //once the enemy dies, search for a new target.
-                else
-                {
-                    aimingAt = -1;
-                }
-                ImGui::Text("Tower aiming at: %d\nTower doing your mom at: longitude 69 latitude 420\nTower cooldown: %f", aimingAt, cooldown);
+                cooldown -= deltaTime;
+            }
         }
-        
+        //once the enemy dies, search for a new target.
+        else
+        {
+            aimingAt = -1;
         }
-    }*/
+    }
+    ImGui::Text("Tower aiming at: %d\nTower cooldown: %f", aimingAt, cooldown);
 }
 void Turret::Draw(Game* game, Resources& res, int z) 
 {

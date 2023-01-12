@@ -17,4 +17,10 @@ class Enemy : public Entity {
         void Movement(Tilemap& tilemap);
         void Damage(int dmgAmount, int i);
         void Death(); 
+        int GetType() {
+            return type;
+        };
+        bool GetCanStart() {return canStart;};
+        ImVec2 GetPos() {return pos;};
+        int GetLife() {return life;};
 };

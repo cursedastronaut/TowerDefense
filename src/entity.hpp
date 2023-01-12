@@ -11,6 +11,10 @@ class Entity
 {
     public:
         Entity();
+        int type = -1;
+        int life = -1;
+        ImVec2 pos {-1,-1};
+        bool canStart = false;
         
         virtual void Update(const std::vector<Entity*>& EntityList) {};
         virtual void Draw(Game* game, Resources& res, int z);
@@ -18,4 +22,9 @@ class Entity
         virtual void Movement(Tilemap& tilemap);
         virtual void Damage(int dmgAmount, int i) {};
         virtual void Death() {};
+
+        virtual int GetType() {return type;};
+        virtual int GetLife() {return life;};
+        virtual bool GetCanStart() {return false;};
+        virtual ImVec2 GetPos() {return pos;};
 };
