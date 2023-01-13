@@ -34,9 +34,13 @@
     <ClCompile Include="externals\src\stb_image.cpp">
       <Filter>externals</Filter>
     </ClCompile>
-    <ClCompile Include="entity.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
+    <ClCompile Include="src\entity.cpp" />
+    <ClCompile Include="src\game.cpp" />
+    <ClCompile Include="src\resources.cpp" />
+    <ClCompile Include="src\tilemap.cpp" />
+    <ClCompile Include="src\UI.cpp" />
+    <ClCompile Include="src\entities\entity_enemy.cpp" />
+    <ClCompile Include="src\entities\entity_tower.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\app.hpp">
@@ -45,6 +49,15 @@
     <ClInclude Include="src\imgui_utils.hpp">
       <Filter>src</Filter>
     </ClInclude>
+    <ClInclude Include="src\calc.hpp" />
+    <ClInclude Include="src\constants.hpp" />
+    <ClInclude Include="src\entity.hpp" />
+    <ClInclude Include="src\game.hpp" />
+    <ClInclude Include="src\resources.hpp" />
+    <ClInclude Include="src\tilemap.hpp" />
+    <ClInclude Include="src\UI.hpp" />
+    <ClInclude Include="src\entities\entity_enemy.hpp" />
+    <ClInclude Include="src\entities\entity_tower.hpp" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="src">

@@ -6,8 +6,8 @@ void UI::Draw(ImDrawList& list, Resources& res, Game* game, std::vector<Entity*>
 {
     //draw a transparent white square on the tile the mouse is hovering
     game->AddRectTexlist( 0, 5,
-        {int{ImGui::GetMousePos().x / 32} * 32, int{ImGui::GetMousePos().y / 32} * 32},   //Upper-left point of rectangle
-        {int{ImGui::GetMousePos().x / 32} * 32 + 32, int{ImGui::GetMousePos().y / 32} * 32 + 32},   //Bottom-right point of rectangle
+        { (float)int(ImGui::GetMousePos().x / 32) * 32, (float)int(ImGui::GetMousePos().y / 32) * 32},   //Upper-left point of rectangle
+        { (float)int(ImGui::GetMousePos().x / 32) * 32 + 32, (float)int(ImGui::GetMousePos().y / 32) * 32 + 32},   //Bottom-right point of rectangle
         IM_COL32_WHITE,  //Color, black and transparent.
         3.0f, //Rounding.
         3.0f //outline thickness.

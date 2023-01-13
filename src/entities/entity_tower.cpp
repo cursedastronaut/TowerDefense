@@ -17,12 +17,12 @@ void Turret::Update(const std::vector<Entity*>& EntityList)
 
 void Turret::Shoot(const std::vector<Entity*>& EntityList)
 {
-    ImGuiIO *io = new ImGuiIO();
+    ImGuiIO *io = &ImGui::GetIO();
     float deltaTime = io->DeltaTime;
     //if no target is initialized, set the closest enemy as the new target.
     if (aimingAt == -1)
     {
-        float shortestDist = INFINITY;
+        float shortestDist = 10000;
         for (int o = 0; o < 6; o++)
         {
             if (EntityList[o]->GetType() == 1 && EntityList[o]->GetCanStart())

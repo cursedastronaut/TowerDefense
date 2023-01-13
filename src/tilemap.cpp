@@ -135,12 +135,12 @@ void Tilemap::Draw(Game* game, Resources& res)
             game->AddToTexlist(
                 y * GRID_WIDTH + x, 1, //Z value
                 tileSetToUse.id,                                                                //Texture
-                {x * (TILE_SIZE), y * (TILE_SIZE)},                                             //Position (upper-left) on Game Screen
-                {x * (TILE_SIZE) + (TILE_SIZE), y * (TILE_SIZE) + (TILE_SIZE)},                 //Position (bottom-right) on Game Screen
-                {(pos.x * TILE_SIZE)/tileSetToUse.width,                                        //UV (upper-right) position on tilesetWood
-                (pos.y * TILE_SIZE)/tileSetToUse.height},                           
-                {(pos.x * TILE_SIZE + TILE_SIZE) / tileSetToUse.width,                          //UV (bottom-left) position on tilesetWood
-                 (pos.y * TILE_SIZE + TILE_SIZE) / tileSetToUse.height}     
+                { (float)x * (TILE_SIZE), (float)y * (TILE_SIZE)},                                             //Position (upper-left) on Game Screen
+                { (float)x * (TILE_SIZE) + (TILE_SIZE), (float)y * (TILE_SIZE) + (TILE_SIZE)},                 //Position (bottom-right) on Game Screen
+                { (float)(pos.x * TILE_SIZE)/tileSetToUse.width,                                        //UV (upper-right) position on tilesetWood
+                ( (float)pos.y * TILE_SIZE)/tileSetToUse.height},
+                { (float)(pos.x * TILE_SIZE + TILE_SIZE) / tileSetToUse.width,                          //UV (bottom-left) position on tilesetWood
+                  (float)(pos.y * TILE_SIZE + TILE_SIZE) / tileSetToUse.height}
             );
             
             pos = {0,0};
@@ -166,12 +166,12 @@ void Tilemap::Draw(Game* game, Resources& res)
                 }
                 game->AddToTexlist( y * GRID_WIDTH + x, 2,
                     res.tilesetPath.id,
-                    {x * (TILE_SIZE), y * (TILE_SIZE)},                                             //Position (upper-left) on Game Screen
-                    {x * (TILE_SIZE) + (TILE_SIZE), y * (TILE_SIZE) + (TILE_SIZE)},                 //Position (bottom-right) on Game Screen
-                    {(pos.x * TILE_SIZE)/res.tilesetPath.width,                                        //UV (upper-right) position on tilesetWood
-                     (pos.y * TILE_SIZE)/res.tilesetPath.height},                           
-                    {(pos.x * TILE_SIZE + TILE_SIZE) / res.tilesetPath.width,                          //UV (bottom-left) position on tilesetWood
-                     (pos.y * TILE_SIZE + TILE_SIZE) / res.tilesetPath.height} 
+                    {(float)x * (TILE_SIZE), (float)y * (TILE_SIZE)},                                             //Position (upper-left) on Game Screen
+                    { (float)x * (TILE_SIZE) + (TILE_SIZE), (float)y * (TILE_SIZE) + (TILE_SIZE)},                 //Position (bottom-right) on Game Screen
+                    { (float)(pos.x * TILE_SIZE)/res.tilesetPath.width,                                        //UV (upper-right) position on tilesetWood
+                     (float)(pos.y * TILE_SIZE)/res.tilesetPath.height},
+                    { (float)(pos.x * TILE_SIZE + TILE_SIZE) / res.tilesetPath.width,                          //UV (bottom-left) position on tilesetWood
+                     (float)(pos.y * TILE_SIZE + TILE_SIZE) / res.tilesetPath.height}
                 );
             }
         }

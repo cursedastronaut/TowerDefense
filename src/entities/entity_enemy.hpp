@@ -1,5 +1,6 @@
 #pragma once
 #include "../entity.hpp"
+#include "../app.hpp"
 class Enemy : public Entity {
     public:
         float   speed       = 0.1f;

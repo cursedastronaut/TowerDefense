@@ -50,6 +50,7 @@
       <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>externals/include</AdditionalIncludeDirectories>
+      <LanguageStandard>stdcpplatest</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -86,14 +87,29 @@
     <ClCompile Include="externals\src\imgui_tables.cpp" />
     <ClCompile Include="externals\src\imgui_widgets.cpp" />
     <ClCompile Include="externals\src\stb_image.cpp" />
-    <ClCompile Include="entity.cpp" />
     <ClCompile Include="src\app.cpp" />
+    <ClCompile Include="src\entities\entity_enemy.cpp" />
+    <ClCompile Include="src\entities\entity_tower.cpp" />
+    <ClCompile Include="src\entity.cpp" />
+    <ClCompile Include="src\game.cpp" />
     <ClCompile Include="src\imgui_utils.cpp" />
     <ClCompile Include="src\main.cpp" />
+    <ClCompile Include="src\resources.cpp" />
+    <ClCompile Include="src\tilemap.cpp" />
+    <ClCompile Include="src\UI.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\app.hpp" />
+    <ClInclude Include="src\calc.hpp" />
+    <ClInclude Include="src\constants.hpp" />
+    <ClInclude Include="src\entities\entity_enemy.hpp" />
+    <ClInclude Include="src\entities\entity_tower.hpp" />
+    <ClInclude Include="src\entity.hpp" />
+    <ClInclude Include="src\game.hpp" />
     <ClInclude Include="src\imgui_utils.hpp" />
+    <ClInclude Include="src\resources.hpp" />
+    <ClInclude Include="src\tilemap.hpp" />
+    <ClInclude Include="src\UI.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

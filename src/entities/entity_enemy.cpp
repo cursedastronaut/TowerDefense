@@ -12,7 +12,7 @@ Enemy::Enemy(Tilemap& tilemap)
     : direction(90)
 {
     for (uint32_t y = 0; y < GRID_HEIGHT; y++)
-   {
+    {
         for (uint32_t x = 0; x < GRID_WIDTH; x++)
         {
             type = 1;
@@ -69,6 +69,10 @@ void Enemy::Draw(Game* game, Resources& res, int z)
 
 void Enemy::Movement(Tilemap& tilemap)
 {
+    ImGuiIO* io = &ImGui::GetIO();
+    float deltaTime = io->DeltaTime;
+    ImGui::Text("My lame ass deltatime be like: %f", deltaTime);
+    
     ImGui::Text("Enemy type: %d Enemy CanStart : %d", type, canStart);
     if (ImGui::Button(std::string("Enemy Start").append(std::to_string(0)).c_str())) {
         canStart = true;
