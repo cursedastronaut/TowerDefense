@@ -27,7 +27,6 @@ void Turret::Shoot(const std::vector<Entity*>& EntityList)
         {
             if (EntityList[o]->GetType() == 1 && EntityList[o]->GetCanStart())
             {
-                printf("test");
                 if (sqrtf(powf(EntityList[o]->GetPos().x - pos.x, 2.0f) + powf(EntityList[o]->GetPos().y - pos.y, 2.0f)) < shortestDist)
                 {
                     aimingAt = o;

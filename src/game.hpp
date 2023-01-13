@@ -1,13 +1,19 @@
 #pragma once
+#include "imgui_utils.hpp"
 #include "constants.hpp"
-//#include "entities/entity_enemy.hpp"
-//#include "entities/entity_tower.hpp"
-//#include "tilemap.hpp"
+#include <vector>
+
+class Entity;
+class Tilemap;
+
 class Game
 {
     public:
-        int money = 0;
-        int dragDropIndex = 0;
+        int money               = 0;
+        int currentLevel        = 1;
+        int levelProgression    = 0;
+        float levelProgCool     = 0;
+        int dragDropIndex       = 0;
 
         struct Texlist {
             bool active = false;
@@ -22,10 +28,10 @@ class Game
             float       thick = 0.0f;
             const char *text;
         };
-
+        
         Texlist arrayTexlist[32][MAX_TEXTURES];
-        /*Enemy enemyArray[ENTITY_NUMBER * ((int)LEVEL_ENTITY_MUL)];
-        Turret turretArray[GRID_HEIGHT * GRID_WIDTH];*/
+
+        void LevelUpdate(std::vector<Entity*>& EntityList, Tilemap* tilemap);
 
         void TexlistUpdate(ImDrawList& dl);
         void AddToTexlist(int z, int layer, ImTextureID id, ImVec2 posUL, ImVec2 posBR, ImVec2 uvUL, ImVec2 uvBR);

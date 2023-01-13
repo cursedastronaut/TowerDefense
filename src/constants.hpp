@@ -18,8 +18,14 @@
 #define SCENE_GAME          1
 
 //Entity settings
-/*#define ENTITY_NUMBER       5       //Entity count on level one. Multiplied by LEVEL_ENTITY_MUL every level
-#define LEVEL_ENTITY_MUL    1.2f*/
+//Number of entities spawning at the beginning of level 1. From level 2 and onwards,
+//it will be INITIAL_ENTITY + currentLevel. 
+#define INITIAL_ENEMY       3 
+//Number of entity to kill to finish a level (go to the final wave). Multiplied by currentLevel.
+#define MAX_ENEMY           15
+//Number of entity spawned during final wave. Multiplied by currentLevel.
+#define FINAL_WAVE_COUNT    5
+
 
 //Graphics settings
 #define MAX_TEXTURES        2048

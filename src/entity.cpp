@@ -1,5 +1,6 @@
 #include "entity.hpp"
 #include "constants.hpp"
+#include "game.hpp"
 
 #include <string>
 
