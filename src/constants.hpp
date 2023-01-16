@@ -1,7 +1,7 @@
 #pragma once
-#define windowWidth     1280
-#define windowHeight    736
-#define targetFPS       60.f //Max FPS
+
+//Gameplay settings
+#define COST_TOWER          100
 
 
 //Tilemap settings
@@ -28,6 +28,9 @@
 
 
 //Graphics settings
+#define windowWidth     1280
+#define windowHeight    736
+#define targetFPS       60.f //Max FPS
 #define MAX_TEXTURES        2048
 #define TILESET_Z           100
 #define TILEPATH_Z          

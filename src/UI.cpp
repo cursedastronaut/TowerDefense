@@ -1,6 +1,7 @@
 #include "UI.hpp"
 #include "constants.hpp"
 #include "entities/entity_tower.hpp"
+#include <string>
 
 void UI::Draw(ImDrawList& list, Resources& res, Game* game, std::vector<Entity*>& EntityList, Tilemap& tilemap)
 {
@@ -27,11 +28,16 @@ void UI::Draw(ImDrawList& list, Resources& res, Game* game, std::vector<Entity*>
         0xFFFFFFFF, "Choose your tower");
     if (dragDropButton(list, res.Turret, {towerSelectionUL.x + 16, towerSelectionUL.y + 16}, {TOWER_ICON_WIDTH, TOWER_ICON_HEIGHT}, {1,1,1,0.3f}, game, 1) == true)
     {
-        Turret* newEntity = new Turret();
-        newEntity->Spawn({ImGui::GetMousePos().x,ImGui::GetMousePos().y}, 0, tilemap);
-        EntityList.push_back(newEntity);
-        //entity->spawnTower({ImGui::GetMousePos().x,ImGui::GetMousePos().y}, 0, tilemap);
+        if (game->money >= COST_TOWER)
+        {
+            Turret* newEntity = new Turret();
+            newEntity->Spawn({ImGui::GetMousePos().x,ImGui::GetMousePos().y}, 0, tilemap);
+            EntityList.push_back(newEntity);
+        }
     }
+
+    game->AddRectFilledTexlist(0,5, {8, 8}, {128, 48}, 0x80000000, 5.f);
+    //game->AddTextTexlist(1,5, {16,16}, 0xFFFFFFFF, );
 }
 
 void UI::Update(ImDrawList& list, Resources& res, Game* game, std::vector<Entity*>& EntityList /*Entity* entity,*/, Tilemap& tilemap)

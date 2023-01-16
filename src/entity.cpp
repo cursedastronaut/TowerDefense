@@ -26,8 +26,6 @@ Entity::~Entity()
 
 void Entity::Draw(Game* game, Resources& res, int z)
 {
-printf("AAAAAAA");
-
 }
 
 void Entity::Spawn(ImVec2 pos, int type, Tilemap& tilemap)
