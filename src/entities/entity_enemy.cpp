@@ -3,13 +3,15 @@
 #include "../constants.hpp"
 #include "entity_enemy.hpp"
 #include <string>
+#include <cmath>
+#define PI 3.1415926535f
 
 Enemy::Enemy()
 {
 }
 
 Enemy::Enemy(Tilemap& tilemap)
-    : direction(90)
+    : direction(0)
 {
     for (uint32_t y = 0; y < GRID_HEIGHT; y++)
     {
@@ -36,21 +38,21 @@ void Enemy::Draw(Game* game, Resources& res, int z)
     ImVec2 uvBR = {1,1};
     switch (direction)
     {
-    case 0:
+    case 90:
         uvUL = {0,0.75f};
         uvBR = {0.25f,1};
         break;
     
-    case 90:
+    case 00:
         uvUL = {0,0.50f};
         uvBR = {0.25f,0.75};
         break;
 
-    case 180:
+    case 270:
         uvUL = {0,0.0f};
         uvBR = {0.25f,0.25f};
         break;
-    case 270:
+    case 180:
         uvUL = {0,0.25f};
         uvBR = {0.25f,0.50f};
         break;
@@ -77,44 +79,55 @@ void Enemy::Movement(Tilemap& tilemap)
     if (life <= 0)
         return;
 
+    ImVec2 directionVec;
+
     for (uint32_t y = 0; y < GRID_HEIGHT; y++)
     {
         for (uint32_t x = 0; x < GRID_WIDTH; x++)
         {
             //Handling directions
+            
             switch (tilemap.cGrid[(int)(pos.y+TILE_SIZE) / TILE_SIZE * GRID_WIDTH + (int)pos.x / TILE_SIZE])
             {
                 case 0x00:
                     break;
                 case 0x02:
-                    direction = 0;
+                    direction = 90;
+                    directionVec = ImVec2(0, 1);
                     break;
                 case 0x03:
-                    direction = 90;
+                    direction = 0;
+                    directionVec = ImVec2(1, 0);
                     break;
                 case 0x04:
-                    direction = 180;
+                    direction = 270;
+                    directionVec = ImVec2(0, -1);
                     break;
                 case 0x05:
-                    direction = 270;
+                    direction = 180;
+                    directionVec = ImVec2(-1, 0);
                     break;
                 
                 default:
                     break;
             }
             //Moves the player
+            //pos.x += directionVec.x * Enemy::speed * ImGui::GetIO().DeltaTime;
+            //pos.y += directionVec.y * Enemy::speed * ImGui::GetIO().DeltaTime;
+            //pos.x += cosf(float(direction) / (2.f * PI)) * Enemy::speed * ImGui::GetIO().DeltaTime;
+            //pos.y += -sinf((direction) / (2.f * PI)) * Enemy::speed * ImGui::GetIO().DeltaTime;
             switch (direction)
             {
-                case 180:
+                case 270:
                     pos.y += 2.f/20.f * ImGui::GetIO().DeltaTime;
                     break;
-                case 90:
+                case 00:
                     pos.x += 2.f/20.f * ImGui::GetIO().DeltaTime;
                     break;
-                case 0:
+                case 90:
                     pos.y -= 2.f/20.f * ImGui::GetIO().DeltaTime;
                     break;
-                case 270:
+                case 180:
                     pos.x -= 2.f/20.f * ImGui::GetIO().DeltaTime;
                     break;
                 
