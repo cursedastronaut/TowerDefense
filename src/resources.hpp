@@ -14,6 +14,7 @@ class Resources
 
 
         Texture title;
+        Texture titleBackground;
         Texture newGame;
         Texture gameOver;
 };

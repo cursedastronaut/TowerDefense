@@ -13,4 +13,5 @@ Resources::Resources()
    title          =  ImGuiUtils::LoadTexture("assets/textures/title.png", true);
    newGame        =  ImGuiUtils::LoadTexture("assets/textures/new_game.png", true);
    gameOver       =  ImGuiUtils::LoadTexture("assets/textures/game_over.png", true);
+   titleBackground=  ImGuiUtils::LoadTexture("assets/textures/background.png", true);
 }
