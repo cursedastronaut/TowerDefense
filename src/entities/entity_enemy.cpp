@@ -109,16 +109,16 @@ void Enemy::Movement(Tilemap& tilemap)
             switch (direction)
             {
                 case 180:
-                    pos.y += 1.f/20.f * ImGui::GetIO().DeltaTime;
+                    pos.y += 10.f/20.f * ImGui::GetIO().DeltaTime;
                     break;
                 case 90:
-                    pos.x += 1.f/20.f * ImGui::GetIO().DeltaTime;
+                    pos.x += 10.f/20.f * ImGui::GetIO().DeltaTime;
                     break;
                 case 0:
-                    pos.y -= 1.f/20.f * ImGui::GetIO().DeltaTime;
+                    pos.y -= 10.f/20.f * ImGui::GetIO().DeltaTime;
                     break;
                 case 270:
-                    pos.x -= 1.f/20.f * ImGui::GetIO().DeltaTime;
+                    pos.x -= 10.f/20.f * ImGui::GetIO().DeltaTime;
                     break;
                 
                 default:

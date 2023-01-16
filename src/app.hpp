@@ -29,4 +29,6 @@ public:
     float deltaTime;
     //Handles scene processing. See constants.hpp to know more.
     int scene = 0;
+    //Tells App::Update when to delete game values.
+    bool restart = false;
 };

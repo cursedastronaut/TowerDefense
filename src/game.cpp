@@ -5,7 +5,7 @@
 #include "constants.hpp"
 #include <math.h>
 
-void Game::LevelUpdate(std::vector<Entity*>& EntityList, Tilemap* tilemap, Resources& res, int* scene)
+void Game::LevelUpdate(std::vector<Entity*>& EntityList, Tilemap* tilemap, Resources& res, int* scene, bool* restart)
 {
     ImGui::Text("currentLevel: %d; wavesPassed: %d %f", currentLevel, levelProgression, levelProgCool);
     if (levelProgression < (INITIAL_ENEMY * currentLevel))
@@ -24,7 +24,24 @@ void Game::LevelUpdate(std::vector<Entity*>& EntityList, Tilemap* tilemap, Resou
     {
     
     }*/
-    if (ImGui::IsKeyReleased(ImGuiKey_Y))
+    
+    for (std::vector<Entity*>::iterator it = EntityList.begin(); it != EntityList.end(); )
+    {
+        Entity* e = *it;
+        ImGui::Text("intruders : %d, posx: %f", intruders, e->GetPos().x);
+        if (e->GetPos().x >= windowWidth)
+        {
+            printf("suce");
+            it = EntityList.erase(it);
+            delete e;
+            intruders ++;
+        }
+        else
+        {
+            it++;
+        }
+    }
+    if (intruders >= 3 || ImGui::IsKeyReleased(ImGuiKey_Y))
         gameover = true;
     if (gameover)
     {
@@ -42,7 +59,7 @@ void Game::LevelUpdate(std::vector<Entity*>& EntityList, Tilemap* tilemap, Resou
         if (ImGui::IsKeyReleased(ImGuiKey_MouseLeft))
         {
             *scene = SCENE_TITLE;
-            //delete this;
+            *restart = true;
         }
     }
     

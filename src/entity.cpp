@@ -20,6 +20,9 @@ Entity::Entity()
     }*/
 }
 
+Entity::~Entity()
+{
+}
 
 void Entity::Draw(Game* game, Resources& res, int z)
 {

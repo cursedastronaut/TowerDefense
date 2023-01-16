@@ -44,7 +44,7 @@ void App::Update()
 
     case SCENE_GAME:
     {
-        game->LevelUpdate(EntityList, tilemap, resources, &scene);
+        game->LevelUpdate(EntityList, tilemap, resources, &scene, &restart);
         tilemap->Update(game, resources);
         ui->Update(*imdrawlist, resources, game, EntityList /*entity,*/, *tilemap);
         
@@ -62,6 +62,12 @@ void App::Update()
     
     default:
         break;
+    }
+    if (restart)
+    {
+        delete game;
+        game = new Game();
+        restart = false;
     }
     game->TexlistUpdate(*imdrawlist);
 }

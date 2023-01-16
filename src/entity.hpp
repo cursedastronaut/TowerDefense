@@ -13,6 +13,7 @@ class Entity
 {
     public:
         Entity();
+        virtual ~Entity();
         int type = -1;
         int life = -1;
         ImVec2 pos {-1,-1};
