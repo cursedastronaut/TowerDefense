@@ -33,11 +33,14 @@ void UI::Draw(ImDrawList& list, Resources& res, Game* game, std::vector<Entity*>
             Turret* newEntity = new Turret();
             newEntity->Spawn({ImGui::GetMousePos().x,ImGui::GetMousePos().y}, 0, tilemap);
             EntityList.push_back(newEntity);
+            game->money -= COST_TOWER;
         }
     }
 
     game->AddRectFilledTexlist(0,5, {8, 8}, {128, 48}, 0x80000000, 5.f);
-    //game->AddTextTexlist(1,5, {16,16}, 0xFFFFFFFF, );
+    std::string nara = "Money : ";
+    nara += std::to_string(game->money);
+    game->AddTextTexlist(1,5, {16,16}, 0xFFFFFFFF, nara);
 }
 
 void UI::Update(ImDrawList& list, Resources& res, Game* game, std::vector<Entity*>& EntityList /*Entity* entity,*/, Tilemap& tilemap)

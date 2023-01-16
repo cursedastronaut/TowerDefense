@@ -107,7 +107,7 @@ void Game::TexlistUpdate(ImDrawList& dl)
                     dl.AddText(
                         arrayTexlist[layer][z].posUL,
                         arrayTexlist[layer][z].col,
-                        arrayTexlist[layer][z].text,
+                        arrayTexlist[layer][z].text.c_str(),
                         NULL
                     );
                 default:
@@ -152,7 +152,7 @@ void Game::AddRectTexlist(int z, int layer, ImVec2 posUL, ImVec2 posBR, ImU32 co
     arrayTexlist[layer][z].thick   = thickness;
 }
 
-void Game::AddTextTexlist(int z, int layer, ImVec2 pos, ImU32 col, const char *text)
+void Game::AddTextTexlist(int z, int layer, ImVec2 pos, ImU32 col, std::string text)
 {
     arrayTexlist[layer][z].active  = true;
     arrayTexlist[layer][z].posUL   = pos;

@@ -10,12 +10,12 @@ Turret::Turret() : Entity()
 {
 }
 
-void Turret::Update(const std::vector<Entity*>& EntityList)
+void Turret::Update(const std::vector<Entity*>& EntityList, Game* game)
 {
-    Shoot(EntityList);
+    Shoot(EntityList, game);
 }
 
-void Turret::Shoot(const std::vector<Entity*>& EntityList)
+void Turret::Shoot(const std::vector<Entity*>& EntityList, Game* game)
 {
     ImGuiIO *io = &ImGui::GetIO();
     float deltaTime = io->DeltaTime;

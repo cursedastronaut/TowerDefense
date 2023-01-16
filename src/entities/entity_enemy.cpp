@@ -130,10 +130,6 @@ void Enemy::Movement(Tilemap& tilemap)
 void Enemy::Damage(int dmgAmount, int i)
 {
     life -= dmgAmount;
-
-    /*for (int i = 0; i < ENTITY_NUMBER * (LEVEL_ENTITY_MUL); i++)
-        if (collision == true)
-            damageEnemy(4, i);*/
 }
 
 void Enemy::Death()

@@ -51,7 +51,7 @@ void App::Update()
         
         for(size_t i = 0; i<EntityList.size(); i++)
         {
-            EntityList[i]->Update(EntityList);
+            EntityList[i]->Update(EntityList, game);
             EntityList[i]->Draw(game, resources, i);
             EntityList[i]->Movement(*tilemap);
         }

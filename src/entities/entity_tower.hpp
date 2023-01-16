@@ -13,10 +13,10 @@ class Turret : public Entity
 
         Turret();
         //Turret functions
-        void Update(const std::vector<Entity*>& EntityList);
+        void Update(const std::vector<Entity*>& EntityList, Game* game);
         void Draw(Game* game, Resources& res, int z) override ;
         void Spawn(ImVec2 pos, int type, Tilemap& tilemap);
-        void Shoot(const std::vector<Entity*>& EntityList);
+        void Shoot(const std::vector<Entity*>& EntityList, Game* game);
         int GetType() {return type;};
         ImVec2 GetPos() {return pos;};
 };

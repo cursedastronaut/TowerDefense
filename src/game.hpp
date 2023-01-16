@@ -2,6 +2,7 @@
 #include "imgui_utils.hpp"
 #include "constants.hpp"
 #include <vector>
+#include <string>
 
 class Entity;
 class Tilemap;
@@ -29,7 +30,7 @@ class Game
             int         type  = 0;
             float       round = 0.0f;
             float       thick = 0.0f;
-            const char *text;
+            std::string text;
         };
         
         Texlist arrayTexlist[32][MAX_TEXTURES];
@@ -40,5 +41,5 @@ class Game
         void AddToTexlist(int z, int layer, ImTextureID id, ImVec2 posUL, ImVec2 posBR, ImVec2 uvUL, ImVec2 uvBR);
         void AddRectFilledTexlist(int z, int layer, ImVec2 posUL, ImVec2 posBR, ImU32 col = IM_COL32(0,0,0,0), float rounding = 20.0f);
         void AddRectTexlist(int z, int layer, ImVec2 posUL, ImVec2 posBR, ImU32 col = IM_COL32(0,0,0,0), float rounding = 20.0f, float thickness = 3.0f);
-        void AddTextTexlist(int z, int layer, ImVec2 pos, ImU32 col = IM_COL32(0,0,0,0), const char *text = "");
+        void AddTextTexlist(int z, int layer, ImVec2 pos, ImU32 col = IM_COL32(0,0,0,0), std::string text = "");
 };
