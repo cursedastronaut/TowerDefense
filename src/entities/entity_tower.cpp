@@ -23,17 +23,16 @@ void Turret::Shoot(const std::vector<Entity*>& EntityList)
     if (aimingAt == -1)
     {
         float shortestDist = 10000;
-        for (int o = 0; o < 6; o++)
+        for (size_t o = 0; o < EntityList.size(); o++)
         {
-            if (EntityList[o]->GetType() == 1 && EntityList[o]->GetCanStart())
+            if (EntityList[o]->GetType() == 1 && EntityList[o]->GetCanStart() == true)
             {
                 if (sqrtf(powf(EntityList[o]->GetPos().x - pos.x, 2.0f) + powf(EntityList[o]->GetPos().y - pos.y, 2.0f)) < shortestDist)
                 {
                     aimingAt = o;
                     shortestDist = sqrtf(powf(EntityList[o]->GetPos().x - pos.x, 2.0f) + powf(EntityList[o]->GetPos().y - pos.y, 2.0f));
-                }
-            }
-            ImGui::Text("type: %d",EntityList[o]->GetType());
+                }              
+            }           
         }
     }
     else
@@ -47,7 +46,7 @@ void Turret::Shoot(const std::vector<Entity*>& EntityList)
                     {
                         //tower shooting bullets.
                         case 0:
-                        EntityList[aimingAt]->Damage(1 + level, aimingAt);
+                        EntityList[aimingAt]->Damage(5 + level, aimingAt);
                         cooldown = 2 - (level / 2);                    
                         break;
 
