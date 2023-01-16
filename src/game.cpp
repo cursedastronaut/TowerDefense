@@ -5,7 +5,7 @@
 #include "constants.hpp"
 #include <math.h>
 
-void Game::LevelUpdate(std::vector<Entity*>& EntityList, Tilemap* tilemap, Resources& res)
+void Game::LevelUpdate(std::vector<Entity*>& EntityList, Tilemap* tilemap, Resources& res, int* scene)
 {
     ImGui::Text("currentLevel: %d; wavesPassed: %d %f", currentLevel, levelProgression, levelProgCool);
     if (levelProgression < (INITIAL_ENEMY * currentLevel))
@@ -33,12 +33,17 @@ void Game::LevelUpdate(std::vector<Entity*>& EntityList, Tilemap* tilemap, Resou
             for (size_t i = 0; i != EntityList.size(); i++)
             {
                 delete EntityList[i];
-
             }
             EntityList.clear();
+            
         }
         AddToTexlist(10,2, res.gameOver.id, {windowWidth/2 - res.gameOver.width, windowHeight/2 - res.gameOver.height},
         {windowWidth/2 + res.gameOver.width, windowHeight/2 + res.gameOver.height}, {0,0}, {1,1});
+        if (ImGui::IsKeyReleased(ImGuiKey_MouseLeft))
+        {
+            *scene = SCENE_TITLE;
+            //delete this;
+        }
     }
     
 }

@@ -44,7 +44,7 @@ void App::Update()
 
     case SCENE_GAME:
     {
-        game->LevelUpdate(EntityList, tilemap, resources);
+        game->LevelUpdate(EntityList, tilemap, resources, &scene);
         tilemap->Update(game, resources);
         ui->Update(*imdrawlist, resources, game, EntityList /*entity,*/, *tilemap);
         
