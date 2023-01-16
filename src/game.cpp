@@ -31,7 +31,6 @@ void Game::LevelUpdate(std::vector<Entity*>& EntityList, Tilemap* tilemap, Resou
         ImGui::Text("intruders : %d, posx: %f", intruders, e->GetPos().x);
         if (e->GetPos().x >= windowWidth)
         {
-            printf("suce");
             it = EntityList.erase(it);
             delete e;
             intruders ++;
