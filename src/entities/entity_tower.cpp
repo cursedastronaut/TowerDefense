@@ -98,23 +98,20 @@ void Turret::Draw(Game* game, Resources& res, int z)
     }
 }
 
-void Turret::Spawn(ImVec2 pos2, int type2, Tilemap& tilemap)
+bool Turret::Spawn(ImVec2 pos2, int type2, Tilemap& tilemap)
 {
     pos2.x = (int)(pos2.x/TILE_SIZE)*TILE_SIZE;
     pos2.y = (int)(pos2.y/TILE_SIZE)*TILE_SIZE;
 
-    if (!active)
-    {
-        if (tilemap.mGrid[(int)(pos2.y/32 * GRID_WIDTH + pos2.x/32)])
-            return;
-        
-        pos       = pos2;
-        type      = type2;
-        aimingAt  = 0;
-        cooldown  = 0;
-        level     = 0;
-        active    = true;
-        return;
-    }
+    if (tilemap.mGrid[(int)(pos2.y/32 * GRID_WIDTH + pos2.x/32)])
+        return 0;
+    
+    pos       = pos2;
+    type      = type2;
+    aimingAt  = 0;
+    cooldown  = 0;
+    level     = 0;
+    active    = true;
+    return 1;
     
 }

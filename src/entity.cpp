@@ -28,8 +28,8 @@ void Entity::Draw(Game* game, Resources& res, int z)
 {
 }
 
-void Entity::Spawn(ImVec2 pos, int type, Tilemap& tilemap)
-{}
+bool Entity::Spawn(ImVec2 pos, int type, Tilemap& tilemap)
+{return 0;}
 
 void Entity::Movement(Tilemap& tilemap)
 {

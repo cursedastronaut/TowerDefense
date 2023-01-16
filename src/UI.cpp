@@ -31,9 +31,9 @@ void UI::Draw(ImDrawList& list, Resources& res, Game* game, std::vector<Entity*>
         if (game->money >= COST_TOWER)
         {
             Turret* newEntity = new Turret();
-            newEntity->Spawn({ImGui::GetMousePos().x,ImGui::GetMousePos().y}, 0, tilemap);
+            if (newEntity->Spawn({ImGui::GetMousePos().x,ImGui::GetMousePos().y}, 0, tilemap))
+                game->money -= COST_TOWER;
             EntityList.push_back(newEntity);
-            game->money -= COST_TOWER;
         }
     }
 

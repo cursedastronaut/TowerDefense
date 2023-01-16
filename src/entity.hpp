@@ -21,7 +21,7 @@ class Entity
         
         virtual void Update(const std::vector<Entity*>& EntityList, Game* game) {};
         virtual void Draw(Game* game, Resources& res, int z);
-        virtual void Spawn(ImVec2 pos, int type, Tilemap& tilemap);
+        virtual bool Spawn(ImVec2 pos, int type, Tilemap& tilemap);
         virtual void Movement(Tilemap& tilemap);
         virtual void Damage(int dmgAmount, int i) {};
         virtual void Death() {};
