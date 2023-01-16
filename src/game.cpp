@@ -5,7 +5,7 @@
 #include "constants.hpp"
 #include <math.h>
 
-void Game::LevelUpdate(std::vector<Entity*>& EntityList, Tilemap* tilemap)
+void Game::LevelUpdate(std::vector<Entity*>& EntityList, Tilemap* tilemap, Resources& res)
 {
     ImGui::Text("currentLevel: %d; wavesPassed: %d %f", currentLevel, levelProgression, levelProgCool);
     if (levelProgression < (INITIAL_ENEMY * currentLevel))
@@ -24,7 +24,22 @@ void Game::LevelUpdate(std::vector<Entity*>& EntityList, Tilemap* tilemap)
     {
     
     }*/
-    
+    if (ImGui::IsKeyReleased(ImGuiKey_Y))
+        gameover = true;
+    if (gameover)
+    {
+        if (EntityList.size())
+        {
+            for (size_t i = 0; i != EntityList.size(); i++)
+            {
+                delete EntityList[i];
+
+            }
+            EntityList.clear();
+        }
+        AddToTexlist(10,2, res.gameOver.id, {windowWidth/2 - res.gameOver.width, windowHeight/2 - res.gameOver.height},
+        {windowWidth/2 + res.gameOver.width, windowHeight/2 + res.gameOver.height}, {0,0}, {1,1});
+    }
     
 }
 
@@ -82,7 +97,7 @@ void Game::TexlistUpdate(ImDrawList& dl)
     }
 }
 
-void Game::AddToTexlist(int z, int layer, ImTextureID id, ImVec2 posUL, ImVec2 posBR, ImVec2 uvUL, ImVec2 uvBR)
+void Game::AddToTexlist(int z, int layer, ImTextureID id, ImVec2 posUL, ImVec2 posBR, ImVec2 uvUL = {0,0}, ImVec2 uvBR = {1,1})
 {
     arrayTexlist[layer][z].active  = true;
     arrayTexlist[layer][z].type    = 0;

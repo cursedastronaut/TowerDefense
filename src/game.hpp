@@ -5,6 +5,7 @@
 
 class Entity;
 class Tilemap;
+class Resources;
 
 class Game
 {
@@ -14,6 +15,7 @@ class Game
         int levelProgression    = 0;
         float levelProgCool     = 0;
         int dragDropIndex       = 0;
+        bool gameover           = false;
 
         struct Texlist {
             bool active = false;
@@ -31,7 +33,7 @@ class Game
         
         Texlist arrayTexlist[32][MAX_TEXTURES];
 
-        void LevelUpdate(std::vector<Entity*>& EntityList, Tilemap* tilemap);
+        void LevelUpdate(std::vector<Entity*>& EntityList, Tilemap* tilemap, Resources& res);
 
         void TexlistUpdate(ImDrawList& dl);
         void AddToTexlist(int z, int layer, ImTextureID id, ImVec2 posUL, ImVec2 posBR, ImVec2 uvUL, ImVec2 uvBR);

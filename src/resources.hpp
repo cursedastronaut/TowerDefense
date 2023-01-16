@@ -15,4 +15,5 @@ class Resources
 
         Texture title;
         Texture newGame;
+        Texture gameOver;
 };
