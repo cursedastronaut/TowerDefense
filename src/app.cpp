@@ -27,7 +27,7 @@ void App::Update()
     switch (scene)
     {
     case SCENE_TITLE:
-        game->AddToTexlist( 0, 0, resources.titleBackground.id, {0,0}, {windowWidth, windowHeight}, {0,0}, {1,1});
+        //game->AddToTexlist( 0, 0, resources.titleBackground.id, {0,0}, {windowWidth, windowHeight}, {0,0}, {1,1});
         game->AddToTexlist( 10, 0, resources.title.id,
                 { (float)windowWidth/2.f - resources.title.width/2.f, (float)64},
                 { (float)windowWidth/2.f + resources.title.width/2.f, (float)64+resources.title.height},
