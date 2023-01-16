@@ -27,7 +27,7 @@ Enemy::Enemy(Tilemap& tilemap)
 
 void Enemy::Draw(Game* game, Resources& res, int z)
 {
-    if (!canStart || life <= 0)
+    if (life <= 0)
     {
         return;
     }
@@ -73,11 +73,8 @@ void Enemy::Movement(Tilemap& tilemap)
     float deltaTime = io->DeltaTime;
     ImGui::Text("My lame ass deltatime be like: %f", deltaTime);
     
-    ImGui::Text("Enemy type: %d Enemy CanStart : %d", type, canStart);
-    if (ImGui::Button(std::string("Enemy Start").append(std::to_string(0)).c_str())) {
-        canStart = true;
-    }
-    if (!canStart || life <= 0)
+    ImGui::Text("Enemy type: %d", type);
+    if (life <= 0)
         return;
 
     for (uint32_t y = 0; y < GRID_HEIGHT; y++)
