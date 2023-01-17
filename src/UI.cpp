@@ -6,7 +6,7 @@
 void UI::Draw(ImDrawList& list, Resources& res, Game* game, std::vector<Entity*>& EntityList, Tilemap& tilemap)
 {
     //draw a transparent white square on the tile the mouse is hovering
-    game->AddRectTexlist( 0, 5,
+    game->AddRectTexlist( 100, 5,
         { (float)int(ImGui::GetMousePos().x / 32) * 32, (float)int(ImGui::GetMousePos().y / 32) * 32},   //Upper-left point of rectangle
         { (float)int(ImGui::GetMousePos().x / 32) * 32 + 32, (float)int(ImGui::GetMousePos().y / 32) * 32 + 32},   //Bottom-right point of rectangle
         IM_COL32_WHITE,  //Color, black and transparent.
@@ -26,7 +26,7 @@ void UI::Draw(ImDrawList& list, Resources& res, Game* game, std::vector<Entity*>
     game->AddTextTexlist(64, 5,
     {towerSelectionUL.x + 16, towerSelectionUL.y + 1}, 
         0xFFFFFFFF, "Choose your tower");
-    if (dragDropButton(list, res.Turret, {towerSelectionUL.x + 16, towerSelectionUL.y + 16}, {TOWER_ICON_WIDTH, TOWER_ICON_HEIGHT}, {1,1,1,0.3f}, game, 1) == true)
+    if (dragDropButton(res.Turret, {towerSelectionUL.x + 16, towerSelectionUL.y + 16}, {TOWER_ICON_WIDTH, TOWER_ICON_HEIGHT}, {1,1,1,0.3f}, game, {1, 5}) == true)
     {
         if (game->money >= COST_TOWER)
         {
@@ -83,7 +83,7 @@ bool UI::Button(Game* game, Texture tex, ImVec2 pos, float width, float height, 
 
 }
 
-bool UI::dragDropButton(ImDrawList& list, Texture tex, ImVec2 pos, ImVec2 widthHeight, ImVec4 col, Game* game,int index)
+bool UI::dragDropButton(Texture tex, ImVec2 pos, ImVec2 widthHeight, ImVec4 col, Game* game, ImVec2 indexAndRange)
 {
     bool isDropped = false;
     if (ImGui::IsMouseHoveringRect({ pos.x, pos.y}, { pos.x + widthHeight.x, pos.y + widthHeight.y}, false))
@@ -91,25 +91,30 @@ bool UI::dragDropButton(ImDrawList& list, Texture tex, ImVec2 pos, ImVec2 widthH
         col.w += 0.1f; //Change alpha of button
         if (ImGui::IsMouseDown(ImGuiMouseButton_Left))
         {
-            game->dragDropIndex = index;
+            game->dragDropIndex = indexAndRange.x;
             col.w += 0.1f;
         }
     }
-    if (ImGui::IsMouseDown(ImGuiMouseButton_Left) && game->dragDropIndex == index)
+    if (ImGui::IsMouseDown(ImGuiMouseButton_Left) && game->dragDropIndex == indexAndRange.x)
     {
         col.w += 0.1f;
+        indexAndRange.y *= TILE_SIZE;
+        game->AddRectFilledTexlist(31, 5, 
+                { (int)(ImGui::GetMousePos().x/32)*32 - indexAndRange.y/2+16, (int)(ImGui::GetMousePos().y/32)*32 - indexAndRange.y/2+16},
+                { (int)(ImGui::GetMousePos().x/32)*32 + indexAndRange.y/2+16, (int)(ImGui::GetMousePos().y/32)*32 + indexAndRange.y/2+16}
+                , 0x80FFFFFF, 9999999999.f);
         game->AddToTexlist(
                 32,5,
                 tex.id,
-                { ImGui::GetMousePos().x, ImGui::GetMousePos().y},
-                { ImGui::GetMousePos().x + widthHeight.x, ImGui::GetMousePos().y + widthHeight.y},
+                { (int)(ImGui::GetMousePos().x/32)*32, (int)(ImGui::GetMousePos().y/32)*32 - tex.height/8},
+                { (int)(ImGui::GetMousePos().x/32)*32 + tex.width/4, (int)(ImGui::GetMousePos().y/32)*32 + tex.height/8},
                 {0,0},
                 {0.25f,0.25f}   //DEBUG TO EDIT TOEDIT
             );
     }    
     else
     {
-        if(game->dragDropIndex == index)
+        if(game->dragDropIndex == indexAndRange.x)
         {
             game->dragDropIndex = 0;
             isDropped = true;  
