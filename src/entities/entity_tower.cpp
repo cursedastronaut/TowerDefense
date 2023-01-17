@@ -69,7 +69,7 @@ void Turret::Draw(Game* game, Resources& res, int z)
         switch (maxCooldown)
         {
             case 5:
-                uvU<L = {0,0.0f};
+                uvUL = {0,0.0f};
                 uvBR = {0.25f,0.25f};
                 break;
 
