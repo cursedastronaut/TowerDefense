@@ -11,6 +11,7 @@ class Turret : public Entity
         float   cooldown = 5.f;
         ImVec2  pos      = {0,0};
         bool    active   = false;
+        float   maxCooldown = 5.f;
 
         Turret();
         //Turret functions
