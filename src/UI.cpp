@@ -1,6 +1,7 @@
 #include "UI.hpp"
 #include "constants.hpp"
 #include "entities/tower_slow.hpp"
+#include "entities/tower_fast.hpp"
 #include <string>
 
 void UI::Draw(ImDrawList& list, Resources& res, Game* game, std::vector<Entity*>& EntityList, Tilemap& tilemap)
@@ -44,11 +45,20 @@ void UI::Draw(ImDrawList& list, Resources& res, Game* game, std::vector<Entity*>
         {
             SlowTurret* newEntity = new SlowTurret();
             if (newEntity->Spawn({ImGui::GetMousePos().x,ImGui::GetMousePos().y}, 0, tilemap))
-                game->money -= COST_TOWER;
+                game->money -= COST_TOWER_SLOW;
             EntityList.push_back(newEntity);
         }
     }
-
+    if (dragDropButton(res.Turret, {towerSelectionUL.x + 96 + 80, towerSelectionUL.y + 16}, {TOWER_ICON_WIDTH, TOWER_ICON_HEIGHT}, {1,1,1,0.3f}, game, {3, NORMAL_TOWER_RANGE, 50, 5}, {0.5f,0,0.75f,0.25f}) == true)
+    {
+        if (game->money >= COST_TOWER)
+        {
+            FastTurret* newEntity = new FastTurret();
+            if (newEntity->Spawn({ImGui::GetMousePos().x,ImGui::GetMousePos().y}, 0, tilemap))
+                game->money -= COST_TOWER_SLOW;
+            EntityList.push_back(newEntity);
+        }
+    }
     game->AddRectFilledTexlist(0,5, {8, 8}, {128, 48}, 0x80000000, 5.f);
     std::string nara = "Money : ";
     nara += std::to_string(game->money);

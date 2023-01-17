@@ -42,7 +42,7 @@ void Turret::Shoot(const std::vector<Entity*>& EntityList, Game* game)
             if (cooldown <= 0)
             {
                 //deals a certain amount of damage to the target depending on the turret's level.
-                EntityList[aimingAt]->Damage(5 + level, aimingAt);
+                EntityList[aimingAt]->Damage(shootingStrengh + level, aimingAt);
                 cooldown = maxCooldown - (level / 2);
             }
             else
@@ -68,6 +68,10 @@ void Turret::Draw(Game* game, Resources& res, int z)
         ImVec2 uvBR = {1,1};
         switch (maxCooldown)
         {
+            case 2:
+                uvUL = {0.5f,0.0f};
+                uvBR = {0.75f,0.25f};
+                break;
             case 5:
                 uvUL = {0,0.0f};
                 uvBR = {0.25f,0.25f};

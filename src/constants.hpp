@@ -2,6 +2,7 @@
 
 //Gameplay settings
 #define COST_TOWER          100
+#define COST_TOWER_SLOW     200
 #define NORMAL_TOWER_RANGE  10.f
 
 

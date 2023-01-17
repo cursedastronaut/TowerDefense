@@ -12,6 +12,7 @@ class Turret : public Entity
         ImVec2  pos      = {0,0};
         bool    active   = false;
         int     maxCooldown = 5;
+        int     shootingStrengh = 2;
 
         Turret();
         //Turret functions

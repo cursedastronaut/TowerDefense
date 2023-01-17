@@ -1,16 +1,15 @@
 #pragma once
 #include "entity_tower.hpp"
 
-class SlowTurret : public Turret
+class FastTurret : public Turret
 {
     public:
-        SlowTurret()
+        FastTurret()
         {
             range = NORMAL_TOWER_RANGE;
-            maxCooldown = 10;
-            shootingStrengh = 5;
+            maxCooldown = 2;
+            shootingStrengh = 1;
         }
         int GetType() {return type;};
         int GetCooldown() {return maxCooldown;};
-        //bool Spawn(ImVec2 pos, int type, Tilemap& tilemap);
 };
