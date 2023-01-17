@@ -41,20 +41,9 @@ void Turret::Shoot(const std::vector<Entity*>& EntityList, Game* game)
         {
             if (cooldown <= 0)
             {
-                    //deals a certain amount of damage to the target depending on the turret's level.
-                    switch(type)
-                    {
-                        //tower shooting bullets.
-                        case 0:
-                        EntityList[aimingAt]->Damage(5 + level, aimingAt);
-                        cooldown = 2 - (level / 2);                    
-                        break;
-
-                        case 1:
-                        //missile function goes here
-                        cooldown = 5 - level; 
-                        break;
-                    }
+                //deals a certain amount of damage to the target depending on the turret's level.
+                EntityList[aimingAt]->Damage(5 + level, aimingAt);
+                cooldown = maxCooldown - (level / 2);
             }
             else
             {
@@ -77,13 +66,17 @@ void Turret::Draw(Game* game, Resources& res, int z)
         //ImGui::Text("%d", type);
         ImVec2 uvUL = {0,0};
         ImVec2 uvBR = {1,1};
-        switch (type)
+        switch (maxCooldown)
         {
-            case 0:
-                uvUL = {0,0.0f};
+            case 5:
+                uvU<L = {0,0.0f};
                 uvBR = {0.25f,0.25f};
                 break;
 
+            case 10:
+                uvUL = {0,0.25f};
+                uvBR = {0.25f,0.50f};
+                break;
             default:
                 break;
         }

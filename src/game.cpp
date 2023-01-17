@@ -53,8 +53,8 @@ void Game::LevelUpdate(std::vector<Entity*>& EntityList, Tilemap* tilemap, Resou
             EntityList.clear();
             
         }
-        AddToTexlist(10,2, res.gameOver.id, {windowWidth/2 - res.gameOver.width, windowHeight/2 - res.gameOver.height},
-        {windowWidth/2 + res.gameOver.width, windowHeight/2 + res.gameOver.height}, {0,0}, {1,1});
+        AddToTexlist(10,2, res.gameOver.id, {windowWidth/2.f - res.gameOver.width, windowHeight/2.f - res.gameOver.height},
+        {windowWidth/2.f + res.gameOver.width, windowHeight/2.f + res.gameOver.height}, {0.f,0.f }, {1.f,1.f });
         if (ImGui::IsKeyReleased(ImGuiKey_MouseLeft))
         {
             *scene = SCENE_TITLE;

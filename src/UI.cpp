@@ -1,6 +1,6 @@
 #include "UI.hpp"
 #include "constants.hpp"
-#include "entities/entity_tower.hpp"
+#include "entities/tower_slow.hpp"
 #include <string>
 
 void UI::Draw(ImDrawList& list, Resources& res, Game* game, std::vector<Entity*>& EntityList, Tilemap& tilemap)
@@ -26,11 +26,23 @@ void UI::Draw(ImDrawList& list, Resources& res, Game* game, std::vector<Entity*>
     game->AddTextTexlist(64, 5,
     {towerSelectionUL.x + 16, towerSelectionUL.y + 1}, 
         0xFFFFFFFF, "Choose your tower");
+    
     if (dragDropButton(res.Turret, {towerSelectionUL.x + 16, towerSelectionUL.y + 16}, {TOWER_ICON_WIDTH, TOWER_ICON_HEIGHT}, {1,1,1,0.3f}, game, {1, NORMAL_TOWER_RANGE, 30, 5}) == true)
     {
         if (game->money >= COST_TOWER)
         {
             Turret* newEntity = new Turret();
+            if (newEntity->Spawn({ImGui::GetMousePos().x,ImGui::GetMousePos().y}, 0, tilemap))
+                game->money -= COST_TOWER;
+            EntityList.push_back(newEntity);
+        }
+    }
+    
+    if (dragDropButton(res.Turret, {towerSelectionUL.x + 96, towerSelectionUL.y + 16}, {TOWER_ICON_WIDTH, TOWER_ICON_HEIGHT}, {1,1,1,0.3f}, game, {2, NORMAL_TOWER_RANGE, 40, 5}, {0,0.25f,0.25f,0.5f}) == true)
+    {
+        if (game->money >= COST_TOWER)
+        {
+            SlowTurret* newEntity = new SlowTurret();
             if (newEntity->Spawn({ImGui::GetMousePos().x,ImGui::GetMousePos().y}, 0, tilemap))
                 game->money -= COST_TOWER;
             EntityList.push_back(newEntity);
@@ -83,7 +95,7 @@ bool UI::Button(Game* game, Texture tex, ImVec2 pos, float width, float height, 
 
 }
 
-bool UI::dragDropButton(Texture tex, ImVec2 pos, ImVec2 widthHeight, ImVec4 col, Game* game, ImVec4 indexAndRange)
+bool UI::dragDropButton(Texture tex, ImVec2 pos, ImVec2 widthHeight, ImVec4 col, Game* game, ImVec4 indexAndRange, ImVec4 uv)
 {
     bool isDropped = false;
     if (ImGui::IsMouseHoveringRect({ pos.x, pos.y}, { pos.x + widthHeight.x, pos.y + widthHeight.y}, false))
@@ -106,10 +118,10 @@ bool UI::dragDropButton(Texture tex, ImVec2 pos, ImVec2 widthHeight, ImVec4 col,
         game->AddToTexlist(
                 indexAndRange.z+3,indexAndRange.w,
                 tex.id,
-                { (int)(ImGui::GetMousePos().x/32)*32, (int)(ImGui::GetMousePos().y/32)*32 - tex.height/8},
-                { (int)(ImGui::GetMousePos().x/32)*32 + tex.width/4, (int)(ImGui::GetMousePos().y/32)*32 + tex.height/8},
-                {0,0},
-                {0.25f,0.25f}   //DEBUG TO EDIT TOEDIT
+                { (int)(ImGui::GetMousePos().x/32)*32.f, (int)(ImGui::GetMousePos().y/32)*32.f - tex.height/8.f },
+                { (int)(ImGui::GetMousePos().x/32)*32.f + tex.width/4.f, (int)(ImGui::GetMousePos().y/32)*32 + tex.height/8.f },
+                {uv.x,uv.y},
+                {uv.z,uv.w}
             );
     }    
     else
@@ -122,18 +134,18 @@ bool UI::dragDropButton(Texture tex, ImVec2 pos, ImVec2 widthHeight, ImVec4 col,
     }
     ImU32 colorU32 = ImColor(col);
     //Background of Turret Selection Window
-    game->AddRectFilledTexlist(indexAndRange.z, indexAndRange.w, //TOEDIT
+    game->AddRectFilledTexlist(indexAndRange.z, indexAndRange.w,
         { pos.x, pos.y},                    //Upper-left point of rectangle
         { pos.x + widthHeight.x, pos.y + widthHeight.y},   //Bottom-right point of rectangle
         colorU32,  //Color, black and transparent.
         10.0f //Rounding.
     );
-    game->AddToTexlist( indexAndRange.z+1 , indexAndRange.w, //TOEDIT
+    game->AddToTexlist( indexAndRange.z+1 , indexAndRange.w,
                 tex.id,
                 { pos.x, pos.y},
                 { pos.x + widthHeight.x, pos.y + widthHeight.y},
-                {0,0},
-                {0.25f,0.25f}   //DEBUG TO EDIT TOEDIT
+                {uv.x,uv.y},
+                {uv.z,uv.w}
             );
     return isDropped;
 
