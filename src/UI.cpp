@@ -26,7 +26,7 @@ void UI::Draw(ImDrawList& list, Resources& res, Game* game, std::vector<Entity*>
     game->AddTextTexlist(64, 5,
     {towerSelectionUL.x + 16, towerSelectionUL.y + 1}, 
         0xFFFFFFFF, "Choose your tower");
-    if (dragDropButton(res.Turret, {towerSelectionUL.x + 16, towerSelectionUL.y + 16}, {TOWER_ICON_WIDTH, TOWER_ICON_HEIGHT}, {1,1,1,0.3f}, game, {1, NORMAL_TOWER_RANGE}) == true)
+    if (dragDropButton(res.Turret, {towerSelectionUL.x + 16, towerSelectionUL.y + 16}, {TOWER_ICON_WIDTH, TOWER_ICON_HEIGHT}, {1,1,1,0.3f}, game, {1, NORMAL_TOWER_RANGE, 30, 5}) == true)
     {
         if (game->money >= COST_TOWER)
         {
@@ -83,7 +83,7 @@ bool UI::Button(Game* game, Texture tex, ImVec2 pos, float width, float height, 
 
 }
 
-bool UI::dragDropButton(Texture tex, ImVec2 pos, ImVec2 widthHeight, ImVec4 col, Game* game, ImVec2 indexAndRange)
+bool UI::dragDropButton(Texture tex, ImVec2 pos, ImVec2 widthHeight, ImVec4 col, Game* game, ImVec4 indexAndRange)
 {
     bool isDropped = false;
     if (ImGui::IsMouseHoveringRect({ pos.x, pos.y}, { pos.x + widthHeight.x, pos.y + widthHeight.y}, false))
@@ -99,12 +99,12 @@ bool UI::dragDropButton(Texture tex, ImVec2 pos, ImVec2 widthHeight, ImVec4 col,
     {
         col.w += 0.1f;
         indexAndRange.y *= TILE_SIZE;
-        game->AddRectFilledTexlist(31, 5, 
+        game->AddRectFilledTexlist(indexAndRange.z+2, indexAndRange.w, 
                 { (int)(ImGui::GetMousePos().x/32)*32 - indexAndRange.y/2+16, (int)(ImGui::GetMousePos().y/32)*32 - indexAndRange.y/2+16},
                 { (int)(ImGui::GetMousePos().x/32)*32 + indexAndRange.y/2+16, (int)(ImGui::GetMousePos().y/32)*32 + indexAndRange.y/2+16}
                 , 0x80FFFFFF, 9999999999.f);
         game->AddToTexlist(
-                32,5,
+                indexAndRange.z+3,indexAndRange.w,
                 tex.id,
                 { (int)(ImGui::GetMousePos().x/32)*32, (int)(ImGui::GetMousePos().y/32)*32 - tex.height/8},
                 { (int)(ImGui::GetMousePos().x/32)*32 + tex.width/4, (int)(ImGui::GetMousePos().y/32)*32 + tex.height/8},
@@ -122,13 +122,13 @@ bool UI::dragDropButton(Texture tex, ImVec2 pos, ImVec2 widthHeight, ImVec4 col,
     }
     ImU32 colorU32 = ImColor(col);
     //Background of Turret Selection Window
-    game->AddRectFilledTexlist(10, 5, //TOEDIT
+    game->AddRectFilledTexlist(indexAndRange.z, indexAndRange.w, //TOEDIT
         { pos.x, pos.y},                    //Upper-left point of rectangle
         { pos.x + widthHeight.x, pos.y + widthHeight.y},   //Bottom-right point of rectangle
         colorU32,  //Color, black and transparent.
         10.0f //Rounding.
     );
-    game->AddToTexlist( 30 , 5, //TOEDIT
+    game->AddToTexlist( indexAndRange.z+1 , indexAndRange.w, //TOEDIT
                 tex.id,
                 { pos.x, pos.y},
                 { pos.x + widthHeight.x, pos.y + widthHeight.y},
