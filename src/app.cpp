@@ -27,13 +27,13 @@ void App::Update()
     switch (scene)
     {
     case SCENE_TITLE:
-        //game->AddToTexlist( 0, 0, resources.titleBackground.id, {0,0}, {windowWidth, windowHeight}, {0,0}, {1,1});
+        game->AddToTexlist( 0, 0, resources.titleBackground.id, {0,0}, {windowWidth, windowHeight}, {0,0}, {1,1});
         game->AddToTexlist( 10, 0, resources.title.id,
                 { (float)windowWidth/2.f - resources.title.width/2.f, (float)64},
                 { (float)windowWidth/2.f + resources.title.width/2.f, (float)64+resources.title.height},
                 {0.f,0.f},                           
                 {1.f,1.f});
-        if (ui->Button(*imdrawlist, resources.newGame, {windowWidth/2 - 100, windowHeight/2 - 50}, 200, 100, {1,1,1,0.5}) ||
+        if (ui->Button(game, resources.newGame, {windowWidth/2 - 100, windowHeight/2 - 50}, 200, 100, {1,1,1,0.5}) ||
             ImGui::IsKeyPressed(ImGuiKey_Enter, false))
             scene = SCENE_GAME;
         /*game->AddToTexlist( 20, resources.newGame.id,
@@ -49,9 +49,21 @@ void App::Update()
         tilemap->Update(game, resources);
         ui->Update(*imdrawlist, resources, game, EntityList /*entity,*/, *tilemap);
         
-        
-        for(size_t i = 0; i<EntityList.size(); i++)
+    for (std::vector<Entity*>::iterator it = EntityList.begin(); it != EntityList.end(); )
         {
+            Entity* e = *it;
+            if (e->GetLife() <= 0 && e->GetType() == 1)
+            {
+                it = EntityList.erase(it);
+                delete e;
+            }
+            else
+            {
+                it++;
+            }
+        }
+        for(size_t i = 0; i<EntityList.size(); i++)
+        { 
             EntityList[i]->Update(EntityList, game);
             EntityList[i]->Draw(game, resources, i);
             EntityList[i]->Movement(*tilemap);

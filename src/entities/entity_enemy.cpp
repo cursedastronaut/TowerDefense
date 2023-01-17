@@ -147,5 +147,5 @@ void Enemy::Damage(int dmgAmount, int i)
 
 void Enemy::Death()
 {
-    
+    printf("test");
 }

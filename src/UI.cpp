@@ -51,7 +51,7 @@ void UI::Update(ImDrawList& list, Resources& res, Game* game, std::vector<Entity
     ImGui::Text("dragDropIndex: %d", game->dragDropIndex);
 }
 
-bool UI::Button(ImDrawList& list, Texture tex, ImVec2 pos, float width, float height, ImVec4 col)
+bool UI::Button(Game* game, Texture tex, ImVec2 pos, float width, float height, ImVec4 col)
 {
     bool isPressed = false;
     if (ImGui::IsMouseHoveringRect({ pos.x, pos.y}, { pos.x + width, pos.y + height}, false))
@@ -66,13 +66,13 @@ bool UI::Button(ImDrawList& list, Texture tex, ImVec2 pos, float width, float he
         
     ImU32 colorU32 = ImColor(col);
     //Background of Turret Selection Window
-    list.AddRectFilled(
+    game->AddRectFilledTexlist(29, 5,
         { pos.x, pos.y},                    //Upper-left point of rectangle
         { pos.x + width, pos.y + height},   //Bottom-right point of rectangle
         colorU32,  //Color, black and transparent.
         20.0f //Rounding.
     );
-    list.AddImage(
+    game->AddToTexlist( 30 , 5,
                 tex.id,
                 { pos.x, pos.y},
                 { pos.x + width, pos.y + height},

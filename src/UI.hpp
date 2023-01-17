@@ -15,6 +15,6 @@ public:
     ~UI();
     void Update(ImDrawList& list, Resources& res, Game* game, std::vector<Entity*>& EntityList /*Entity* entity,*/, Tilemap& tilemap);
     void Draw(ImDrawList& list, Resources& res, Game* game, std::vector<Entity*>& EntityList, Tilemap& tilemap);
-    bool Button(ImDrawList& list, Texture tex, ImVec2 pos, float width, float height, ImVec4 col);
+    bool Button(Game* game, Texture tex, ImVec2 pos, float width, float height, ImVec4 col);
     bool dragDropButton(ImDrawList& list, Texture tex, ImVec2 pos, ImVec2 widthHeight, ImVec4 col, Game* game, int index);
 };
