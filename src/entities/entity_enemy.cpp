@@ -3,8 +3,6 @@
 #include "../constants.hpp"
 #include "entity_enemy.hpp"
 #include <string>
-#include <cmath>
-#define PI 3.1415926535f
 
 Enemy::Enemy()
 {
@@ -20,8 +18,8 @@ Enemy::Enemy(Tilemap& tilemap)
             type = 1;
             if (tilemap.cGrid[y * GRID_WIDTH + x] == 0x06)
             {
-                pos.x = x * TILE_SIZE;
-                pos.y = (y-1) * TILE_SIZE;
+                pos.x = x * TILE_SIZE + (TILE_SIZE / 2);
+                pos.y = y * TILE_SIZE + (TILE_SIZE / 2);
             }
         }
     }
@@ -62,73 +60,76 @@ void Enemy::Draw(Game* game, Resources& res, int z)
     }
     game->AddToTexlist(z, 10,
         res.Fighter4.id,                                                               
-        {pos.x, pos.y},                                            
-        {pos.x+res.Fighter4.width/4, pos.y+res.Fighter4.height/4},                 
+        {pos.x - res.Fighter4.width / 8, pos.y - res.Fighter4.height / 8 - res.Fighter4.height / 8},  
+        {pos.x + res.Fighter4.width / 8, pos.y + res.Fighter4.height / 8 - res.Fighter4.height / 8}, 
+        // {pos.x + res.Fighter4.width / 2, pos.y + res.Fighter4.height / 2},                 
         uvUL,                           
         uvBR     
     );
+
 }
 
 void Enemy::Movement(Tilemap& tilemap)
 {
     ImGuiIO* io = &ImGui::GetIO();
     float deltaTime = io->DeltaTime;
-    ImGui::Text("My lame ass deltatime be like: %f", deltaTime);
-    
+    ImGui::Text("Cooldown: [%f]", turnCooldown);
+    // ImGui::Text("My lame ass deltatime be like: %f", deltaTime);
     ImGui::Text("Enemy type: %d", type);
+
     if (life <= 0)
         return;
-
-    ImVec2 directionVec;
 
     for (uint32_t y = 0; y < GRID_HEIGHT; y++)
     {
         for (uint32_t x = 0; x < GRID_WIDTH; x++)
         {
             //Handling directions
-            
-            switch (tilemap.cGrid[(int)(pos.y+TILE_SIZE) / TILE_SIZE * GRID_WIDTH + (int)pos.x / TILE_SIZE])
+            if (tilemap.cGrid[(int)(pos.y / TILE_SIZE) * GRID_WIDTH + (int)(pos.x / TILE_SIZE)] != 0x01)
             {
-                case 0x00:
-                    break;
-                case 0x02:
-                    direction = 90;
-                    directionVec = ImVec2(0, 1);
-                    break;
-                case 0x03:
-                    direction = 0;
-                    directionVec = ImVec2(1, 0);
-                    break;
-                case 0x04:
-                    direction = 270;
-                    directionVec = ImVec2(0, -1);
-                    break;
-                case 0x05:
-                    direction = 180;
-                    directionVec = ImVec2(-1, 0);
-                    break;
-                
-                default:
-                    break;
+                turnCooldown -= deltaTime;
+                if (turnCooldown <= 0)
+                {
+                    switch (tilemap.cGrid[(int)(pos.y / TILE_SIZE) * GRID_WIDTH + (int)(pos.x / TILE_SIZE)])
+                    {
+                        case 0x02:
+                            direction = 90;
+                            break;
+                        case 0x03:
+                            direction = 0;
+                            break;
+                        case 0x04:
+                            direction = 270;
+                            break;
+                        case 0x05:
+                            direction = 180;
+                            break;
+                        
+                        default:
+                            break;
+                    }
+                    turnCooldown = (TILE_SIZE / 2) / speed;
+                }                   
             }
+            else
+            {
+                turnCooldown = (TILE_SIZE / 2) / speed;
+            }
+
             //Moves the player
-            //pos.x += directionVec.x * Enemy::speed * ImGui::GetIO().DeltaTime;
-            //pos.y += directionVec.y * Enemy::speed * ImGui::GetIO().DeltaTime;
-            //pos.x += cosf(float(direction) / (2.f * PI)) * Enemy::speed * ImGui::GetIO().DeltaTime;
-            //pos.y += -sinf((direction) / (2.f * PI)) * Enemy::speed * ImGui::GetIO().DeltaTime;
             switch (direction)
             {
                 case 270:
-                    pos.y += 2.f/20.f * ImGui::GetIO().DeltaTime;
+                    pos.y += speed * deltaTime;
                     break;
                 case 00:
-                    pos.x += 2.f/20.f * ImGui::GetIO().DeltaTime;
+                    pos.x += speed * deltaTime;
                     break;
                 case 90:
-                    pos.y -= 2.f/20.f * ImGui::GetIO().DeltaTime;
+                    pos.y -= speed * deltaTime;
                     break;
                 case 180:
-                    pos.x -= 2.f/20.f * ImGui::GetIO().DeltaTime;
+                    pos.x -= speed * deltaTime;
                     break;
                 
                 default:

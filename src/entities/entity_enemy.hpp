@@ -1,6 +1,7 @@
 #pragma once
 #include "../entity.hpp"
 #include "../app.hpp"
+
 class Enemy : public Entity {
     public:
         float   speed       = 0.1f;
@@ -8,6 +9,7 @@ class Enemy : public Entity {
         int     life        = 10;
         int     type        = 1;
         bool    canStart    = true;
+        float   turnCooldown = (TILE_SIZE / 2) * speed;
 
         Enemy();
         Enemy(Tilemap& tilemap);
