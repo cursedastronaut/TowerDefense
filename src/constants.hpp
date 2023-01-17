@@ -2,6 +2,7 @@
 
 //Gameplay settings
 #define COST_TOWER          100
+#define NORMAL_TOWER_RANGE  10.f
 
 
 //Tilemap settings

@@ -26,7 +26,7 @@ void UI::Draw(ImDrawList& list, Resources& res, Game* game, std::vector<Entity*>
     game->AddTextTexlist(64, 5,
     {towerSelectionUL.x + 16, towerSelectionUL.y + 1}, 
         0xFFFFFFFF, "Choose your tower");
-    if (dragDropButton(res.Turret, {towerSelectionUL.x + 16, towerSelectionUL.y + 16}, {TOWER_ICON_WIDTH, TOWER_ICON_HEIGHT}, {1,1,1,0.3f}, game, {1, 5}) == true)
+    if (dragDropButton(res.Turret, {towerSelectionUL.x + 16, towerSelectionUL.y + 16}, {TOWER_ICON_WIDTH, TOWER_ICON_HEIGHT}, {1,1,1,0.3f}, game, {1, NORMAL_TOWER_RANGE}) == true)
     {
         if (game->money >= COST_TOWER)
         {

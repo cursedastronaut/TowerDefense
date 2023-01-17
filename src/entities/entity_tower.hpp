@@ -7,7 +7,7 @@ class Turret : public Entity
         int     aimingAt = -1;
         int     type     = 0;
         int     level    = 0;
-        float   range    = 5.f;
+        float   range    = NORMAL_TOWER_RANGE;
         float   cooldown = 5.f;
         ImVec2  pos      = {0,0};
         bool    active   = false;
