@@ -21,6 +21,7 @@ void Game::LevelUpdate(std::vector<Entity*>& EntityList, Tilemap* tilemap, Resou
         
         levelProgCool -= ImGui::GetIO().DeltaTime;
     }
+    levelProgression = 0;
     
     for (std::vector<Entity*>::iterator it = EntityList.begin(); it != EntityList.end(); )
     {
