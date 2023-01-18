@@ -15,7 +15,7 @@ class Game
         int currentLevel        = 1;
         int levelProgression    = 0;
         float levelProgCool     = 0;
-        int intruders           = 0;
+        int castle_life         = 50;
         int dragDropIndex       = 0;
         bool gameover           = false;
 

@@ -32,5 +32,6 @@ class Entity
         virtual ImVec2 GetPos() {return pos;};
         virtual float GetSpeed() {return 0;};
         virtual float GetMaxSpeed() {return 0;};
+        virtual float GetAttack() {return 0;};
         virtual void EditSpeed(float newSpeed) {};
 };

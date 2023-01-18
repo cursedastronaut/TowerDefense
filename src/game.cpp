@@ -28,19 +28,19 @@ void Game::LevelUpdate(std::vector<Entity*>& EntityList, Tilemap* tilemap, Resou
     for (std::vector<Entity*>::iterator it = EntityList.begin(); it != EntityList.end(); )
     {
         Entity* e = *it;
-        ImGui::Text("intruders : %d, posx: %f", intruders, e->GetPos().x);
+        ImGui::Text("castle_life : %d, posx: %f", castle_life, e->GetPos().x);
         if (e->GetPos().x >= windowWidth)
         {
+            castle_life -= e->GetAttack();
             it = EntityList.erase(it);
             delete e;
-            intruders ++;
         }
         else
         {
             it++;
         }
     }
-    if (intruders >= 3 || ImGui::IsKeyReleased(ImGuiKey_Y))
+    if (castle_life <= 0 || ImGui::IsKeyReleased(ImGuiKey_Y))
         gameover = true;
     if (gameover)
     {
