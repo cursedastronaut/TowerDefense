@@ -8,9 +8,12 @@ class Resources
         Texture tilesetWood;
         Texture tilesetCastle;
         Texture tilesetPath;
-        Texture Fighter4;
         Texture Turret;
         Texture Void;
+
+
+        Texture Fighter4;
+        Texture Fighter4Frozen;
 
 
         Texture title;

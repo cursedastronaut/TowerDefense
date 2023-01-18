@@ -27,6 +27,7 @@ Enemy::Enemy(Tilemap& tilemap)
 
 void Enemy::Draw(Game* game, Resources& res, int z)
 {
+    Texture texture = res.Fighter4;
     if (life <= 0)
     {
         return;
@@ -58,10 +59,12 @@ void Enemy::Draw(Game* game, Resources& res, int z)
     default:
         break;
     }
+    if (maxSpeed != speed)
+        texture = res.Fighter4Frozen;
     game->AddToTexlist(z, 10,
-        res.Fighter4.id,                                                               
-        {pos.x - res.Fighter4.width / 8, pos.y - res.Fighter4.height / 8 - res.Fighter4.height / 8},  
-        {pos.x + res.Fighter4.width / 8, pos.y + res.Fighter4.height / 8 - res.Fighter4.height / 8}, 
+        texture.id,                                                               
+        {pos.x - texture.width / 8, pos.y - texture.height / 8 - texture.height / 8},  
+        {pos.x + texture.width / 8, pos.y + texture.height / 8 - texture.height / 8}, 
         // {pos.x + res.Fighter4.width / 2, pos.y + res.Fighter4.height / 2},                 
         uvUL,                           
         uvBR     
