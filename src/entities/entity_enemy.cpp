@@ -91,6 +91,11 @@ void Enemy::Draw(Game* game, Resources& res, int z)
         uvUL,                           
         uvBR     
     );
+    std::string life_count = "HP = ";
+    life_count += std::to_string(GetLife());
+    game->AddTextTexlist(z,11, 
+    {pos.x - texture[isFrozen].width / 8, pos.y}
+    , 0xFFFF0000, life_count);
 
 }
 
