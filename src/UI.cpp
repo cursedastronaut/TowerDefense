@@ -27,19 +27,6 @@ void UI::Draw(ImDrawList& list, Resources& res, Game* game, std::vector<Entity*>
     game->AddTextTexlist(64, 5,
     {towerSelectionUL.x + 16, towerSelectionUL.y + 1}, 
         0xFFFFFFFF, "Choose your tower");
-    
-    //
-
-    if (dragDropButton(res.Turret, {towerSelectionUL.x + 16, towerSelectionUL.y + 16}, {TOWER_ICON_WIDTH, TOWER_ICON_HEIGHT}, {1,1,1,0.3f}, game, {1, NORMAL_TOWER_RANGE, 30, 5}) == true)
-    {
-        if (game->money >= COST_TOWER)
-        {
-            Turret* newEntity = new Turret();
-            if (newEntity->Spawn({ImGui::GetMousePos().x,ImGui::GetMousePos().y}, 0, tilemap))
-                game->money -= COST_TOWER;
-            EntityList.push_back(newEntity);
-        }
-    }
 
     //displays the price of the different towers
     std::string towerCost[] = {"", "", ""};
@@ -54,10 +41,20 @@ void UI::Draw(ImDrawList& list, Resources& res, Game* game, std::vector<Entity*>
             towerCost[i] //the text itself
         );
     }
-    
-    if (dragDropButton(res.Turret, {towerSelectionUL.x + 96, towerSelectionUL.y + 16}, {TOWER_ICON_WIDTH, TOWER_ICON_HEIGHT}, {1,1,1,0.3f}, game, {2, NORMAL_TOWER_RANGE, 40, 5}, {0,0.25f,0.25f,0.5f}) == true)
+
+    if (dragDropButton(res.Turret, {towerSelectionUL.x + 16, towerSelectionUL.y + 16}, {TOWER_ICON_WIDTH, TOWER_ICON_HEIGHT}, {1,1,1,0.3f}, game, {1, NORMAL_TOWER_RANGE, 30, 5}) == true)
     {
         if (game->money >= COST_TOWER)
+        {
+            Turret* newEntity = new Turret();
+            if (newEntity->Spawn({ImGui::GetMousePos().x,ImGui::GetMousePos().y}, 0, tilemap))
+                game->money -= COST_TOWER;
+            EntityList.push_back(newEntity);
+        }
+    } 
+    if (dragDropButton(res.Turret, {towerSelectionUL.x + 96, towerSelectionUL.y + 16}, {TOWER_ICON_WIDTH, TOWER_ICON_HEIGHT}, {1,1,1,0.3f}, game, {2, NORMAL_TOWER_RANGE, 40, 5}, {0,0.25f,0.25f,0.5f}) == true)
+    {
+        if (game->money >= COST_TOWER_SLOW)
         {
             SlowTurret* newEntity = new SlowTurret();
             if (newEntity->Spawn({ImGui::GetMousePos().x,ImGui::GetMousePos().y}, 0, tilemap))
@@ -67,7 +64,7 @@ void UI::Draw(ImDrawList& list, Resources& res, Game* game, std::vector<Entity*>
     }
     if (dragDropButton(res.Turret, {towerSelectionUL.x + 96 + 80, towerSelectionUL.y + 16}, {TOWER_ICON_WIDTH, TOWER_ICON_HEIGHT}, {1,1,1,0.3f}, game, {3, NORMAL_TOWER_RANGE, 50, 5}, {0.5f,0,0.75f,0.25f}) == true)
     {
-        if (game->money >= COST_TOWER)
+        if (game->money >= COST_TOWER_FAST)
         {
             FastTurret* newEntity = new FastTurret();
             if (newEntity->Spawn({ImGui::GetMousePos().x,ImGui::GetMousePos().y}, 0, tilemap))
