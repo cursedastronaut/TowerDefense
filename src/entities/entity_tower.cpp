@@ -34,6 +34,13 @@ void Turret::Shoot(const std::vector<Entity*>& EntityList, Game* game)
     }
     else
     {
+        //debug tower aim
+        game->AddRectFilledTexlist(1003, 29,
+            {EntityList[aimingAt]->GetPos().x - 16, EntityList[aimingAt]->GetPos().y - 16},
+            {EntityList[aimingAt]->GetPos().x + 16, EntityList[aimingAt]->GetPos().y + 16},
+            IM_COL32(255, 0, 0, 150)
+        );
+
         if (EntityList[aimingAt]->GetLife() > 0)
         {
             if (cooldown <= 0)
@@ -94,8 +101,7 @@ void Turret::Draw(Game* game, Resources& res, int z)
             {pos.x+res.Turret.width/4, pos.y+res.Turret.height/4-TILE_SIZE},                 
             uvUL,                           
             uvBR     
-        ); 
-        
+        );        
     }
 }
 
