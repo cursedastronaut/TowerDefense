@@ -30,4 +30,7 @@ class Entity
         virtual int GetLife() {return life;};
         virtual bool GetCanStart() {return false;};
         virtual ImVec2 GetPos() {return pos;};
+        virtual float GetSpeed() {return 0;};
+        virtual float GetMaxSpeed() {return 0;};
+        virtual void EditSpeed(float newSpeed) {};
 };

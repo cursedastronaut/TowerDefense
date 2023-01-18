@@ -25,4 +25,7 @@ class Enemy : public Entity {
         bool GetCanStart() {return canStart;};
         ImVec2 GetPos() {return pos;};
         int GetLife() {return life;};
+        float GetSpeed() {return speed;};
+        float GetMaxSpeed() {return maxSpeed;};
+        void EditSpeed(float newSpeed) {speed = newSpeed;};
 };
