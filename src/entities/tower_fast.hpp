@@ -7,9 +7,10 @@ class FastTurret : public Turret
         FastTurret()
         {
             range = NORMAL_TOWER_RANGE;
-            maxCooldown = 2;
+            towerClass = 2;
+            maxCooldown = 0.5f;
             shootingStrengh = 1;
         }
         int GetType() {return type;};
-        int GetCooldown() {return maxCooldown;};
+        float GetCooldown() {return maxCooldown;};
 };

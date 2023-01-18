@@ -5,14 +5,15 @@ class Turret : public Entity
 {
     public:
         int     aimingAt = -1;
+        int     towerClass = 0;
         int     type     = 0;
         int     level    = 0;
         float   range    = NORMAL_TOWER_RANGE;
         float   cooldown = 5.f;
         ImVec2  pos      = {0,0};
         bool    active   = false;
-        int     maxCooldown = 5;
-        int     shootingStrengh = 2;
+        float   maxCooldown = 1.5f;
+        int     shootingStrengh = 3;
 
         Turret();
         //Turret functions
@@ -20,7 +21,7 @@ class Turret : public Entity
         void Draw(Game* game, Resources& res, int z) override ;
         bool Spawn(ImVec2 pos, int type, Tilemap& tilemap);
         void Shoot(const std::vector<Entity*>& EntityList, Game* game);
-        virtual int GetCooldown() {return maxCooldown;};
+        virtual float GetCooldown() {return maxCooldown;};
         int GetType() {return type;};
         ImVec2 GetPos() {return pos;};
 };

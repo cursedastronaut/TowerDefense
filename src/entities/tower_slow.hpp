@@ -7,10 +7,11 @@ class SlowTurret : public Turret
         SlowTurret()
         {
             range = NORMAL_TOWER_RANGE;
-            maxCooldown = 10;
+            towerClass = 1;
+            maxCooldown = 5;
             shootingStrengh = 5;
         }
         int GetType() {return type;};
-        int GetCooldown() {return maxCooldown;};
+        float GetCooldown() {return maxCooldown;};
         //bool Spawn(ImVec2 pos, int type, Tilemap& tilemap);
 };
