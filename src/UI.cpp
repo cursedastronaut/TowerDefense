@@ -28,6 +28,8 @@ void UI::Draw(ImDrawList& list, Resources& res, Game* game, std::vector<Entity*>
     {towerSelectionUL.x + 16, towerSelectionUL.y + 1}, 
         0xFFFFFFFF, "Choose your tower");
     
+    //
+
     if (dragDropButton(res.Turret, {towerSelectionUL.x + 16, towerSelectionUL.y + 16}, {TOWER_ICON_WIDTH, TOWER_ICON_HEIGHT}, {1,1,1,0.3f}, game, {1, NORMAL_TOWER_RANGE, 30, 5}) == true)
     {
         if (game->money >= COST_TOWER)
@@ -37,6 +39,20 @@ void UI::Draw(ImDrawList& list, Resources& res, Game* game, std::vector<Entity*>
                 game->money -= COST_TOWER;
             EntityList.push_back(newEntity);
         }
+    }
+
+    //displays the price of the different towers
+    std::string towerCost[] = {"", "", ""};
+    towerCost[0] = std::to_string(COST_TOWER);
+    towerCost[1] = std::to_string(COST_TOWER_SLOW);
+    towerCost[2] = std::to_string(COST_TOWER_FAST);
+    for(int i = 0; i <= 2; i++)
+    {
+        game->AddTextTexlist(10 + i, 5,
+            {towerSelectionUL.x + 16 + (80 * i), towerSelectionUL.y + 112}, //position of text
+            IM_COL32_WHITE, //color of text
+            towerCost[i] //the text itself
+        );
     }
     
     if (dragDropButton(res.Turret, {towerSelectionUL.x + 96, towerSelectionUL.y + 16}, {TOWER_ICON_WIDTH, TOWER_ICON_HEIGHT}, {1,1,1,0.3f}, game, {2, NORMAL_TOWER_RANGE, 40, 5}, {0,0.25f,0.25f,0.5f}) == true)
@@ -59,6 +75,23 @@ void UI::Draw(ImDrawList& list, Resources& res, Game* game, std::vector<Entity*>
             EntityList.push_back(newEntity);
         }
     }
+
+    // Attempt at simplifying the repetitive code above
+
+        // for(int i = 0; i <= 2; i++)
+        // {
+        //     if (dragDropButton(res.Turret, {towerSelectionUL.x + 16 + (80 * i), towerSelectionUL.y + 16}, {TOWER_ICON_WIDTH, TOWER_ICON_HEIGHT}, {1,1,1,0.3f}, game, {i + 1, NORMAL_TOWER_RANGE, 30 + (10 * i), 5}, /*{0.5f,0,0.75f,0.25f}*/) == true)
+        //     {
+        //         if (game->money >= COST_TOWER)
+        //         {
+        //             FastTurret* newEntity = new FastTurret();
+        //             if (newEntity->Spawn({ImGui::GetMousePos().x,ImGui::GetMousePos().y}, 0, tilemap))
+        //                 game->money -= COST_TOWER_FAST;
+        //             EntityList.push_back(newEntity);
+        //         }
+        //     }        
+        // }
+
     game->AddRectFilledTexlist(0,5, {8, 8}, {128, 48}, 0x80000000, 5.f);
     std::string nara = "Money : ";
     nara += std::to_string(game->money);
