@@ -1,6 +1,3 @@
-//#include "../tilemap.hpp"
-//include "../imgui_utils.hpp"
-//#include "../entity.hpp"
 #include "entity_tower.hpp"
 #include "../constants.hpp"
 #include <string>
@@ -41,7 +38,7 @@ void Turret::Shoot(const std::vector<Entity*>& EntityList, Game* game)
         {
             if (cooldown <= 0)
             {
-                if (maxCooldown == 2.f)
+                if (towerClass == 2)
                     EntityList[aimingAt]->EditSpeed(EntityList[aimingAt]->GetMaxSpeed() / 2.f);
                 //deals a certain amount of damage to the target depending on the turret's level.
                 EntityList[aimingAt]->Damage(shootingStrengh + level, aimingAt);

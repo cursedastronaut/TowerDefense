@@ -1,6 +1,7 @@
 #include "game.hpp"
 #include "imgui_utils.hpp"
 #include "entities/enemy_beefy.hpp"
+#include "entities/enemy_healer.hpp"
 #include "tilemap.hpp"
 #include "constants.hpp"
 #include <math.h>
@@ -12,7 +13,7 @@ void Game::LevelUpdate(std::vector<Entity*>& EntityList, Tilemap* tilemap, Resou
     {
         if (levelProgCool <= 0.f)
         {
-            Enemy* newEntity = new Enemy(*tilemap);
+            Healer* newEntity = new Healer(*tilemap);
             EntityList.push_back(newEntity);
             levelProgCool = 2.f;
             levelProgression ++;

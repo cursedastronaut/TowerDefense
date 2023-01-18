@@ -75,7 +75,7 @@ void Enemy::Draw(Game* game, Resources& res, int z)
         break;
 
     case 2:
-        texture[0] = res.Fighter4;
+        texture[0] = res.Fighter5;
         texture[1] = res.Fighter5Frozen;
         break;
     
