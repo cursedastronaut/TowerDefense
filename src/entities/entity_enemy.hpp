@@ -5,6 +5,7 @@
 class Enemy : public Entity {
     public:
         float   speed       = 0.1f;
+        float   maxSpeed    = 0.1f;
         int     direction   = 0;
         int     life        = 10;
         int     type        = 1;
