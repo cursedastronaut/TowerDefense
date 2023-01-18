@@ -9,6 +9,7 @@ class Enemy : public Entity {
         int     direction   = 0;
         int     life        = 10;
         int     type        = 1;
+        int     enemyType   = 0;
         int     attack      = 1;
         bool    canStart    = true;
         float   turnCooldown = (TILE_SIZE / 2) * speed;

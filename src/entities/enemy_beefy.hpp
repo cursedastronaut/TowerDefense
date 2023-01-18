@@ -4,11 +4,15 @@
 class Beefy : public Enemy
 {
     public:
-        float   speed       = 0.05f;
-        float   maxSpeed    = 0.05f;
 
-        Wimp();
-        Wimp(Tilemap& tilemap);
+        Beefy();
+        Beefy(Tilemap& tilemap) : Enemy(tilemap) 
+        {
+            speed = 0.05f;
+            maxSpeed = 0.05f;
+            enemyType = 1;
+            attack = 3;
+        };
         //Enemy functions
         float GetSpeed() {return speed;};
         float GetMaxSpeed() {return maxSpeed;};

@@ -1,6 +1,6 @@
 #include "game.hpp"
 #include "imgui_utils.hpp"
-#include "entities/entity_enemy.hpp"
+#include "entities/enemy_beefy.hpp"
 #include "tilemap.hpp"
 #include "constants.hpp"
 #include <math.h>
@@ -19,11 +19,7 @@ void Game::LevelUpdate(std::vector<Entity*>& EntityList, Tilemap* tilemap, Resou
         }
         
         levelProgCool -= ImGui::GetIO().DeltaTime;
-    }/*
-    else if ((INITIAL_ENEMY * currentLevel) + )
-    {
-    
-    }*/
+    }
     
     for (std::vector<Entity*>::iterator it = EntityList.begin(); it != EntityList.end(); )
     {

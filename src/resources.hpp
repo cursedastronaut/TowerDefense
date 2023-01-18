@@ -12,8 +12,12 @@ class Resources
         Texture Void;
 
 
+        Texture Fighter3;
+        Texture Fighter3Frozen;
         Texture Fighter4;
         Texture Fighter4Frozen;
+        Texture Fighter5;
+        Texture Fighter5Frozen;
 
 
         Texture title;

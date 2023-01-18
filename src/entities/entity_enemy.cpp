@@ -27,7 +27,7 @@ Enemy::Enemy(Tilemap& tilemap)
 
 void Enemy::Draw(Game* game, Resources& res, int z)
 {
-    Texture texture = res.Fighter4;
+    Texture texture[2] = {res.Fighter4, res.Fighter4Frozen};
     if (life <= 0)
     {
         return;
@@ -59,13 +59,35 @@ void Enemy::Draw(Game* game, Resources& res, int z)
     default:
         break;
     }
+
+    bool isFrozen = false;
+
+    switch (enemyType)
+    {
+    case 0:
+        texture[0] = res.Fighter3;
+        texture[1] = res.Fighter3Frozen;
+        break;
+    
+    case 1:
+        texture[0] = res.Fighter4;
+        texture[1] = res.Fighter4Frozen;
+        break;
+
+    case 2:
+        texture[0] = res.Fighter4;
+        texture[1] = res.Fighter5Frozen;
+        break;
+    
+    default:
+        break;
+    }
     if (maxSpeed != speed)
-        texture = res.Fighter4Frozen;
+        isFrozen = true;
     game->AddToTexlist(z, 10,
-        texture.id,                                                               
-        {pos.x - texture.width / 8, pos.y - texture.height / 8 - texture.height / 8},  
-        {pos.x + texture.width / 8, pos.y + texture.height / 8 - texture.height / 8}, 
-        // {pos.x + res.Fighter4.width / 2, pos.y + res.Fighter4.height / 2},                 
+        texture[isFrozen].id,                                                               
+        {pos.x - texture[isFrozen].width / 8, pos.y - texture[isFrozen].height / 8 - texture[isFrozen].height / 8},  
+        {pos.x + texture[isFrozen].width / 8, pos.y + texture[isFrozen].height / 8 - texture[isFrozen].height / 8},           
         uvUL,                           
         uvBR     
     );
@@ -76,9 +98,8 @@ void Enemy::Movement(Tilemap& tilemap)
 {
     ImGuiIO* io = &ImGui::GetIO();
     float deltaTime = io->DeltaTime;
-    ImGui::Text("Cooldown: [%f]", turnCooldown);
     // ImGui::Text("My lame ass deltatime be like: %f", deltaTime);
-    ImGui::Text("Enemy type: %d", type);
+    ImGui::Text("Enemy speed: %f, speed v: %f", GetSpeed(), speed);
 
     if (life <= 0)
         return;
