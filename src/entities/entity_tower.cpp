@@ -10,16 +10,25 @@ Turret::Turret() : Entity()
 void Turret::Update(const std::vector<Entity*>& EntityList, Game* game)
 {
     Shoot(EntityList, game);
+
+    // debug tower range
+    game->AddRectFilledTexlist(1003 + pos.x, 29,
+        {pos.x - range * 16 + 16, pos.y - range * 16 + 16},
+        {pos.x + range * 16 + 16, pos.y + range * 16 + 16},
+        IM_COL32(255, 255, 255, 100),
+    1000.f
+    );
 }
 
 void Turret::Shoot(const std::vector<Entity*>& EntityList, Game* game)
 {
     ImGuiIO *io = &ImGui::GetIO();
     float deltaTime = io->DeltaTime;
+    float shortestDist;
+    cooldown = fmaxf(cooldown - deltaTime, 0);
     //if no target is initialized, set the closest enemy as the new target.
-    if (aimingAt == -1)
+    if (aimingAt == -1 || shortestDist > range)
     {
-        float shortestDist = 10000;
         for (size_t o = 0; o < EntityList.size(); o++)
         {
             if (EntityList[o]->GetType() == 1 && EntityList[o]->GetCanStart() == true)
@@ -28,41 +37,36 @@ void Turret::Shoot(const std::vector<Entity*>& EntityList, Game* game)
                 {
                     aimingAt = o;
                     shortestDist = sqrtf(powf(EntityList[o]->GetPos().x - pos.x, 2.0f) + powf(EntityList[o]->GetPos().y - pos.y, 2.0f));
-                }              
+                }
             }           
         }
     }
-    else
+    //if the enemy is close enough and his life is above 0, shoot at him
+    else if (EntityList[aimingAt]->GetLife() > 0)
     {
+        ImGui::Text("Tower aiming at: %d\nTower cooldown: %f\ndistance:%f", aimingAt, cooldown, abs(sqrtf(powf(EntityList[aimingAt]->GetPos().x - pos.x, 2.0f) + powf(EntityList[aimingAt]->GetPos().y - pos.y, 2.0f))) );
         //debug tower aim
-        game->AddRectFilledTexlist(1003, 29,
+        game->AddRectFilledTexlist(1003 + aimingAt, 29,
             {EntityList[aimingAt]->GetPos().x - 16, EntityList[aimingAt]->GetPos().y - 16},
             {EntityList[aimingAt]->GetPos().x + 16, EntityList[aimingAt]->GetPos().y + 16},
-            IM_COL32(255, 0, 0, 150)
+            IM_COL32(255, (int){fminf(pos.x / 4, 255)}, 0, 150)
         );
-
-        if (EntityList[aimingAt]->GetLife() > 0)
+        if (cooldown <= 0)
         {
-            if (cooldown <= 0)
+            if (towerClass == 2)
             {
-                if (towerClass == 2)
-                    EntityList[aimingAt]->EditSpeed(EntityList[aimingAt]->GetMaxSpeed() / 2.f);
-                //deals a certain amount of damage to the target depending on the turret's level.
-                EntityList[aimingAt]->Damage(shootingStrengh + level, aimingAt);
-                cooldown = maxCooldown - (level / 4);
+                EntityList[aimingAt]->EditSpeed(EntityList[aimingAt]->GetMaxSpeed() / 2.f);                
             }
-            else
-            {
-                cooldown -= deltaTime;
-            }
-        }
-        //once the enemy dies, search for a new target.
-        else
-        {
-            aimingAt = -1;
+            //deals a certain amount of damage to the target depending on the turret's level.
+            EntityList[aimingAt]->Damage(shootingStrengh + level, aimingAt);
+            cooldown = maxCooldown - (level / 4);
         }
     }
-    ImGui::Text("Tower aiming at: %d\nTower cooldown: %f", aimingAt, cooldown);
+    //else, find a new target
+    else
+    {
+        aimingAt = -1;
+    }
 }
 void Turret::Draw(Game* game, Resources& res, int z) 
 {
