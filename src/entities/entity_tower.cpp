@@ -78,7 +78,7 @@ void Turret::Draw(Game* game, Resources& res, int z)
         switch (towerClass)
         {
             //default tower
-            case ENEMYTYPE_WIMP:
+            case NORMAL_ATTACK:
                 if (!level)
                 {
                     uvUL = {0,0.0f};
@@ -92,7 +92,7 @@ void Turret::Draw(Game* game, Resources& res, int z)
                 break;
             
             //slow but strong tower
-            case ENEMYTYPE_BEEFY:
+            case SLOW_TOWERCLASS:
                 if (!level)
                 {
                     uvUL = {0,0.25f};
@@ -106,7 +106,7 @@ void Turret::Draw(Game* game, Resources& res, int z)
                 break;
 
             //fast but weak tower
-            case ENEMYTYPE_HEALER:
+            case FAST_TOWERCLASS:
                 if (!level)
                 {
                     uvUL = {0.5f,0.0f};

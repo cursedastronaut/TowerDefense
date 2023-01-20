@@ -64,17 +64,17 @@ void Enemy::Draw(Game* game, Resources& res, int z)
 
     switch (enemyType)
     {
-    case 0:
+    case ENEMYTYPE_WIMP:
         texture[0] = res.Fighter3;
         texture[1] = res.Fighter3Frozen;
         break;
     
-    case 1:
+    case ENEMYTYPE_BEEFY:
         texture[0] = res.Fighter4;
         texture[1] = res.Fighter4Frozen;
         break;
 
-    case 2:
+    case ENEMYTYPE_HEALER:
         texture[0] = res.Fighter5;
         texture[1] = res.Fighter5Frozen;
         break;

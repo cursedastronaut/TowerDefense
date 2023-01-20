@@ -31,7 +31,7 @@
     //Enemy settings
     #define ENTITYTYPE_ENEMY    1
         //Wimp (entity_enemy.hpp)
-            #define ENEMYTYPE_WIMP      0
+            #define ENEMYTYPE_WIMP      0 // Enum
             #define WIMP_MAXSPEED       0.1f
             #define WIMP_LIFE           10
             #define WIMP_ATTACK         2
@@ -49,6 +49,18 @@
     
     //Tower settings
         #define ENTITYTYPE_TOWER        0
+        //Normal tower
+            #define NORMAL_TOWERCLASS   0
+            #define NORMAL_MAXCOOLDOWN  1.5f
+            #define NORMAL_ATTACK       3
+        //Slow tower
+            #define SLOW_TOWERCLASS     1
+            #define SLOW_MAXCOOLDOWN    5
+            #define SLOW_ATTACK         5
+        //Fast tower
+            #define FAST_TOWERCLASS     2
+            #define FAST_MAXCOOLDOWN    0.5f
+            #define FAST_ATTACK         1
 //Graphics settings
 #define windowWidth     1280
 #define windowHeight    736

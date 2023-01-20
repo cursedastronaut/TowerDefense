@@ -5,15 +5,15 @@ class Turret : public Entity
 {
     public:
         int     aimingAt = -1;
-        int     towerClass = 0;
-        int     type     = 0;
+        int     towerClass = NORMAL_TOWERCLASS;
+        int     type     = ENTITYTYPE_TOWER;
         int     level    = 0;
         float   range    = NORMAL_TOWER_RANGE;
-        float   cooldown = 5.f;
+        float   cooldown = NORMAL_MAXCOOLDOWN;
         ImVec2  pos      = {0,0};
         bool    active   = false;
-        float   maxCooldown = 1.5f;
-        int     shootingStrengh = 3;
+        float   maxCooldown = NORMAL_MAXCOOLDOWN;
+        int     shootingStrengh = NORMAL_ATTACK;
 
         Turret();
         //Turret functions
