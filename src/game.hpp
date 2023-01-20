@@ -38,7 +38,9 @@ class Game
         
         Texlist arrayTexlist[32][MAX_TEXTURES];
 
+        void spawnEnemy(std::vector<Entity*>& EntityList, Tilemap* tilemap, int kind);
         void LevelUpdate(std::vector<Entity*>& EntityList, Tilemap* tilemap, Resources& res, int* scene, bool* restart);
+
 
         void TexlistUpdate(ImDrawList& dl);
         void AddToTexlist(int z, int layer, ImTextureID id, ImVec2 posUL, ImVec2 posBR, ImVec2 uvUL, ImVec2 uvBR);

@@ -8,35 +8,22 @@
 
 void Game::LevelUpdate(std::vector<Entity*>& EntityList, Tilemap* tilemap, Resources& res, int* scene, bool* restart)
 {
-    // ImGui::Text("currentLevel: %d\nwavesPassed: %d %f", currentLevel, levelProgression, levelProgCool);
     ImGui::Text("currentLevel: %d\nspawn cooldown: %f\nenemies left: %d", currentLevel, levelProgCool, enemyLeft);
-    // if (levelProgression < (INITIAL_ENEMY * currentLevel))
-    // {
-    //     if (levelProgCool <= 0.f)
-        // {
-            
-            // else
-            // {
-                if (enemyToSpawn > 0 && levelProgCool <= 0.f)
-                {
-                    Healer* newEntity = new Healer(*tilemap);
-                    EntityList.push_back(newEntity);
-                    levelProgCool = 2.f;
-                    // levelProgression ++;
-                    enemyToSpawn -= 1;
-                }
-                if(enemyLeft <= 0 && enemyToSpawn <= 0)
-                {
-                    currentLevel += 1;
-                    levelProgCool = 10.f;
-                    enemyToSpawn = INITIAL_ENEMY * currentLevel;
-                    enemyLeft = INITIAL_ENEMY * currentLevel;
-                }
-            // }
-        // }
-        levelProgCool -= ImGui::GetIO().DeltaTime;
-    // }
-    // levelProgression = 0;
+    if (enemyToSpawn > 0 && levelProgCool <= 0.f)
+    {
+        int randNum = rand()%(ENEMYTYPE_HEALER-ENEMYTYPE_WIMP + 1) + ENEMYTYPE_WIMP;
+        spawnEnemy(EntityList, tilemap, randNum);
+        levelProgCool = 2.f;
+        enemyToSpawn -= 1;
+    }
+    if(enemyLeft <= 0 && enemyToSpawn <= 0)
+    {
+        currentLevel += 1;
+        levelProgCool = 10.f;
+        enemyToSpawn = INITIAL_ENEMY * currentLevel;
+        enemyLeft = INITIAL_ENEMY * currentLevel;
+    }
+    levelProgCool -= ImGui::GetIO().DeltaTime;
     
     for (std::vector<Entity*>::iterator it = EntityList.begin(); it != EntityList.end(); )
     {
@@ -75,6 +62,25 @@ void Game::LevelUpdate(std::vector<Entity*>& EntityList, Tilemap* tilemap, Resou
         }
     }
     
+}
+
+void Game::spawnEnemy(std::vector<Entity*>& EntityList, Tilemap* tilemap, int kind)
+{
+    if (kind == ENEMYTYPE_WIMP)
+    {
+        Enemy* newEntity = new Enemy(*tilemap);
+        EntityList.push_back(newEntity); 
+    }
+    else if (kind == ENEMYTYPE_BEEFY)
+    {
+        Beefy* newEntity = new Beefy(*tilemap);
+        EntityList.push_back(newEntity);
+    }
+    else if (kind == ENEMYTYPE_HEALER)
+    {
+        Healer* newEntity = new Healer(*tilemap);
+        EntityList.push_back(newEntity);
+    }
 }
 
 
