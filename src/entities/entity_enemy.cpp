@@ -3,6 +3,8 @@
 #include "../constants.hpp"
 #include "entity_enemy.hpp"
 #include <string>
+#include <math.h>
+//#include "../calc.hpp"
 
 Enemy::Enemy()
 {
@@ -34,16 +36,23 @@ void Enemy::Update(std::vector<Entity*>& EntityList, Game* game)
 
         if (cooldown <= 0)
         {
-            printf("awa");
+            ImVec2 distanceVec = {0,0};
+            float shortestDistance = 999;
+            size_t closestEnemy = 0;
             for (size_t i = 0; i < EntityList.size(); i++)
             {
                 if (EntityList[i]->GetType() == ENTITYTYPE_ENEMY && EntityList[i]->GetCanStart() == true)
                 {
-                    EntityList[i]->life += HEAL;
-                    cooldown = HEALER_COOLDOWN;
-                    return;
+                    distanceVec = EntityList[i]->GetPos();
+                    if (sqrtf(powf(EntityList[i]->pos.x - pos.x, 2.f) + powf(EntityList[i]->pos.y - pos.y, 2.f)) < shortestDistance
+                        && (EntityList[i] != this))
+                    {
+                        closestEnemy = i;
+                        shortestDistance = sqrtf(pow(EntityList[i]->pos.x - pos.x, 2) + pow(EntityList[i]->pos.y - pos.y, 2));
+                    }
                 }
             }
+            EntityList[closestEnemy]->life += HEAL;
             cooldown = HEALER_COOLDOWN;
         }
         else
