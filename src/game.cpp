@@ -8,7 +8,6 @@
 
 void Game::LevelUpdate(std::vector<Entity*>& EntityList, Tilemap* tilemap, Resources& res, int* scene, bool* restart)
 {
-    ImGui::Text("currentLevel: %d\nspawn cooldown: %f\nenemies left: %d", currentLevel, levelProgCool, enemyLeft);
     if (enemyToSpawn > 0 && levelProgCool <= 0.f)
     {
         int randNum = rand()%(ENEMYTYPE_HEALER-ENEMYTYPE_WIMP + 1) + ENEMYTYPE_WIMP;
