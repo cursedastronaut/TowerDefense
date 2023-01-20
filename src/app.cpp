@@ -77,6 +77,12 @@ void App::Update()
                 //Removes the enemy from the Entity list
                 it = EntityList.erase(it);
                 delete e;
+                for (size_t o = 0; o < EntityList.size(); o++)
+                {
+                    if (EntityList[o]->GetType() == ENTITYTYPE_TOWER)
+                        EntityList[o]->EditAiming(-1);
+                }
+                game->enemyLeft -= 1;
             }
             else
             {

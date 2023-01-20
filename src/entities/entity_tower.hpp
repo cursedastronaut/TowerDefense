@@ -25,5 +25,6 @@ class Turret : public Entity
         int GetLevel() {return level;};
         int GetClassType() {return towerClass;};
         void EditLevel(int newLevel) {level = newLevel;};
+        void EditAiming(int i) {aimingAt = i;};
         ImVec2 GetPos() {return pos;};
 };

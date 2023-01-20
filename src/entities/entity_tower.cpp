@@ -87,7 +87,7 @@ void Turret::Draw(Game* game, Resources& res, int z)
         switch (towerClass)
         {
             //default tower
-            case NORMAL_ATTACK:
+            case NORMAL_TOWERCLASS:
                 if (!level)
                 {
                     uvUL = {0,0.0f};
