@@ -1,6 +1,6 @@
 #pragma once
 
-#define VERSION             "Version Beta 200123_25"
+#define VERSION             "Version GOLD"
 
 //Gameplay settings
 #define COST_TOWER          100
