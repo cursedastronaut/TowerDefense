@@ -9,15 +9,17 @@ Enemy::Enemy()
 {
     
 }
-
+//Played at enemy spawn
 Enemy::Enemy(Tilemap& tilemap)
     : direction(0)
 {
+    //Looping through all the path tiles tiles
     for (uint32_t y = 0; y < GRID_HEIGHT; y++)
     {
         for (uint32_t x = 0; x < GRID_WIDTH; x++)
         {
             type = 1;
+            //Finds the Spawn tile, and sets enemy position to this tile.
             if (tilemap.cGrid[y * GRID_WIDTH + x] == 0x06)
             {
                 pos.x = x * TILE_SIZE + (TILE_SIZE / 2);
@@ -30,11 +32,13 @@ Enemy::Enemy(Tilemap& tilemap)
 
 void Enemy::Update(std::vector<Entity*>& EntityList, Game* game)
 {
+    //If enemy updating is a healer
     if (GetClassType() == ENEMYTYPE_HEALER)
     {
 
         if (cooldown <= 0)
         {
+            //Finds the closest enemy and heals it.
             ImVec2 distanceVec = {0,0};
             float shortestDistance = 999;
             size_t closestEnemy = 0;
@@ -63,14 +67,18 @@ void Enemy::Update(std::vector<Entity*>& EntityList, Game* game)
 
 void Enemy::Draw(Game* game, Resources& res, int z)
 {
-    Texture texture[2] = {res.Fighter4, res.Fighter4Frozen};
+    //If enemy is dead but somehow still active, discard the following.
     if (life <= 0)
     {
         return;
     }
 
+    //Sets default textures
+    Texture texture[2] = {res.Fighter4, res.Fighter4Frozen};
+
     ImVec2 uvUL = {0,0};
     ImVec2 uvBR = {1,1};
+    //Changes UV based on the direction the enemy is walking towards
     switch (direction)
     {
     case 90:
@@ -96,8 +104,7 @@ void Enemy::Draw(Game* game, Resources& res, int z)
         break;
     }
 
-    bool isFrozen = false;
-
+    //Sets the textures for the enemy, depending of its type
     switch (enemyType)
     {
     case ENEMYTYPE_WIMP:
@@ -118,8 +125,12 @@ void Enemy::Draw(Game* game, Resources& res, int z)
     default:
         break;
     }
+    //Checks if enemy is slower, if yes, it will draw the frozen texture.
+    bool isFrozen = false;
     if (maxSpeed != speed)
         isFrozen = true;
+    
+    //Changes UV depending on the position, this is where the walking animation is made.
     if (((int)(pos.x/TILE_SIZE) % 2 && (direction == 0 || direction == 180)) || ((int)(pos.y/TILE_SIZE) % 2 && (direction == 90 || direction == 270)))
     {
         uvUL.x += 0.25f;    uvBR.x += 0.25f;
@@ -128,6 +139,8 @@ void Enemy::Draw(Game* game, Resources& res, int z)
     {
         uvUL.x += 0.50f;    uvBR.x += 0.50f;
     }
+    
+    //Actual enemy drawing
     game->AddToTexlist(z, 10,
         texture[isFrozen].id,                                                               
         {pos.x - texture[isFrozen].width / 8, pos.y - texture[isFrozen].height / 8 - texture[isFrozen].height / 8},  
@@ -135,6 +148,8 @@ void Enemy::Draw(Game* game, Resources& res, int z)
         uvUL,                           
         uvBR     
     );
+
+    //Draws the number of HP of an enemy
     std::string life_count = "HP = ";
     life_count += std::to_string(GetLife());
     game->AddTextTexlist(z,11, 
@@ -148,9 +163,11 @@ void Enemy::Movement(Tilemap& tilemap)
     ImGuiIO* io = &ImGui::GetIO();
     float deltaTime = io->DeltaTime;
 
+    //If enemy is dead but somehow still active, discard the following.
     if (life <= 0)
         return;
 
+    //Looping through every path tile
     for (uint32_t y = 0; y < GRID_HEIGHT; y++)
     {
         for (uint32_t x = 0; x < GRID_WIDTH; x++)
@@ -161,6 +178,7 @@ void Enemy::Movement(Tilemap& tilemap)
                 turnCooldown -= deltaTime;
                 if (turnCooldown <= 0)
                 {
+                    //If the enemy steps on a direction changing tile, it will then change directions.
                     switch (tilemap.cGrid[(int)(pos.y / TILE_SIZE) * GRID_WIDTH + (int)(pos.x / TILE_SIZE)])
                     {
                         case 0x02:
@@ -206,17 +224,15 @@ void Enemy::Movement(Tilemap& tilemap)
                 default:
                     break;
             }
-
-            //float2 dirs[] = { { 0.f, 1.f }, { 1.f, 0.f }, { 0.f, 1.f }, { 0.f, 1.f } };
-            //pos += speed * dirs[direction] * io.deltaTime;
         } //End of for x
     }    //End of for y
 }
+//Damages the enemy by dmgAmount
 void Enemy::Damage(int dmgAmount, int i)
 {
     life -= dmgAmount;
 }
-
+//TODO: To remove
 void Enemy::Death()
 {
 }
