@@ -121,6 +121,14 @@ void Enemy::Draw(Game* game, Resources& res, int z)
     }
     if (maxSpeed != speed)
         isFrozen = true;
+    if (((int)(pos.x/TILE_SIZE) % 2 && (direction == 0 || direction == 180)) || ((int)(pos.y/TILE_SIZE) % 2 && (direction == 90 || direction == 270)))
+    {
+        uvUL.x += 0.25f;    uvBR.x += 0.25f;
+    }
+    if (((int)(pos.x/TILE_SIZE) % 4 && (direction == 0 || direction == 180)) || ((int)(pos.y/TILE_SIZE) % 4 && (direction == 90 || direction == 270)))
+    {
+        uvUL.x += 0.50f;    uvBR.x += 0.50f;
+    }
     game->AddToTexlist(z, 10,
         texture[isFrozen].id,                                                               
         {pos.x - texture[isFrozen].width / 8, pos.y - texture[isFrozen].height / 8 - texture[isFrozen].height / 8},  
