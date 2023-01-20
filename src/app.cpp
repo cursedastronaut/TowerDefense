@@ -54,6 +54,15 @@ void App::Update()
             Entity* e = *it;
             if (e->GetLife() <= 0 && e->GetType() == 1)
             {
+                switch (e->GetClassType())
+                {
+                    case 0:
+                        game->money += 100; break;
+                    case 1:
+                        game->money += 200; break;
+                    case 2:
+                        game->money += 50; break;
+                }
                 it = EntityList.erase(it);
                 delete e;
             }
@@ -68,7 +77,6 @@ void App::Update()
             EntityList[i]->Draw(game, resources, i);
             EntityList[i]->Movement(*tilemap);
         }
-        //entity->Update(game, resources, *tilemap);
         break;
     }
         

@@ -30,5 +30,6 @@ class Enemy : public Entity {
         float GetSpeed() {return speed;};
         float GetMaxSpeed() {return maxSpeed;};
         float GetAttack() {return attack;};
+        int GetClassType() {return enemyType;};
         void EditSpeed(float newSpeed) {speed = newSpeed;};
 };

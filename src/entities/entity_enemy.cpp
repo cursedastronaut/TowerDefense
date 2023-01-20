@@ -103,7 +103,6 @@ void Enemy::Movement(Tilemap& tilemap)
 {
     ImGuiIO* io = &ImGui::GetIO();
     float deltaTime = io->DeltaTime;
-    // ImGui::Text("My lame ass deltatime be like: %f", deltaTime);
     ImGui::Text("Enemy speed: %f, speed v: %f", GetSpeed(), speed);
 
     if (life <= 0)
@@ -177,5 +176,4 @@ void Enemy::Damage(int dmgAmount, int i)
 
 void Enemy::Death()
 {
-    printf("test");
 }
