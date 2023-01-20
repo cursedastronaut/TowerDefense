@@ -16,7 +16,7 @@ Resources::Resources()
    Fighter4Frozen =  ImGuiUtils::LoadTexture("assets/textures/characters/fighter04_frozen.png", true);
    Fighter5Frozen =  ImGuiUtils::LoadTexture("assets/textures/characters/fighter05_frozen.png", true);
 
-
+   //Title screen
    Void           =  ImGuiUtils::LoadTexture("assets/textures/void.png", true);
    title          =  ImGuiUtils::LoadTexture("assets/textures/title.png", true);
    newGame        =  ImGuiUtils::LoadTexture("assets/textures/new_game.png", true);

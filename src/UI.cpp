@@ -109,7 +109,6 @@ void UI::Update(ImDrawList& list, Resources& res, Game* game, std::vector<Entity
     if (game->gameover)
         return;
     Draw(list, res, game, EntityList/*entity,*/, tilemap);
-    ImGui::Text("dragDropIndex: %d", game->dragDropIndex);
 }
 
 bool UI::Button(Game* game, Texture tex, ImVec2 pos, float width, float height, ImVec4 col)

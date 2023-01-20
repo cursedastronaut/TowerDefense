@@ -46,12 +46,15 @@ void Turret::Shoot(const std::vector<Entity*>& EntityList, Game* game)
         }
         else
         {
-            //debug tower aim
-            game->AddRectFilledTexlist(500.f + (int)(pos.x / TILE_SIZE), 29,
-                {EntityList[aimingAt]->GetPos().x - 16, EntityList[aimingAt]->GetPos().y - 16},
-                {EntityList[aimingAt]->GetPos().x + 16, EntityList[aimingAt]->GetPos().y + 16},
-                IM_COL32(255, fminf(pos.x / 3, 255), 0, 150)
-            );
+            if (game->drawAiming)
+            {
+                //Debug tower aim
+                game->AddRectFilledTexlist(500.f + (int)(pos.x / TILE_SIZE), 29,
+                    {EntityList[aimingAt]->GetPos().x - 16, EntityList[aimingAt]->GetPos().y - 16},
+                    {EntityList[aimingAt]->GetPos().x + 16, EntityList[aimingAt]->GetPos().y + 16},
+                    IM_COL32(255, fminf(pos.x / 3, 255), 0, 150)
+                );
+            }
 
             if (EntityList[aimingAt]->GetLife() > 0)
             {
@@ -74,7 +77,6 @@ void Turret::Shoot(const std::vector<Entity*>& EntityList, Game* game)
                 aimingAt = -1;
             }
         }
-        ImGui::Text("Tower aiming at: %d\nTower cooldown: %f", aimingAt, cooldown);
     }
     
 }
@@ -82,7 +84,6 @@ void Turret::Draw(Game* game, Resources& res, int z)
 {
     if (active)
     {
-        ImGui::Text("lvl: %d", level);
         ImVec2 uvUL = {0,0};
         ImVec2 uvBR = {1,1};
         switch (towerClass)

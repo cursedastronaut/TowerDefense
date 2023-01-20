@@ -4,6 +4,7 @@
 #include <cstdio>
 #include <stdint.h>
 
+//Grid size
 #define GRID_WIDTH 40
 #define GRID_HEIGHT 23
 

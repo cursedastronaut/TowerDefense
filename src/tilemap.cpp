@@ -3,8 +3,10 @@
 #include <stdio.h>
 #include <cstdio>
 
+//Executed once on program start
 Tilemap::Tilemap()
 {
+    //Opens the maps and paths
     FILE*    f;
     FILE*    f2;
     uint32_t i;
@@ -19,7 +21,7 @@ Tilemap::Tilemap()
 
     i = 0;
 
-    //cleans the memory before drawing the tiles
+    //Cleans the memory before drawing the tiles
     while (i < GRID_WIDTH * GRID_HEIGHT)
     {
         mGrid[i++] = 0;
@@ -27,7 +29,7 @@ Tilemap::Tilemap()
     }
     i = 0;
 
-    //draws the tiles
+    //Remember each tiles in the grids
     while (i < GRID_WIDTH * GRID_HEIGHT && !feof(f))
     {
         cGrid[i]   = fgetc(f2);
@@ -48,23 +50,24 @@ void Tilemap::Update(Game* game, Resources& res)
 
 void Tilemap::Draw(Game* game, Resources& res)
 {
-
+    //Looping through every tile
     for (uint32_t y = 0; y < GRID_HEIGHT; y++)
     {
         for (uint32_t x = 0; x < GRID_WIDTH; x++)
         {
             float2 pos = {0,0};
             Texture tileSetToUse = res.tilesetWood;
-            //ImU32 col = ImColor(0,0,0,0);
+
+            //Chooses texture depending on tile type
             switch (mGrid[y * GRID_WIDTH + x])
             {
                 //Grass tile
-                case 0:
+                case 0x00:
                     pos.x = 0;  pos.y = 0;
                     break;
 
                 //Cobblestone tile
-                case 1:
+                case 0x01:
                     pos.x = 1;  pos.y = 0;  break;
 
                 //Castle tiles
@@ -131,21 +134,23 @@ void Tilemap::Draw(Game* game, Resources& res)
                     pos.x = 3;  pos.y = 26; break;
                 default:
                     break;
-            }   
+            }
+            //Draws the tile
             game->AddToTexlist(
                 y * GRID_WIDTH + x, 1, //Z value
-                tileSetToUse.id,                                                                //Texture
-                { (float)x * (TILE_SIZE), (float)y * (TILE_SIZE)},                                             //Position (upper-left) on Game Screen
-                { (float)x * (TILE_SIZE) + (TILE_SIZE), (float)y * (TILE_SIZE) + (TILE_SIZE)},                 //Position (bottom-right) on Game Screen
-                { (float)(pos.x * TILE_SIZE)/tileSetToUse.width,                                        //UV (upper-right) position on tilesetWood
+                tileSetToUse.id,                                                               //Texture
+                { (float)x * (TILE_SIZE), (float)y * (TILE_SIZE)},                             //Position (upper-left) on Game Screen
+                { (float)x * (TILE_SIZE) + (TILE_SIZE), (float)y * (TILE_SIZE) + (TILE_SIZE)}, //Position (bottom-right) on Game Screen
+                { (float)(pos.x * TILE_SIZE)/tileSetToUse.width,                               //UV (upper-right) position on tilesetWood
                 ( (float)pos.y * TILE_SIZE)/tileSetToUse.height},
-                { (float)(pos.x * TILE_SIZE + TILE_SIZE) / tileSetToUse.width,                          //UV (bottom-left) position on tilesetWood
+                { (float)(pos.x * TILE_SIZE + TILE_SIZE) / tileSetToUse.width,                 //UV (bottom-left) position on tilesetWood
                   (float)(pos.y * TILE_SIZE + TILE_SIZE) / tileSetToUse.height}
             );
             
             pos = {0,0};
             if (drawPath)
             {
+                //Chooses the texture depending on the path tile
                 switch (cGrid[y * GRID_WIDTH + x])
                 {
                 case 0x01: //Continue walking
@@ -164,6 +169,7 @@ void Tilemap::Draw(Game* game, Resources& res)
                     pos = {7,0};
                     break;
                 }
+                //Draws the path tile
                 game->AddToTexlist( y * GRID_WIDTH + x, 2,
                     res.tilesetPath.id,
                     {(float)x * (TILE_SIZE), (float)y * (TILE_SIZE)},                                             //Position (upper-left) on Game Screen

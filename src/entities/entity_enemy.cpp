@@ -147,7 +147,6 @@ void Enemy::Movement(Tilemap& tilemap)
 {
     ImGuiIO* io = &ImGui::GetIO();
     float deltaTime = io->DeltaTime;
-    ImGui::Text("Enemy speed: %f, speed v: %f", GetSpeed(), speed);
 
     if (life <= 0)
         return;
