@@ -19,9 +19,12 @@ class Turret : public Entity
         //Turret functions
         void Update(const std::vector<Entity*>& EntityList, Game* game);
         void Draw(Game* game, Resources& res, int z) override ;
-        bool Spawn(ImVec2 pos, int type, Tilemap& tilemap);
+        bool Spawn(ImVec2 pos, int type, Tilemap& tilemap, std::vector<Entity*>& EntityList);
         void Shoot(const std::vector<Entity*>& EntityList, Game* game);
         virtual float GetCooldown() {return maxCooldown;};
         int GetType() {return type;};
+        int GetLevel() {return level;};
+        int GetClassType() {return towerClass;};
+        void EditLevel(int newLevel) {level = newLevel;};
         ImVec2 GetPos() {return pos;};
 };

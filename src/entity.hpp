@@ -28,10 +28,13 @@ class Entity
 
         virtual int GetType() {return type;};
         virtual int GetLife() {return life;};
+        virtual int GetLevel() {return 0;};
         virtual bool GetCanStart() {return false;};
         virtual ImVec2 GetPos() {return pos;};
         virtual float GetSpeed() {return 0;};
         virtual float GetMaxSpeed() {return 0;};
         virtual float GetAttack() {return 0;};
+        virtual int GetClassType() {return 0;};
+        virtual void EditLevel(int newLevel) {};
         virtual void EditSpeed(float newSpeed) {};
 };
