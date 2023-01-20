@@ -44,32 +44,41 @@ void UI::Draw(ImDrawList& list, Resources& res, Game* game, std::vector<Entity*>
 
     if (dragDropButton(res.Turret, {towerSelectionUL.x + 16, towerSelectionUL.y + 16}, {TOWER_ICON_WIDTH, TOWER_ICON_HEIGHT}, {1,1,1,0.3f}, game, {1, NORMAL_TOWER_RANGE, 30, 5}) == true)
     {
-        if (game->money >= COST_TOWER)
+        if (!ImGui::IsMouseHoveringRect(towerSelectionUL, towerSelectionBR, false) && !ImGui::IsMouseHoveringRect({8, 8}, {128, 48}, false))
         {
-            Turret* newEntity = new Turret();
-            if (newEntity->Spawn({ImGui::GetMousePos().x,ImGui::GetMousePos().y}, tilemap, EntityList))
-                game->money -= COST_TOWER;
-            EntityList.push_back(newEntity);
+            if (game->money >= COST_TOWER)
+            {
+                Turret* newEntity = new Turret();
+                if (newEntity->Spawn({ImGui::GetMousePos().x,ImGui::GetMousePos().y}, tilemap, EntityList))
+                    game->money -= COST_TOWER;
+                EntityList.push_back(newEntity);
+            }
         }
     } 
     if (dragDropButton(res.Turret, {towerSelectionUL.x + 96, towerSelectionUL.y + 16}, {TOWER_ICON_WIDTH, TOWER_ICON_HEIGHT}, {1,1,1,0.3f}, game, {2, NORMAL_TOWER_RANGE, 40, 5}, {0,0.25f,0.25f,0.5f}) == true)
     {
-        if (game->money >= COST_TOWER_SLOW)
+        if (!ImGui::IsMouseHoveringRect(towerSelectionUL, towerSelectionBR, false) && !ImGui::IsMouseHoveringRect({8, 8}, {128, 48}, false))
         {
-            SlowTurret* newEntity = new SlowTurret();
-            if (newEntity->Spawn({ImGui::GetMousePos().x,ImGui::GetMousePos().y}, tilemap, EntityList))
-                game->money -= COST_TOWER_SLOW;
-            EntityList.push_back(newEntity);
+            if (game->money >= COST_TOWER_SLOW)
+            {
+                SlowTurret* newEntity = new SlowTurret();
+                if (newEntity->Spawn({ImGui::GetMousePos().x,ImGui::GetMousePos().y}, tilemap, EntityList))
+                    game->money -= COST_TOWER_SLOW;
+                EntityList.push_back(newEntity);
+            }
         }
     }
     if (dragDropButton(res.Turret, {towerSelectionUL.x + 96 + 80, towerSelectionUL.y + 16}, {TOWER_ICON_WIDTH, TOWER_ICON_HEIGHT}, {1,1,1,0.3f}, game, {3, NORMAL_TOWER_RANGE, 50, 5}, {0.5f,0,0.75f,0.25f}) == true)
     {
-        if (game->money >= COST_TOWER_FAST)
+        if (!ImGui::IsMouseHoveringRect(towerSelectionUL, towerSelectionBR, false) && !ImGui::IsMouseHoveringRect({8, 8}, {128, 48}, false))
         {
-            FastTurret* newEntity = new FastTurret();
-            if (newEntity->Spawn({ImGui::GetMousePos().x,ImGui::GetMousePos().y}, tilemap, EntityList))
-                game->money -= COST_TOWER_FAST;
-            EntityList.push_back(newEntity);
+           if (game->money >= COST_TOWER_FAST)
+            {
+                FastTurret* newEntity = new FastTurret();
+                if (newEntity->Spawn({ImGui::GetMousePos().x,ImGui::GetMousePos().y}, tilemap, EntityList))
+                    game->money -= COST_TOWER_FAST;
+                EntityList.push_back(newEntity);
+            } 
         }
     }
 
