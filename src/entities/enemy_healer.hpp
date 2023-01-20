@@ -12,9 +12,11 @@ class Healer : public Enemy
             maxSpeed = HEALER_MAXSPEED;
             enemyType = ENEMYTYPE_HEALER;
             attack = HEALER_ATTACK;
+            cooldown = HEALER_COOLDOWN;
         };
         //Enemy functions
         float GetSpeed() {return speed;};
         float GetMaxSpeed() {return maxSpeed;};
+        int GetClassType() {return enemyType;};
         void EditSpeed(float newSpeed) {speed = newSpeed;};
 };

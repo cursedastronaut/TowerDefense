@@ -19,7 +19,7 @@ class Entity
         ImVec2 pos {-1,-1};
         bool canStart = false;
         
-        virtual void Update(const std::vector<Entity*>& EntityList, Game* game) {};
+        virtual void Update(std::vector<Entity*>& EntityList, Game* game) {};
         virtual void Draw(Game* game, Resources& res, int z);
         virtual bool Spawn(ImVec2 pos, Tilemap& tilemap);
         virtual void Movement(Tilemap& tilemap);

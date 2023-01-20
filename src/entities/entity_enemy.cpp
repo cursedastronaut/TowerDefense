@@ -6,6 +6,7 @@
 
 Enemy::Enemy()
 {
+    
 }
 
 Enemy::Enemy(Tilemap& tilemap)
@@ -21,6 +22,33 @@ Enemy::Enemy(Tilemap& tilemap)
                 pos.x = x * TILE_SIZE + (TILE_SIZE / 2);
                 pos.y = y * TILE_SIZE + (TILE_SIZE / 2);
             }
+        }
+    }
+    life        = WIMP_LIFE;
+}
+
+void Enemy::Update(std::vector<Entity*>& EntityList, Game* game)
+{
+    if (GetClassType() == ENEMYTYPE_HEALER)
+    {
+
+        if (cooldown <= 0)
+        {
+            printf("awa");
+            for (size_t i = 0; i < EntityList.size(); i++)
+            {
+                if (EntityList[i]->GetType() == ENTITYTYPE_ENEMY && EntityList[i]->GetCanStart() == true)
+                {
+                    EntityList[i]->life += HEAL;
+                    cooldown = HEALER_COOLDOWN;
+                    return;
+                }
+            }
+            cooldown = HEALER_COOLDOWN;
+        }
+        else
+        {
+            cooldown -= ImGui::GetIO().DeltaTime;
         }
     }
 }

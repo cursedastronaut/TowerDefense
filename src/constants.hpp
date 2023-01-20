@@ -5,6 +5,7 @@
 #define COST_TOWER_SLOW     200
 #define COST_TOWER_FAST     50
 #define NORMAL_TOWER_RANGE  10.f
+#define HEAL                2
 
 
 //Tilemap settings
@@ -41,6 +42,7 @@
             #define HEALER_MAXSPEED     0.15f
             #define HEALER_ATTACK       1
             #define HEALER_DROP         50
+            #define HEALER_COOLDOWN     5.f
         //Beefy (ennemy_beefy.hpp)
             #define ENEMYTYPE_BEEFY     1
             #define BEEFY_MAXSPEED      0.05f

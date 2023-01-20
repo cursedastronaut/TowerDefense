@@ -7,7 +7,7 @@ Turret::Turret() : Entity()
 {
 }
 
-void Turret::Update(const std::vector<Entity*>& EntityList, Game* game)
+void Turret::Update(std::vector<Entity*>& EntityList, Game* game)
 {
     Shoot(EntityList, game);
 }

@@ -45,7 +45,7 @@ void App::Update()
         for (std::vector<Entity*>::iterator it = EntityList.begin(); it != EntityList.end(); )
         {
             Entity* e = *it;
-            if (e->GetLife() <= 0 && e->GetType() == 1)
+            if (e->life <= 0 && e->GetType() == 1)
             {
                 switch (e->GetClassType())
                 {

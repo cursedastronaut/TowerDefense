@@ -7,9 +7,9 @@ class Enemy : public Entity {
         float   speed       = WIMP_MAXSPEED;
         float   maxSpeed    = WIMP_MAXSPEED;
         int     direction   = 0;
-        int     life        = WIMP_LIFE;
         int     type        = ENTITYTYPE_ENEMY;
         int     enemyType   = ENEMYTYPE_WIMP;
+        float   cooldown    = 0;
         int     attack      = WIMP_ATTACK;
         bool    canStart    = true;
         float   turnCooldown = (TILE_SIZE / 2) * speed;
@@ -20,6 +20,7 @@ class Enemy : public Entity {
         ImVec2 pos          = {0,0};
         //Enemy functions
         void Draw(Game* game, Resources& res, int z);
+        void Update(std::vector<Entity*>& EntityList, Game* game);
         void Movement(Tilemap& tilemap);
         void Damage(int dmgAmount, int i);
         void Death(); 
