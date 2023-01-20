@@ -56,7 +56,7 @@ void Turret::Shoot(const std::vector<Entity*>& EntityList, Game* game)
                     if (towerClass == FAST_TOWERCLASS)
                         EntityList[aimingAt]->EditSpeed(EntityList[aimingAt]->GetMaxSpeed() / 2.f);
                     //Deals a certain amount of damage to the target depending on the turret's level.
-                    EntityList[aimingAt]->Damage(shootingStrengh + level, aimingAt);
+                    EntityList[aimingAt]->Damage(shootingStrength + level, aimingAt);
                     //Sets the cooldown back to its maximum. It is lower when leveled up.
                     cooldown = maxCooldown - (level / 4);
                 }

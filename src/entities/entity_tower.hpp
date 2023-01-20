@@ -12,7 +12,7 @@ class Turret : public Entity
         float   cooldown = NORMAL_MAXCOOLDOWN;
         bool    active   = false;
         float   maxCooldown = NORMAL_MAXCOOLDOWN;
-        int     shootingStrengh = NORMAL_ATTACK;
+        int     shootingStrength = NORMAL_ATTACK;
 
         Turret();
         //Turret functions
