@@ -37,4 +37,5 @@ class Entity
         virtual int GetClassType() {return 0;};
         virtual void EditLevel(int newLevel) {};
         virtual void EditSpeed(float newSpeed) {};
+        virtual void EditAiming(int i) {};
 };
