@@ -55,7 +55,7 @@ void App::Update()
         //Draws the tilemap
         tilemap->Update(game, resources);
         //Draws and process the UI
-        ui->Update(*imdrawlist, resources, game, EntityList /*entity,*/, *tilemap);
+        ui->Update(*imdrawlist, resources, game, EntityList , *tilemap);
         
         //Looping through every entity
         for (std::vector<Entity*>::iterator it = EntityList.begin(); it != EntityList.end(); )

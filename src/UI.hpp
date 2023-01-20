@@ -13,7 +13,7 @@ class UI
 public:
     UI();
     ~UI();
-    void Update(ImDrawList& list, Resources& res, Game* game, std::vector<Entity*>& EntityList /*Entity* entity,*/, Tilemap& tilemap);
+    void Update(ImDrawList& list, Resources& res, Game* game, std::vector<Entity*>& EntityList, Tilemap& tilemap);
     void Draw(ImDrawList& list, Resources& res, Game* game, std::vector<Entity*>& EntityList, Tilemap& tilemap);
     bool Button(Game* game, Texture tex, ImVec2 pos, float width, float height, ImVec4 col);
     bool dragDropButton(Texture tex, ImVec2 pos, ImVec2 widthHeight, ImVec4 col, Game* game, ImVec4 indexAndRange, ImVec4 uv = {0,0,0.25f,0.25f});
