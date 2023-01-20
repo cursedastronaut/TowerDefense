@@ -58,7 +58,7 @@ void UI::Draw(ImDrawList& list, Resources& res, Game* game, std::vector<Entity*>
         }
 
         //Draws and process the tower drag and drop button
-        if (dragDropButton(res.Turret, {towerSelectionUL.x + 16 + (80 * i), towerSelectionUL.y + 16}, {TOWER_ICON_WIDTH, TOWER_ICON_HEIGHT}, {1,1,1,0.3f}, game, {i + 1, NORMAL_TOWER_RANGE, 30 + (10 * i), 5}, UVtoUse) == true)
+        if (dragDropButton(res.Turret, {towerSelectionUL.x + 16 + (80 * i), towerSelectionUL.y + 16}, {TOWER_ICON_WIDTH, TOWER_ICON_HEIGHT}, {1,1,1,0.3f}, game, {(float)i + 1, NORMAL_TOWER_RANGE, (float)(30 + (10 * i)), 5}, UVtoUse) == true)
         {
             int costTower;
             //Sets the correct price in "costTower". this value will be used to display the price below each buttons and also
@@ -80,6 +80,7 @@ void UI::Draw(ImDrawList& list, Resources& res, Game* game, std::vector<Entity*>
                     case NORMAL_TOWERCLASS: newEntity = new Turret(); break;
                     case SLOW_TOWERCLASS: newEntity = new SlowTurret(); break;
                     case FAST_TOWERCLASS: newEntity = new FastTurret(); break;
+                    default: newEntity = new Turret(); break;
                 }
                 //Checks the placement of the turret, and substract the cost if it succeeded
                 if (newEntity->Spawn({ImGui::GetMousePos().x,ImGui::GetMousePos().y}, tilemap, EntityList))
