@@ -20,7 +20,6 @@ class Game
         int castle_life         = 50;
         int dragDropIndex       = 0;
         bool gameover           = false;
-        bool drawAiming         = false;
 
         struct Texlist {
             bool active = false;

@@ -27,7 +27,6 @@ void Game::LevelUpdate(std::vector<Entity*>& EntityList, Tilemap* tilemap, Resou
     for (std::vector<Entity*>::iterator it = EntityList.begin(); it != EntityList.end(); )
     {
         Entity* e = *it;
-        ImGui::Text("castle_life : %d, posx: %f", castle_life, e->GetPos().x);
         if (e->GetPos().x >= windowWidth)
         {
             castle_life -= e->GetAttack();
