@@ -79,20 +79,44 @@ void Turret::Draw(Game* game, Resources& res, int z)
         {
             //default tower
             case 0:
-                uvUL = {0,0.0f};
-                uvBR = {0.25f,0.25f};
+                if (!level)
+                {
+                    uvUL = {0,0.0f};
+                    uvBR = {0.25f,0.25f};
+                }
+                else
+                {
+                    uvUL = {0.5f,0.25f};
+                    uvBR = {0.75f,0.5f};
+                }
                 break;
             
             //slow but strong tower
             case 1:
-                uvUL = {0,0.25f};
-                uvBR = {0.25f,0.50f};
+                if (!level)
+                {
+                    uvUL = {0,0.25f};
+                    uvBR = {0.25f,0.50f};
+                }
+                else
+                {
+                    uvUL = {0.5f,0.5f};
+                    uvBR = {0.75f,0.75f};
+                }
                 break;
 
             //fast but weak tower
             case 2:
-                uvUL = {0.5f,0.0f};
-                uvBR = {0.75f,0.25f};
+                if (!level)
+                {
+                    uvUL = {0.5f,0.0f};
+                    uvBR = {0.75f,0.25f};
+                }
+                else
+                {
+                    uvUL = {0.0f,0.5f};
+                    uvBR = {0.25f,0.75f};
+                }
                 break;
 
             default:

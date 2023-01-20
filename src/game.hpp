@@ -11,7 +11,7 @@ class Resources;
 class Game
 {
     public:
-        int money               = 200;
+        int money               = 2000;
         int currentLevel        = 1;
         int levelProgression    = 0;
         float levelProgCool     = 0;
