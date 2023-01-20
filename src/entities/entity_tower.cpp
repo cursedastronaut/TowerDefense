@@ -21,9 +21,9 @@ void Turret::Shoot(const std::vector<Entity*>& EntityList, Game* game)
         //if no target is initialized, set the closest enemy as the new target.
         if (aimingAt == -1)
         {
-            ImVec2 distanceVec = {0,0};
-            float shortestDist = 999;
-            for (size_t o = 0; o < EntityList.size(); o++)
+            //ImVec2 distanceVec = {0,0};
+            float shortestDist = NORMAL_TOWER_RANGE * TILE_SIZE;
+                for (size_t o = 0; o < EntityList.size(); o++)
             {
                 if (EntityList[o]->GetType() == ENTITYTYPE_ENEMY && EntityList[o]->GetCanStart() == true)
                 {
@@ -35,12 +35,12 @@ void Turret::Shoot(const std::vector<Entity*>& EntityList, Game* game)
 
                     
                     
-                    distanceVec = EntityList[o]->GetPos();
-                    if (sqrtf(powf(EntityList[o]->pos.x - pos.x, 2.f) + powf(EntityList[o]->pos.y - pos.y, 2.f)) < shortestDist
-                        && (EntityList[o] != this))
+                    //distanceVec = EntityList[o]->pos;
+                    if (sqrtf(powf(EntityList[o]->pos.x - pos.x, 2.f) + powf(EntityList[o]->pos.y - pos.y, 2.f)) < shortestDist)
                     {
                         aimingAt = o;
-                        shortestDist = sqrtf(pow(EntityList[o]->pos.x - pos.x, 2) + pow(EntityList[o]->pos.y - pos.y, 2));
+                        shortestDist = sqrtf(powf(EntityList[o]->pos.x - pos.x, 2.f) + powf(EntityList[o]->pos.y - pos.y, 2.f));
+                        printf("\nshort:%f\n", shortestDist);
                     }        
                 }           
             }
@@ -48,7 +48,7 @@ void Turret::Shoot(const std::vector<Entity*>& EntityList, Game* game)
         else
         {
             //debug tower aim
-            game->AddRectFilledTexlist(500 + (int){pos.x / TILE_SIZE}, 29,
+            game->AddRectFilledTexlist(500.f + (int)(pos.x / TILE_SIZE), 29,
                 {EntityList[aimingAt]->GetPos().x - 16, EntityList[aimingAt]->GetPos().y - 16},
                 {EntityList[aimingAt]->GetPos().x + 16, EntityList[aimingAt]->GetPos().y + 16},
                 IM_COL32(255, fminf(pos.x / 3, 255), 0, 150)
@@ -173,7 +173,7 @@ bool Turret::Spawn(ImVec2 pos2, Tilemap& tilemap, std::vector<Entity*>& EntityLi
     
     pos       = pos2;
     type      = ENTITYTYPE_TOWER;
-    aimingAt  = 0;
+    aimingAt  = -1;
     cooldown  = 0;
     level     = 0;
     active    = true;

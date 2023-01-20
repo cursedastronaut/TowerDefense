@@ -10,7 +10,6 @@ class Turret : public Entity
         int     level    = 0;
         float   range    = NORMAL_TOWER_RANGE;
         float   cooldown = NORMAL_MAXCOOLDOWN;
-        ImVec2  pos      = {0,0};
         bool    active   = false;
         float   maxCooldown = NORMAL_MAXCOOLDOWN;
         int     shootingStrengh = NORMAL_ATTACK;

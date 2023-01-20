@@ -17,7 +17,6 @@ class Enemy : public Entity {
         Enemy();
         Enemy(Tilemap& tilemap);
 
-        ImVec2 pos          = {0,0};
         //Enemy functions
         void Draw(Game* game, Resources& res, int z);
         void Update(std::vector<Entity*>& EntityList, Game* game);

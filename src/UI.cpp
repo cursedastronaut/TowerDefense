@@ -161,14 +161,14 @@ bool UI::dragDropButton(Texture tex, ImVec2 pos, ImVec2 widthHeight, ImVec4 col,
         col.w += 0.1f;
         indexAndRange.y *= TILE_SIZE;
         game->AddRectFilledTexlist(indexAndRange.z+2, indexAndRange.w, 
-                { (int)(ImGui::GetMousePos().x/TILE_SIZE)*TILE_SIZE - indexAndRange.y/2+TILE_SIZE/2, (int)(ImGui::GetMousePos().y/TILE_SIZE)*TILE_SIZE - indexAndRange.y/2+TILE_SIZE/2},
-                { (int)(ImGui::GetMousePos().x/TILE_SIZE)*TILE_SIZE + indexAndRange.y/2+TILE_SIZE/2, (int)(ImGui::GetMousePos().y/TILE_SIZE)*TILE_SIZE + indexAndRange.y/2+TILE_SIZE/2}
+                { ((int)(ImGui::GetMousePos().x/TILE_SIZE)*TILE_SIZE) - (indexAndRange.y/2)+(TILE_SIZE/2), ((int)(ImGui::GetMousePos().y/TILE_SIZE)*TILE_SIZE) - (indexAndRange.y/2)+(TILE_SIZE/2)},
+                { ((int)(ImGui::GetMousePos().x/TILE_SIZE)*TILE_SIZE) + (indexAndRange.y/2)+(TILE_SIZE/2), ((int)(ImGui::GetMousePos().y/TILE_SIZE)*TILE_SIZE) + (indexAndRange.y/2)+(TILE_SIZE/2)}
                 , 0x80FFFFFF, 9999999999.f);
         game->AddToTexlist(
                 indexAndRange.z+3,indexAndRange.w,
                 tex.id,
-                { (int)(ImGui::GetMousePos().x/TILE_SIZE)*TILE_SIZE, (int)(ImGui::GetMousePos().y/TILE_SIZE)*TILE_SIZE - tex.height/8.f },
-                { (int)(ImGui::GetMousePos().x/TILE_SIZE)*TILE_SIZE + tex.width/4.f, (int)(ImGui::GetMousePos().y/TILE_SIZE)*TILE_SIZE + tex.height/8.f },
+                { (float)(int)(ImGui::GetMousePos().x/TILE_SIZE)*TILE_SIZE, (int)(ImGui::GetMousePos().y/TILE_SIZE)*TILE_SIZE - tex.height/8.f },
+                { (float)(int)(ImGui::GetMousePos().x/TILE_SIZE)*TILE_SIZE + tex.width/4.f, (int)(ImGui::GetMousePos().y/TILE_SIZE)*TILE_SIZE + tex.height/8.f },
                 {uv.x,uv.y},
                 {uv.z,uv.w}
             );
