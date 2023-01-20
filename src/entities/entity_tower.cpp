@@ -21,26 +21,37 @@ void Turret::Shoot(const std::vector<Entity*>& EntityList, Game* game)
         //if no target is initialized, set the closest enemy as the new target.
         if (aimingAt == -1)
         {
-            float shortestDist = 10000;
+            ImVec2 distanceVec = {0,0};
+            float shortestDist = 999;
             for (size_t o = 0; o < EntityList.size(); o++)
             {
-                if (EntityList[o]->GetType() == 1 && EntityList[o]->GetCanStart() == true)
+                if (EntityList[o]->GetType() == ENTITYTYPE_ENEMY && EntityList[o]->GetCanStart() == true)
                 {
-                    if (sqrtf(powf(EntityList[o]->GetPos().x - pos.x, 2.0f) + powf(EntityList[o]->GetPos().y - pos.y, 2.0f)) < shortestDist)
+                    // if (sqrtf(powf(EntityList[o]->GetPos().x - pos.x, 2.0f) + powf(EntityList[o]->GetPos().y - pos.y, 2.0f)) < shortestDist)
+                    // {
+                    //     aimingAt = o;
+                    //     shortestDist = sqrtf(powf(EntityList[o]->GetPos().x - pos.x, 2.0f) + powf(EntityList[o]->GetPos().y - pos.y, 2.0f));
+                    // }      
+
+                    
+                    
+                    distanceVec = EntityList[o]->GetPos();
+                    if (sqrtf(powf(EntityList[o]->pos.x - pos.x, 2.f) + powf(EntityList[o]->pos.y - pos.y, 2.f)) < shortestDist
+                        && (EntityList[o] != this))
                     {
                         aimingAt = o;
-                        shortestDist = sqrtf(powf(EntityList[o]->GetPos().x - pos.x, 2.0f) + powf(EntityList[o]->GetPos().y - pos.y, 2.0f));
-                    }              
+                        shortestDist = sqrtf(pow(EntityList[o]->pos.x - pos.x, 2) + pow(EntityList[o]->pos.y - pos.y, 2));
+                    }        
                 }           
             }
         }
         else
         {
             //debug tower aim
-            game->AddRectFilledTexlist(1003, 29,
+            game->AddRectFilledTexlist(500 + (int){pos.x / TILE_SIZE}, 29,
                 {EntityList[aimingAt]->GetPos().x - 16, EntityList[aimingAt]->GetPos().y - 16},
                 {EntityList[aimingAt]->GetPos().x + 16, EntityList[aimingAt]->GetPos().y + 16},
-                IM_COL32(255, 0, 0, 150)
+                IM_COL32(255, fminf(pos.x / 3, 255), 0, 150)
             );
 
             if (EntityList[aimingAt]->GetLife() > 0)
