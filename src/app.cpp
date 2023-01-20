@@ -10,8 +10,6 @@ App::App()
 {
     this->tilemap = new Tilemap();
     this->game = new Game();
-
-    
 }
 
 App::~App()
@@ -36,11 +34,6 @@ void App::Update()
         if (ui->Button(game, resources.newGame, {windowWidth/2 - 100, windowHeight/2 - 50}, 200, 100, {1,1,1,0.5}) ||
             ImGui::IsKeyPressed(ImGuiKey_Enter, false))
             scene = SCENE_GAME;
-        /*game->AddToTexlist( 20, resources.newGame.id,
-                {windowWidth/2 - 100, windowHeight/2 - 50},
-                {windowWidth/2 + 100, windowHeight/2 + 50},
-                {0,0},                           
-                {1,1});*/
         break;
 
     case SCENE_GAME:
@@ -49,7 +42,7 @@ void App::Update()
         tilemap->Update(game, resources);
         ui->Update(*imdrawlist, resources, game, EntityList /*entity,*/, *tilemap);
         
-    for (std::vector<Entity*>::iterator it = EntityList.begin(); it != EntityList.end(); )
+        for (std::vector<Entity*>::iterator it = EntityList.begin(); it != EntityList.end(); )
         {
             Entity* e = *it;
             if (e->GetLife() <= 0 && e->GetType() == 1)
@@ -57,11 +50,11 @@ void App::Update()
                 switch (e->GetClassType())
                 {
                     case 0:
-                        game->money += 100; break;
+                        game->money += WIMP_DROP; break;
                     case 1:
-                        game->money += 200; break;
+                        game->money += BEEFY_DROP; break;
                     case 2:
-                        game->money += 50; break;
+                        game->money += HEALER_DROP; break;
                 }
                 it = EntityList.erase(it);
                 delete e;

@@ -47,7 +47,7 @@ void UI::Draw(ImDrawList& list, Resources& res, Game* game, std::vector<Entity*>
         if (game->money >= COST_TOWER)
         {
             Turret* newEntity = new Turret();
-            if (newEntity->Spawn({ImGui::GetMousePos().x,ImGui::GetMousePos().y}, 0, tilemap, EntityList))
+            if (newEntity->Spawn({ImGui::GetMousePos().x,ImGui::GetMousePos().y}, tilemap, EntityList))
                 game->money -= COST_TOWER;
             EntityList.push_back(newEntity);
         }
@@ -57,7 +57,7 @@ void UI::Draw(ImDrawList& list, Resources& res, Game* game, std::vector<Entity*>
         if (game->money >= COST_TOWER_SLOW)
         {
             SlowTurret* newEntity = new SlowTurret();
-            if (newEntity->Spawn({ImGui::GetMousePos().x,ImGui::GetMousePos().y}, 0, tilemap, EntityList))
+            if (newEntity->Spawn({ImGui::GetMousePos().x,ImGui::GetMousePos().y}, tilemap, EntityList))
                 game->money -= COST_TOWER_SLOW;
             EntityList.push_back(newEntity);
         }
@@ -67,7 +67,7 @@ void UI::Draw(ImDrawList& list, Resources& res, Game* game, std::vector<Entity*>
         if (game->money >= COST_TOWER_FAST)
         {
             FastTurret* newEntity = new FastTurret();
-            if (newEntity->Spawn({ImGui::GetMousePos().x,ImGui::GetMousePos().y}, 0, tilemap, EntityList))
+            if (newEntity->Spawn({ImGui::GetMousePos().x,ImGui::GetMousePos().y}, tilemap, EntityList))
                 game->money -= COST_TOWER_FAST;
             EntityList.push_back(newEntity);
         }

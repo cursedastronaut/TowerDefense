@@ -19,7 +19,7 @@ class Turret : public Entity
         //Turret functions
         void Update(const std::vector<Entity*>& EntityList, Game* game);
         void Draw(Game* game, Resources& res, int z) override ;
-        bool Spawn(ImVec2 pos, int type, Tilemap& tilemap, std::vector<Entity*>& EntityList);
+        bool Spawn(ImVec2 pos, Tilemap& tilemap, std::vector<Entity*>& EntityList);
         void Shoot(const std::vector<Entity*>& EntityList, Game* game);
         virtual float GetCooldown() {return maxCooldown;};
         int GetType() {return type;};

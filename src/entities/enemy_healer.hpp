@@ -8,10 +8,10 @@ class Healer : public Enemy
         Healer();
         Healer(Tilemap& tilemap) : Enemy(tilemap) 
         {
-            speed = 0.15f;
-            maxSpeed = 0.15f;
-            enemyType = 2;
-            attack = 1;
+            speed = HEALER_MAXSPEED;
+            maxSpeed = HEALER_MAXSPEED;
+            enemyType = ENEMYTYPE_HEALER;
+            attack = HEALER_ATTACK;
         };
         //Enemy functions
         float GetSpeed() {return speed;};

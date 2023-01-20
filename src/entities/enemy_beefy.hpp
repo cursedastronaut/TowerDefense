@@ -8,10 +8,10 @@ class Beefy : public Enemy
         Beefy();
         Beefy(Tilemap& tilemap) : Enemy(tilemap) 
         {
-            speed = 0.05f;
-            maxSpeed = 0.05f;
-            enemyType = 1;
-            attack = 3;
+            speed = BEEFY_MAXSPEED;
+            maxSpeed = BEEFY_MAXSPEED;
+            enemyType = ENEMYTYPE_BEEFY;
+            attack = BEEFY_ATTACK;
         };
         //Enemy functions
         float GetSpeed() {return speed;};

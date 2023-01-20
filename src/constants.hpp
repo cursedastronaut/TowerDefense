@@ -21,15 +21,34 @@
 #define SCENE_GAME          1
 
 //Entity settings
-//Number of entities spawning at the beginning of level 1. From level 2 and onwards,
-//it will be INITIAL_ENTITY + currentLevel. 
-#define INITIAL_ENEMY       3 
-//Number of entity to kill to finish a level (go to the final wave). Multiplied by currentLevel.
-#define MAX_ENEMY           15
-//Number of entity spawned during final wave. Multiplied by currentLevel.
-#define FINAL_WAVE_COUNT    5
-
-
+    //Number of entities spawning at the beginning of level 1. From level 2 and onwards,
+    //it will be INITIAL_ENTITY + currentLevel. 
+    #define INITIAL_ENEMY       3 
+    //Number of entity to kill to finish a level (go to the final wave). Multiplied by currentLevel.
+    #define MAX_ENEMY           15
+    //Number of entity spawned during final wave. Multiplied by currentLevel.
+    #define FINAL_WAVE_COUNT    5
+    //Enemy settings
+    #define ENTITYTYPE_ENEMY    1
+        //Wimp (entity_enemy.hpp)
+            #define ENEMYTYPE_WIMP      0
+            #define WIMP_MAXSPEED       0.1f
+            #define WIMP_LIFE           10
+            #define WIMP_ATTACK         2
+            #define WIMP_DROP           100
+        //Healer (enemy_healer.hpp)
+            #define ENEMYTYPE_HEALER    2
+            #define HEALER_MAXSPEED     0.15f
+            #define HEALER_ATTACK       1
+            #define HEALER_DROP         50
+        //Beefy (ennemy_beefy.hpp)
+            #define ENEMYTYPE_BEEFY     1
+            #define BEEFY_MAXSPEED      0.05f
+            #define BEEFY_ATTACK        3
+            #define BEEFY_DROP          200
+    
+    //Tower settings
+        #define ENTITYTYPE_TOWER        0
 //Graphics settings
 #define windowWidth     1280
 #define windowHeight    736

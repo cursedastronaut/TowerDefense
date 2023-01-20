@@ -4,13 +4,13 @@
 
 class Enemy : public Entity {
     public:
-        float   speed       = 0.1f;
-        float   maxSpeed    = 0.1f;
+        float   speed       = WIMP_MAXSPEED;
+        float   maxSpeed    = WIMP_MAXSPEED;
         int     direction   = 0;
-        int     life        = 10;
-        int     type        = 1;
-        int     enemyType   = 0;
-        int     attack      = 2;
+        int     life        = WIMP_LIFE;
+        int     type        = ENTITYTYPE_ENEMY;
+        int     enemyType   = ENEMYTYPE_WIMP;
+        int     attack      = WIMP_ATTACK;
         bool    canStart    = true;
         float   turnCooldown = (TILE_SIZE / 2) * speed;
 

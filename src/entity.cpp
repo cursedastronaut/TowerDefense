@@ -28,12 +28,9 @@ void Entity::Draw(Game* game, Resources& res, int z)
 {
 }
 
-bool Entity::Spawn(ImVec2 pos, int type, Tilemap& tilemap)
+bool Entity::Spawn(ImVec2 pos, Tilemap& tilemap)
 {return 0;}
 
 void Entity::Movement(Tilemap& tilemap)
 {
-    //moveEnemy(tilemap);
 }
-/*void Damage(int dmgAmount, int i);
-void Death();*/

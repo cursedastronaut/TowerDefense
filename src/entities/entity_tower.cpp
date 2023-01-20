@@ -78,7 +78,7 @@ void Turret::Draw(Game* game, Resources& res, int z)
         switch (towerClass)
         {
             //default tower
-            case 0:
+            case ENEMYTYPE_WIMP:
                 if (!level)
                 {
                     uvUL = {0,0.0f};
@@ -92,7 +92,7 @@ void Turret::Draw(Game* game, Resources& res, int z)
                 break;
             
             //slow but strong tower
-            case 1:
+            case ENEMYTYPE_BEEFY:
                 if (!level)
                 {
                     uvUL = {0,0.25f};
@@ -106,7 +106,7 @@ void Turret::Draw(Game* game, Resources& res, int z)
                 break;
 
             //fast but weak tower
-            case 2:
+            case ENEMYTYPE_HEALER:
                 if (!level)
                 {
                     uvUL = {0.5f,0.0f};
@@ -132,12 +132,12 @@ void Turret::Draw(Game* game, Resources& res, int z)
     }
 }
 
-bool Turret::Spawn(ImVec2 pos2, int type2, Tilemap& tilemap, std::vector<Entity*>& EntityList)
+bool Turret::Spawn(ImVec2 pos2, Tilemap& tilemap, std::vector<Entity*>& EntityList)
 {
     pos2.x = (int)(pos2.x/TILE_SIZE)*TILE_SIZE;
     pos2.y = (int)(pos2.y/TILE_SIZE)*TILE_SIZE;
 
-    if (tilemap.mGrid[(int)(pos2.y/32 * GRID_WIDTH + pos2.x/32)])
+    if (tilemap.mGrid[(int)(pos2.y/TILE_SIZE * GRID_WIDTH + pos2.x/TILE_SIZE)])
         return 0;
 
     for (size_t i = 0; i < EntityList.size(); i++)
@@ -161,7 +161,7 @@ bool Turret::Spawn(ImVec2 pos2, int type2, Tilemap& tilemap, std::vector<Entity*
     }
     
     pos       = pos2;
-    type      = type2;
+    type      = ENTITYTYPE_TOWER;
     aimingAt  = 0;
     cooldown  = 0;
     level     = 0;
