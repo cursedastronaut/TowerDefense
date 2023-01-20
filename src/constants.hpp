@@ -1,5 +1,7 @@
 #pragma once
 
+#define VERSION             "Version Beta 200123_10"
+
 //Gameplay settings
 #define COST_TOWER          100
 #define COST_TOWER_SLOW     200

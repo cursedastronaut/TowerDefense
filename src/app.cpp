@@ -34,6 +34,7 @@ void App::Update()
         if (ui->Button(game, resources.newGame, {windowWidth/2 - 100, windowHeight/2 - 50}, 200, 100, {1,1,1,0.5}) ||
             ImGui::IsKeyPressed(ImGuiKey_Enter, false))
             scene = SCENE_GAME;
+        game->AddTextTexlist(20, 0, {0 , windowHeight - 16}, 0xFF000000, VERSION);
         break;
 
     case SCENE_GAME:
