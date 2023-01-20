@@ -4,7 +4,6 @@
 #include "entity_enemy.hpp"
 #include <string>
 #include <math.h>
-//#include "../calc.hpp"
 
 Enemy::Enemy()
 {

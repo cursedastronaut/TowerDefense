@@ -2,7 +2,7 @@
 #include "../constants.hpp"
 #include <string>
 #include <math.h>
-
+#include "../calc.hpp"
 Turret::Turret() : Entity()
 {
 }
@@ -40,7 +40,6 @@ void Turret::Shoot(const std::vector<Entity*>& EntityList, Game* game)
                     {
                         aimingAt = o;
                         shortestDist = sqrtf(powf(EntityList[o]->pos.x - pos.x, 2.f) + powf(EntityList[o]->pos.y - pos.y, 2.f));
-                        printf("\nshort:%f\n", shortestDist);
                     }        
                 }           
             }
@@ -145,8 +144,7 @@ void Turret::Draw(Game* game, Resources& res, int z)
 
 bool Turret::Spawn(ImVec2 pos2, Tilemap& tilemap, std::vector<Entity*>& EntityList)
 {
-    pos2.x = (int)(pos2.x/TILE_SIZE)*TILE_SIZE;
-    pos2.y = (int)(pos2.y/TILE_SIZE)*TILE_SIZE;
+    pos2 = Calc::ToWorldInt(pos2);
 
     if (tilemap.mGrid[(int)(pos2.y/TILE_SIZE * GRID_WIDTH + pos2.x/TILE_SIZE)])
         return 0;

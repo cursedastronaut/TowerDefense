@@ -3,7 +3,7 @@
 #include "entities/tower_slow.hpp"
 #include "entities/tower_fast.hpp"
 #include <string>
-
+#include "calc.hpp"
 void UI::Draw(ImDrawList& list, Resources& res, Game* game, std::vector<Entity*>& EntityList, Tilemap& tilemap)
 {
     //draw a transparent white square on the tile the mouse is hovering
@@ -161,14 +161,14 @@ bool UI::dragDropButton(Texture tex, ImVec2 pos, ImVec2 widthHeight, ImVec4 col,
         col.w += 0.1f;
         indexAndRange.y *= TILE_SIZE;
         game->AddRectFilledTexlist(indexAndRange.z+2, indexAndRange.w, 
-                { ((int)(ImGui::GetMousePos().x/TILE_SIZE)*TILE_SIZE) - (indexAndRange.y/2)+(TILE_SIZE/2), ((int)(ImGui::GetMousePos().y/TILE_SIZE)*TILE_SIZE) - (indexAndRange.y/2)+(TILE_SIZE/2)},
-                { ((int)(ImGui::GetMousePos().x/TILE_SIZE)*TILE_SIZE) + (indexAndRange.y/2)+(TILE_SIZE/2), ((int)(ImGui::GetMousePos().y/TILE_SIZE)*TILE_SIZE) + (indexAndRange.y/2)+(TILE_SIZE/2)}
+                { Calc::MousePositionWorld().x - (indexAndRange.y/2)+(TILE_SIZE/2), Calc::MousePositionWorld().y - (indexAndRange.y/2)+(TILE_SIZE/2)},
+                { Calc::MousePositionWorld().x + (indexAndRange.y/2)+(TILE_SIZE/2), Calc::MousePositionWorld().y + (indexAndRange.y/2)+(TILE_SIZE/2)}
                 , 0x80FFFFFF, 9999999999.f);
         game->AddToTexlist(
                 indexAndRange.z+3,indexAndRange.w,
                 tex.id,
-                { (float)(int)(ImGui::GetMousePos().x/TILE_SIZE)*TILE_SIZE, (int)(ImGui::GetMousePos().y/TILE_SIZE)*TILE_SIZE - tex.height/8.f },
-                { (float)(int)(ImGui::GetMousePos().x/TILE_SIZE)*TILE_SIZE + tex.width/4.f, (int)(ImGui::GetMousePos().y/TILE_SIZE)*TILE_SIZE + tex.height/8.f },
+                { Calc::MousePositionWorld().x                  , Calc::MousePositionWorld().y - tex.height/8.f},
+                { Calc::MousePositionWorld().x + tex.width/4.f  , Calc::MousePositionWorld().y + tex.height/8.f},
                 {uv.x,uv.y},
                 {uv.z,uv.w}
             );

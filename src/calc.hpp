@@ -2,8 +2,9 @@
 
 #include <stdlib.h>
 #include <math.h>
-
-#include "types.hpp"
+#include "imgui_utils.hpp"
+#include "constants.hpp"
+//#include "types.hpp"
 
 
 static inline float2 operator+(float2 a, float2 b) { return { a.x + b.x, a.y + b.y }; }
@@ -51,5 +52,14 @@ namespace Calc
     static inline float clamp(float x, float minValue, float maxValue)
     {
         return min(max(x, minValue), maxValue);
+    }
+
+    static inline ImVec2 MousePositionWorld()
+    {
+        return  {(float)((int)(ImGui::GetMousePos().x/TILE_SIZE)*TILE_SIZE), (float)((int)(ImGui::GetMousePos().y/TILE_SIZE)*TILE_SIZE)} ;
+    }
+    static inline ImVec2 ToWorldInt(ImVec2 pos)
+    {
+        return { (float)(int)(pos.x/TILE_SIZE)*TILE_SIZE, (float)(int)(pos.y/TILE_SIZE)*TILE_SIZE};
     }
 }
